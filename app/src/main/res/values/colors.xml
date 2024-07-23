@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F99576</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="back_color">#F67A71</color>
+    <color name="colorAccent">#707070</color>
+    <color name="white">#FFFFFF</color>
+    <color name="login_txt">#3D3D3D</color>
+    <color name="txt_mobile_number">#663D3D3D</color>
+    <color name="txt_forgot">#3D3D3D</color>
+    <color name="resend_txt_color">#F36F69</color>
+    <color name="shadow_color">#7F7F7F</color>
+    <color name="tab_color">#6D7278</color>
+    <color name="error_color">#E83931</color>
+    <color name="not_selected_color">#3F3F3F</color>
+    <color name="payment_success">#6AC259</color>
+    <color name="cancel_background_color">#F68D6E</color>
+    <color name="color_text_gary">#787878</color>
+    <color name="color_view_gary">#3D3D3D</color>
+
+    <color name="black">#000000</color>
+    <color name="black_transparent">#80000000</color>
+    <color name="color_text_grey">#3D3D3D</color>
+    <color name="speedometer_red">#EC2324</color>
+    <color name="speedometer_yellow">#FCB040</color>
+    <color name="speedometer_green">#3AB549</color>
+    <color name="timer_color">#F67A71</color>
+    <color name="transparent">#00000000</color>
+    <color name="black_overlay">#66000000</color>
+
+    <color name="band_color">#0084DD</color>
+</resources>

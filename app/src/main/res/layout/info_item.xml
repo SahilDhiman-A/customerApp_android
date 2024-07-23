@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/spinner_txt"
+    android:padding="@dimen/_20sdp"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    >
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/img_cross"
+        android:layout_marginTop="@dimen/_5sdp"
+       android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_cross"/>
+    <WebView
+        android:id="@+id/web"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_below="@id/img_cross"
+        android:visibility="visible" />
+
+</RelativeLayout>

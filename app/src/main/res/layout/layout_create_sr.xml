@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+    <include layout="@layout/toolbar_head"/>
+
+    <LinearLayout
+        android:layout_below="@+id/toolbar_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/_35sdp"
+        android:layout_marginRight="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_45sdp">
+<androidx.appcompat.widget.AppCompatTextView
+android:id="@+id/txt_isu_type"
+    android:visibility="gone"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/request_type"
+    android:textSize="@dimen/_12sdp"
+    android:textColor="@color/colorAccent"/>
+<RelativeLayout
+    android:id="@+id/layout_select_issue"
+    android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_height="wrap_content">
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_issue_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_16sdp"
+        android:layout_toStartOf="@+id/img_drop"
+        android:text="@string/request_type"
+        android:layout_centerVertical="true"
+      android:layout_marginEnd="@dimen/_8sdp"
+        android:textColor="@color/colorAccent"/>
+    <ImageView
+        android:id="@+id/img_drop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        app:srcCompat="@drawable/ic_arrow_down"
+        tools:ignore="ContentDescription" />
+</RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/colorAccent"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_45sdp"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/input_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:hint="@string/description"
+                android:textSize="@dimen/_16sdp"
+                android:lineSpacingExtra="@dimen/_6sdp"
+                android:maxLines="4"
+                android:textColor="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/layout_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_submit"
+            android:textAllCaps="true"
+            android:drawableEnd="@drawable/ic_arrow_white"
+            android:textSize="16sp"
+            android:layout_gravity="center_horizontal"
+          android:layout_marginTop="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:textColor="@color/white"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingStart="@dimen/_19sdp"
+            android:paddingEnd="@dimen/_19sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:drawablePadding="@dimen/_15sdp"
+            android:background="@drawable/login_background"
+            android:layout_marginStart="@dimen/_30sdp"
+            />
+
+    </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/back_color"
+        android:layout_centerInParent="true"/>
+</RelativeLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_Home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home"/>
+
+    <item
+        android:id="@+id/navigation_invoice"
+        android:icon="@drawable/ic_invoice_unselect"
+        android:title="@string/payments"/>
+    <item
+        android:id="@+id/navigation_Sr"
+        android:icon="@drawable/ic_sr_unselect"
+        android:title="@string/my_sr"/>
+    <item
+        android:id="@+id/navigation_more"
+        android:icon="@drawable/ic_menu_unselect"
+        android:title="@string/menu"/>
+</menu>

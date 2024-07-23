@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+    <include layout="@layout/toolbar_head"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/faq_card"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="#ffffff"
+        app:cardCornerRadius="@dimen/_15sdp">
+
+        <ExpandableListView
+            android:id="@+id/expandableListView"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_20sdp"
+            android:groupIndicator="@null"
+            android:divider="@null"
+            android:layout_width="match_parent" />
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

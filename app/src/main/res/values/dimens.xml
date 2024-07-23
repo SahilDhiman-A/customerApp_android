@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="design_fab_image_size" tools:override="true">18dp</dimen>
+    <dimen name="window_left_margin">20dp</dimen>
+    <dimen name="window_right_margin">20dp</dimen>
+
+
+    <dimen name="header_text">20sp</dimen>
+    <dimen name="sub_header_text">16sp</dimen>
+    <dimen name="btn_speed_text">15sp</dimen>
+    <dimen name="normal_text">14sp</dimen>
+    <dimen name="btn_text">16sp</dimen>
+    <dimen name="timer_text_size">22sp</dimen>
+
+    <dimen name="network_strength_size">20sp</dimen>
+
+</resources>

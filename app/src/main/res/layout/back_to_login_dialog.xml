@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dial_background">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="@dimen/_20sdp"
+        android:orientation="vertical">
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/colorPrimaryDark"
+    android:textSize="@dimen/_14sdp"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_gravity="center_horizontal"
+    android:text="@string/we_shared"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:textSize="@dimen/_14sdp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/your_number"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/_14sdp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/registered_email"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/back_to_login"
+                android:textAllCaps="true"
+                android:drawableEnd="@drawable/ic_expand_button"
+                android:textSize="16sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/_25sdp"
+                android:textColor="@color/white"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingStart="@dimen/_19sdp"
+                android:paddingEnd="@dimen/_19sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:drawablePadding="@dimen/_15sdp"
+                android:background="@drawable/login_background"
+                android:layout_marginStart="@dimen/_10sdp"
+                />
+            </LinearLayout>
+
+</LinearLayout>

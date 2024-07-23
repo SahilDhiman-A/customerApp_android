@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PinEntryEditText">
+        <attr name="pinAnimationType" format="enum">
+            <enum name="popIn" value="0" />
+            <enum name="fromBottom" value="1" />
+            <enum name="none" value="-1" />
+        </attr>
+        <attr name="pinCharacterMask" format="string" />
+        <attr name="pinRepeatedHint" format="string" />
+        <attr name="pinLineStroke" format="dimension" />
+        <attr name="pinLineStrokeSelected" format="dimension" />
+        <attr name="pinCharacterSpacing" format="dimension" />
+        <attr name="pinTextBottomPadding" format="dimension" />
+        <attr name="pinLineColors" format="color" />
+        <attr name="pinBackgroundDrawable" format="reference" />
+        <attr name="pinBackgroundIsSquare" format="boolean" />
+    </declare-styleable>
+
+
+    <declare-styleable name="IconDescriptionViewItem">
+        <attr name="icon" format="reference" />
+        <attr name="size" format="string"/>
+        <attr name="right_icon" format="reference" />
+        <attr name="message" format="string" />
+        <attr name="hide_right_icon" format="boolean" />
+        <attr name="hide_border" format="boolean" />
+        <attr name="toggle" format="boolean" />
+        <attr name="text_style" format="integer" />
+        <attr name="text_color" format="reference" />
+        <attr name="text_color_entered" format="reference" />
+        <attr name="text_size" format="dimension" />
+
+    </declare-styleable>
+    <item name="day" type="id"></item>
+    <item name="month" type="id"></item>
+    <item name="year" type="id"></item>
+</resources>

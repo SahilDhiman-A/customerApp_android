@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layout_cancelled"
+    android:gravity="center_vertical"
+    android:visibility="gone"
+    android:background="@color/colorPrimaryDark">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_payment_status"
+            android:layout_width="wrap_content"
+            app:srcCompat="@drawable/ic_attention"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            tools:ignore="ContentDescription" />
+        <TextView
+            android:id="@+id/txt_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:padding="@dimen/_5sdp"
+            android:fontFamily="@font/helvetica_neu_bold"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:lineSpacingExtra="@dimen/_5sdp"
+            android:textColor="@color/resend_txt_color"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/account_cancelled"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:padding="@dimen/_5sdp"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/payment_amount"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/please_create_new"/>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/create_new_sr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reactivate_now"
+        android:textAllCaps="true"
+        android:drawableEnd="@drawable/ic_arrow_white"
+        android:textSize="16sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/_25sdp"
+        android:textColor="@color/white"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingStart="@dimen/_19sdp"
+        android:paddingEnd="@dimen/_19sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:drawablePadding="@dimen/_15sdp"
+        android:background="@drawable/login_background"
+        android:layout_marginStart="@dimen/_10sdp"
+        />
+
+
+
+
+    </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/llMyAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           android:layout_above="@+id/layout_logout"
+            android:layout_gravity="bottom"
+            android:background="#191919"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:padding="@dimen/_15sdp">
+
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                app:srcCompat="@drawable/ic_my_account" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text="@string/my_account"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="#191919"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/_15sdp">
+
+            <ImageView
+                android:id="@+id/img_logout"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                app:srcCompat="@drawable/ic_logout" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text="@string/logout"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

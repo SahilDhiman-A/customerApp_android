@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    android:gravity="center_vertical"
+    android:background="@color/colorPrimaryDark"
+    android:id="@+id/layout_activation_in_progress">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            app:srcCompat="@drawable/ic_progression"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            tools:ignore="ContentDescription" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:lineSpacingExtra="@dimen/_5sdp"
+            android:textColor="@color/colorAccent"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/activation_in_progress"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textAlignment="center"
+            android:padding="@dimen/_5sdp"
+            android:textColor="@color/colorAccent"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/come_back_later"/>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/close_app_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back_to_login"
+        android:textAllCaps="true"
+        android:drawableEnd="@drawable/ic_arrow_white"
+        android:textSize="16sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/_25sdp"
+        android:textColor="@color/white"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingStart="@dimen/_19sdp"
+        android:paddingEnd="@dimen/_19sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:drawablePadding="@dimen/_15sdp"
+        android:background="@drawable/login_background"
+        android:layout_marginStart="@dimen/_10sdp"
+        />
+
+    </LinearLayout>

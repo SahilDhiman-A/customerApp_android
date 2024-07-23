@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical"
+    tools:ignore="ContentDescription">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_head" />
+
+    <include
+        layout="@layout/no_internet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:visibility="gone" />
+
+
+    <include
+        layout="@layout/my_inernet_not"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:visibility="visible" />
+
+    <include
+        layout="@layout/back_to_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar" />
+
+    <include
+        layout="@layout/trubleshoot_progess_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar" />
+    <include
+        layout="@layout/account_deactive"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar" />
+    <include
+        layout="@layout/create_sr_internet_not_working"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar" />
+    <include
+        layout="@layout/invoice_details_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar" />
+    <include
+        layout="@layout/sr_details_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar" />
+    <ProgressBar
+        android:id="@+id/pro2"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:indeterminateTint="@color/back_color"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

@@ -1,0 +1,677 @@
+<resources>
+    <string name="appName">My Spectra</string>
+    <string name="txt_make_life_better">#MakeLifeBetter</string>
+    <string name="txt_enter_mobile_number">Hi! Let\'s get started</string>
+    <string name="enter_username_password">Hi! Let\'s get started</string>
+    <string name="txt_mobile_number">Registered Mobile Number</string>
+    <string name="pleaseEnterMobile">Please Enter Mobile Number</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="enter_email">Please enter email id</string>
+    <string name="enter_mobile">Please enter mobile number</string>
+    <string name="txt_login_via_username">Username</string>
+    <string name="txt_login_via_mobile">Mobile Number</string>
+    <string name="enter_details">Enter your username and password</string>
+    <string name="txt_username">Username</string>
+    <string name="txt_password">Password</string>
+    <string name="txt_show">SHOW</string>
+    <string name="txt_hide">HIDE</string>
+    <string name="txt_login">Login</string>
+    <string name="company_name">Company Name</string>
+    <string name="txt_forgot_password">Forgot Username/Password?</string>
+    <string name="txt_edit">Edit</string>
+    <string name="enter_otp">Please enter the 4 digits OTP below</string>
+    <string name="txt_verify">Verify</string>
+    <string name="txt_submit">Submit</string>
+    <string name="billing_contact">Billing Contact</string>
+    <string name="technical_contact">Technical Contact</string>
+    <string name="gd_mrng">Good Morning</string>
+    <string name="gd_afternoon">Good Afternoon</string>
+    <string name="months">Months</string>
+    <string name="gd_eve">Good Evening</string>
+    <string name="get_the_code">Didn’t get the OTP?</string>
+    <string name="no_internet">No Internet Access Please retry later</string>
+    <string name="txt_resend">Resend</string>
+    <string name="come_back_later">Please come back later</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="activation_in_progress">Account activation is in progress</string>
+    <string name="validation_username">Please enter Username</string>
+    <string name="validation_password">Please enter Password</string>
+    <string name="invalid_otp">Oops! OTP does not match</string>
+    <string name="txt_enter_registered_canid">Enter your CAN ID to reset \n your password.</string>
+    <string name="txt_enter_registered_username">Enter your Username to reset \n your password.</string>
+    <string name="invoice_no">Invoice No.</string>
+    <string name="amount">Amount</string>
+    <string name="amount_cannot_be_empty">Payable amount can\'t be empty</string>
+    <string name="amount_cannot_be_0">Payable amount can\'t be 0</string>
+    <string name="tds_amt">TDS Amount</string>
+    <string name="unpaid_amt">Unpaid Balance</string>
+    <string name="unlimited_data">Hurrey! <font fgcolor='#ffffff'>\nYou have \nunlimited data \nto enjoy.</font></string>
+    <string name="invoice_period">Invoice Period</string>
+    <string name="try_again">Try again</string>
+    <string name="invoice_amt">Invoice Amount</string>
+    <string name="opening_amt">Opening Balance</string>
+    <string name="oops">Oops, Something went wrong</string>
+    <string name="please_try">Please try again later</string>
+    <string name="due_date">Due Date</string>
+    <string name="new_connection">New Connection</string>
+    <string name="support_line">Support Line</string>
+    <string name="view">VIEW</string>
+    <string name="download">Download</string>
+    <string name="total_outstanding_amount">Outstanding Amount</string>
+    <string name="out_amt">Total outstanding amount</string>
+    <string name="pay_now">PAY NOW</string>
+    <string name="change_plan">Change Plan</string>
+    <string name="select_package">Select Plan</string>
+    <string name="from">From</string>
+    <string name="select_date">Select Date</string>
+    <string name="to">To</string>
+    <string name="invoice_details">Invoice Details</string>
+    <string name="invoice_date">Invoice Date</string>
+    <string name="view_details">View Details</string>
+    <string name="data_usage">Data Usage</string>
+    <string name="can_id">CAN ID</string>
+    <string name="due_date_color"><font fgcolor='#F67A71'>(Due Date)</font></string>
+    <string name="transaction_number">Transaction No.</string>
+    <string name="transaction_date">Transaction Date</string>
+    <string name="type">Type</string>
+    <string name="no_sr">Hurrey! \n There is no service request</string>
+    <string name="payment_successful">Payment Successful</string>
+    <string name="unable_to_process">We were unable to process your  \n payment.</string>
+    <string name="raise_new_request">Raise New Request</string>
+    <string name="close_app">Close app</string>
+    <string name="sr_number">SR Number</string>
+    <string name="problem_type">Problem Type</string>
+    <string name="problem_sub_type">Problem Sub Type</string>
+    <string name="expected_resolution_time">Expected Resolution Time</string>
+    <string name="plan_name">Plan Name</string>
+    <string name="payment_amount">Your payment of INR</string>
+    <string name="charges">Charges</string>
+    <string name="no_request_found">No Request Found</string>
+    <string name="logout_msg">Are you sure you want to logout?</string>
+    <string name="txt_logout">Logout</string>
+    <string name="upload_profile_picture">Upload Profile picture</string>
+    <string name="plan_description">Plan Description</string>
+    <string name="email_id">Email ID</string>
+    <string name="no_dues">No Dues</string>
+    <string name="can_select_max_one">you can select maximum period of 1 year</string>
+    <string name="no_blank_date">Cannot select back date</string>
+    <string name="exit_msg">Do you want to exit ?</string>
+    <string name="installation_address">Installation Address</string>
+    <string name="add_new_account">Add New Account</string>
+    <string name="reset_password_for">Reset Password for</string>
+    <string name="we_shared">We have shared your login details on</string>
+    <string name="please_confirm_change">Please confirm that you want to change your plan</string>
+    <string name="your_number">your registered email id and</string>
+    <string name="registered_email">Registered Mobile Number.</string>
+    <string name="back_to_home">Back to home</string>
+    <string name="select_issue_type">Please select issue type</string>
+    <string name="enter_description">Please enter description</string>
+    <string name="back_to_login">Back To Login</string>
+    <string name="showing_mrtg_graph">Showing MRTG Graph For</string>
+    <string name="search_by_sr">Search by SR number…</string>
+    <string name="successfully_received">is successfully received.</string>
+    <string name="billing_address">Billing Address</string>
+    <string name="account_cancelled">Account Cancelled</string>
+    <string name="please_create_new">Your Account is currently cancelled. \nTo Re-activate your account</string>
+    <string name="back_to_sr">Back to sr</string>
+    <string name="amt_to_pay">Amount to pay</string>
+    <string name="ok">OK</string>
+    <string name="back_to_account">Back To Account</string>
+    <string name="enter_tds">Enter TDS Amount \n( up to </string>
+    <string name="value_percent"> of billed amount)</string>
+    <string name="sr_requested">Your service request has been \n submitted successfully. Your service \n request number is</string>
+    <string name="proceed">proceed</string>
+    <string name="request_number">request number is </string>
+    <string name="please_select_dates">Please select date range.</string>
+    <string name="create_7_sr">I want to re-activate my services</string>
+    <string name="txt_24_hours">24 hours</string>
+    <string name="txt_today">Today</string>
+    <string name="txt_yesterday">Yesterday or Last Day</string>
+    <string name="last_seven_days">Last 7 Days</string>
+    <string name="can_">CAN ID- </string>
+    <string name="this_week">This week</string>
+    <string name="last_week">Last week</string>
+    <string name="last_30_days">"Last 30 days"</string>
+    <string name="this_month">This Month</string>
+    <string name="last_month">Last Month</string>
+    <string name="last_365_days">Last 365 Days</string>
+    <string name="last_2_years">Last 2 years</string>
+    <string name="this_year">This Year</string>
+    <string name="date_format_MMM_yyyy">MMM yyyy</string>
+    <string name="date_format_yyyy_MM_dd">yyyy-MM-dd</string>
+    <string name="please_enter_can">Please enter CAN ID</string>
+    <string name="confirmation_text">Thank you for sharing your CAN ID. We have shared the details on your registered email and mobile number to reset your password.</string>
+
+    <string-array name="faq_answer_b2c">
+        <item>Yes, you may change the plan anytime by raising a SR under ‘My SR’ menu.</item>
+        <item>Billing of the customer is started from the first day of installation and the billing cycle is 30 days. Your bill is sent to your registered e-mail id on your bill generation date. You can also check your bill in our app under ‘Invoices’ menu.</item>
+        <item>You can make online bill payment via credit card/debit card/Net banking by logging into your account at Spectra app under ‘Invoices’ menu.</item>
+        <item>You can change your tariff plan by raising a SR through app under ‘My SR’ menu or contacting us on our toll–free no: 1800–121–5678 or by writing us at care@spectra.co.</item>
+        <item>To view your due date for bill click on the Invoices menu.</item>
+        <item>Router issues may result in internet connection disruption. Rebooting the router or switching it off and on can solve the problem. Unplug your router, wait for some time and re-plug. Attempt to reconnect to internet. If the issue is still not resolved or you do not have connection issues with the router, then you may please contact our customer care at care@spectra.co for support or raise a SR under ‘My SR’ menu.</item>
+        <item>First check the LEDs on the router – If No LED is glowing, then ensure power cable is connected to CPE and power supply is available. If power is not coming, please change the socket on different power source to verify the availability of power. If adapter is faulty, please replace with the working adapter. If only WAN LED is not glowing, ensure WAN Cable is properly connected on the WAN port of CPE. If cable is loose, plug out and plug in the WAN cable again. If still LED is not coming up, please power off device and power on after 5 sec. If the problem is still not resolved, then please write to us at care@spectra.co If WAN and LAN/Wi-Fi LEDs are glowing solid green, then If you are connected by LAN cable 
+    • Ensure that DHCP option is enable in your Ethernet card.
+    • Check TCP/IP Setting in your Device by typing in Start -> Run > ncpa.cpl and press enter.
+    • Radio button should be checked (Obtain an IP Address automatically &amp; Obtain DNS server address automatically)
+    • Check cable from Router LAN port to your PC / Laptop Ethernet port.
+    • Verify your IP with following steps:
+        ◦ Click on start button in window.
+        ◦ Click on run, type cmd, a window dialog box will open, type ipconfig on command prompt.
+If you are not getting the IP address, then please write to us at care@spectra.co If you are getting the IP Address, please try to ping Default Gateway. If you are getting reply after ping command, it means your connectivity from PC to CPE is fine, If still your internet is not working please call customer care. If you are not able to ping Default Gateway, it could be due to LAN connectivity issue, please write to us at care@spectra.co</item>
+        <item>You can also check your account data usage in app under ‘Data usage’ menu.</item>
+        <item>100 GB data gives you practically unlimited access for Watching 50 HD movies, or Streaming a whole month of music streaming (that’s 650 hours!), or Half a month of continuous HD video calling on Skype (that’s 320 hours!), or Thousands of hours of web browsing and thousands of e-mails.</item>
+        <item>Data volume refers to the data allocated in a specific plan which can be used for uploads and download. We have both limited and unlimited Internet plans. Please visit www.spectra.co for plan details.</item>
+        <item>To check your usage in app, click on \'Data Usage\' menu.</item>
+        <item>Post successful account verification, our Installation team will visit your premises within 72 hours and install the FTTH connection and give you demonstration. We support only equipment given by us.</item>
+        <item>Our teams are well trained but sometimes we come across scenarios where wiring teams get stuck on account of choke conduit. In such cases, team will re-attempt and at the time will request for the support of your building electrician. If all these efforts fail, then the amount will be refunded to you within 4 weeks in your bank account as per details shared.</item>
+        <item>To check the accurate speed please connect your device on the direct LAN cable. To perform a speed test, visit http://fiber.spectra.co/</item>
+        <item>You will need to submit the following documents along with duly filled Customer Application Form (CAF) and applicable charges (if any)
+     Self-attested Photograph
+     Self-attested Proof of Identity
+     Self-attested Proof of Address</item>
+        <item> You can attach self_attested copy of any one of them for Proof of Address &amp; Proof of Identity.\n
+     Aadhaar (UID) Card \n
+     Passport \n
+     Voter ID Card \n
+     Current passbook of Post Office/PSU Bank as Proof of Address, having photo as Proof of Identity &amp; Address. \n
+     Photo Identity Card having address of Central Govt./PSU or State Govt./PSU only. \n
+     Certificate of address having photo, issued by MP/MLA/Group A Gazetted Officer in letter head. \n
+     Certificate of address with photo from Govt. \n
+     Recognized educational institutions (for students only) Pensioner\'s Card having Photo with address. \n
+     CGHS/ECHS Card Address card with photo issued by Dept. of Post, Govt. of India. \n
+     Caste &amp; Domicile Certificate with Photo &amp; Address issued by State Govt. \n
+     Freedom Fighter Card having Photo &amp; Address. \n
+     Certificate of address having photo issued by Village Panchayat head or equivalent authority. \n
+     (For rural areas) Kisan Passbook having Photo with Address.</item>
+        <item>Yes, you can have multiple connections. You may apply while taking initial connection or any time later. Multiple connections will be installed post verifying there are no dues on the existing connection.</item>
+        <item>There can be 2 reasons for this. We may either be not present in your area or your society has not given permission to allow our connectivity. Check Internet availability in your area.</item>
+        <item>Asymmetric bandwidth gives you different speeds for upload and download (Download like browsing, watching movies, downloading songs, etc. is usually higher than uploads like file upload, etc.). Symmetric bandwidth allows you same speeds for both upload and downloads. </item>
+        <item>On connecting to the internet your device is automatically given IP (Internet Protocol) address to identify it to the outside world. There are 2 types of IP address – static and dynamic.</item>
+        <item>Static IP address always remains the same. Dynamic IP address changes from session to session and is given to Business users.</item>
+        <item> FTTH stands for Fiber-to-the-Home. This means a fiber optic line is hooked directly to your home or business. Fiber optic line uses a thin strand of glass to transmit beams of light that carry an amazing amount of data. This delivers high-speed Internet services.</item>
+        <item>Fair Usage Policy (also known as Fair Access Policy or Bandwidth Cap) is implemented by Internet Service Providers (ISPs) where once you reach data transfer limit as per the plan opted, speed reduces to as stated in your plan and is reset as per plan at the start of your next monthly billing cycle.</item>
+        <item>To check the accurate speed please connect your device on the direct LAN cable. To perform a speed test, Visit http://fiber.spectra.co </item>
+        <item>We have different modes of payment available. You can make the payment through Credit card /debit card - offline &amp; online. Apart from this you can also make payment via Mobiwik, Paytm, Ola money, PayU Money, Airtel Money, Freecharge, Payzapp, UPI.</item>
+        <item><![CDATA[You can change your registered mobile number by contacting us on our toll free no: 1800–121–5678 or by writing us at care@spectra.co. You can even do live chat on our website i.e. www.spectra.co]]></item>
+        <item><![CDATA[You can change your registered e–mail ID by contacting us on our toll–free no: 1800–121–5678 or by writing us at care@spectra.co . Live chat is available on our website i.e. www.spectra.co]]></item>
+        <item>Yes, you can transfer the ownership of your internet connection.</item>
+        <item>You have to raise Service request under ‘My SR’ menu. You need to pay a charge of ₹ 500.</item>
+        <item>You can submit a request for internal shifting in app under ‘My SR’ menu. You need to pay a charge of ₹ 250.</item>
+        <item><![CDATA[You can update your alternate number by contacting us on our toll–free no: 1800–121–5678 or by writing us at care@spectra.co. Live chat is available on our website i.e. www.spectra.co]]></item>
+        <!--<item><![CDATA[You can submit a request for safe custody by contacting at us on our toll–free no: 1800–121–5678 or by writing us at care@spectra.co. Live chat is available on our website i.e. www.spectra.co. You need to pay a charge of ₹ 550 for safe custody.]]></item>-->
+        <item>It takes 30 days to process your refund into your bank account.</item>
+        <item>100 GB data gives you practically unlimited access for Watching 50 HD movies, or Streaming a whole month of music streaming (that’s 650 hours!), or Half a month of continuous HD video calling on Skype (that’s 320 hours!), or Thousands of hours of web browsing and thousands of e-mails.</item>
+        <item>One gigabit per second (Gbps) is equivalent to 1000 megabits per second (Mbps) internet connection. One Gbps is also called 1000 Mbps or 1 GIG. This is the fastest broadband Internet connection available in India, enabling you to browse the web and upload or download files faster than ever before.</item>
+        <item>On an average today, a household has 4-5 devices connected to the broadband such as TVs, laptops, smartphones, tablets, printers, home security systems or gaming consoles. All these devices consume bandwidth from the same connection, which means the resulting speed and experience on each device takes a hit. If you have a high-speed connection such as 1 Gbps, multiple devices can deliver great experience simultaneously. 
+Another great benefit is the symmetric upload speed which other providers can’t offer. This means that not only will you be able download files and content at lightning fast speed, but all uploads will also take only seconds. 
+With Spectra 1 Gbps, you can:
+     Use multiple devices simultaneously without sacrificing speed or compromising on experience on any
+     Stream movies, download videos and upload photos with virtually no buffering or waiting
+     Play games online knowing you have the fastest Internet speed available
+     Work from home with the greatest efficiency and reliability you can get from a home Internet connection
+     Upload heavy files such as photographs, videos and work documents to the cloud in seconds.
+All these things can be done simultaneously using just one connection. So why not?</item>
+        <item>There is nothing that you can’t do with 1 Gbps. You can binge watch in 4K videos on multiple Smart TVs, play multiplayer online games and do HD video conferencing and all of it simultaneously.
+     Download 3 MB MP3 file in less than half a second
+     Download 350 MB TV episode in 3 seconds
+     Download 950 MB 1080p HD TV episode in 8 seconds
+     Download 15 GB 4k movie in less than 2 minutes
+     Upload to cloud faster than transfer to external drive
+     Online multi-player gaming without buffer</item>
+        <item>We are offering you the fastest speed with unlimited data volume at the prices that you currently pay for your existing services. At the same price, you can get much more. Also, 1 Gbps is about the speed experience more than consumption limits. Your consumption could remain the same, but speed of 1 Gbps will enhance the experience.</item>
+        <item>We will provide you with an ONT device that terminates the fiber cable at your location. Along with this, you will receive D-Link DIR 825 AC1200 Dual Band Gigabit router that is designed to give the best experience of 1 Gbps connection. With this, you can:
+
+     Simultaneously stream HD and 4K content on multiple devices
+     Seamlessly play multiplayer online gaming
+     Video call without buffer
+     Backup to cloud or download software and program updates in seconds
+     Set parental control on usage
+     Connect to storage, printer etc. via 4 Gigabit ports and USB port
+The router comes at no additional cost with Spectra 1 Gbps package with a refundable security deposit of Rs. 2000. If you are an existing Spectra user, you can call us on 1800 121 5678 today for more details and for scheduling installation.</item>
+        <item>With our 1 Gbps package, we set you up for the fastest broadband experience. The actual speed that you get depends on number of devices being used and their configuration. For best performance from your broadband package, we recommend a direct ethernet (LAN) cable connection. Minimum requirement for a laptop to deliver 1 Gbps speed:
+
+     LAN Port 1 G
+    Mother Board intel i5 (i7 recommended)
+     RAM: 8 Gb
+     Processor 2.4 Ghz</item>
+        <item>No, the plans are truly unlimited. There is no data capping on the volume you consume. However, if you choose our limited time promotion offer of package costing Rs. 799 for six months, your data will be capped at 150 GB.</item>
+        <item>For best performance from your 1 Gbps connection, we recommend a direct ethernet (LAN) cable connection. Internet speeds over a wired connection (Cat 5 or Cat 6 ethernet cable) are faster compared to wireless speeds. 
+There are many factors that adversely impact your home Wi-Fi performance, these are:
+
+     Types of wireless devices its processor and operating system: older phones and laptops that have older Wi-Fi protocols 802.11g, n will give you lower speed and worst still slow down the output from the router.
+     Invest in a dual band 802.11AC router. With dual band technology, you can set-up 2 SSID\'s, one on the 2.4 GHz band for slower connection but longer range. And the less occupied 5GHz frequency band for higher speeds at a shorter distance. Your Spectra connection comes with D-Link DIR 825 1200AC at no additional cost for a refundable security deposit.
+     Number of devices in use: the more the devices, the more the load on the router and the lesser the speed.
+     Distance from the router: the 2.4 GHz channel gives you range but lower speeds, while the 5 GHz channel is less crowded, gives you higher speed but for shorter distances.
+    Network interference in your home. In high-rise buildings, with multiple flats on the same floor, signal interference from your neighbor’s router impacts the reach and speed of your router.
+     Your internet browser: Plug-ins and add-ins affect browser performance and therefore results of your speed test.
+     Building materials, in-home obstructions affect signal strength.
+     Location of your Wi-Fi router and its height. do place your router in a central, elevated spot. In perhaps your living room at an ideal height of 6 Ft (like the top of a shelf of your book rack) so that furniture and other obstacles do not block its signal. Your router should also be away from sources of electrical interference such as microwaves, cordless phones and TVs.</item>
+        <item>We recommend that you use: http://fiber.spectra.co </item>
+        <item>There are many factors that can adversely impact your 1 Gbps experience. In most cases, this happens when the device being used doesn’t support such high speed. Laptops fitted with a gig port support up to 1 Gbps speeds. 
+The next thing to check is if your device is plugged directly into the router via an Ethernet cable versus using Wi-Fi service. A cable is the best way to experience your device\'s full speed. If you connect via Wi-Fi, your speed will decrease since wireless connections are slower. Wireless connections can also be adversely affected by extreme distance versus close proximity to the router as well as the number of walls or other obstacles between your device and the router. 
+The last thing to check is if your router supports 1 Gbps speed. We recommend using the D-Link DIR 825 AC1200 Dual Band Gigabit router that is designed to give the best experience of 1 Gbps connection. With this, you can:
+
+     Simultaneously stream HD and 4K content on multiple devices
+     Seamlessly play multiplayer online gaming
+     Video call without buffer
+     Backup to cloud or download software and program updates in seconds
+     Set parental control on usage
+     Connect to storage, printer etc. via 4 Gigabit ports and USB port
+
+The router comes at no additional cost with Spectra 1 Gbps package with a refundable security deposit of Rs. 2000. If you are an existing Spectra user, you can call us on 1800 121 5678 today for more details and for scheduling installation.</item>
+        <item>Thank you for your interest in our services. We are actively expanding our fiber network across major cities in the country. Our website is the best place to check availability of our services in real time.</item>
+        <item>Thank you for your interest in our services. We are actively expanding our fiber network across major cities in the country. Our website is the best place to check availability of our services in real time.</item>
+        <item>Spectra is a fiber broadband service. While other service providers oﬀer a core copper network or a LAN or coaxial cable, both of which cannot serve a reliable upload and download speed. Spectra’s 100% ﬁber network gives you an experience like never before.
+
+     Fiber is fast. Much, much faster than copper. It is reliable, made of glass and works on light pulses. Your data transfers at the speed of light.
+     Spectra is the fastest. Spectra is consistently #1 on the Netﬂix ISP leader board in India for fastest internet service.
+     You get a dual band, gigabit router, D-Link DIR 825 AC 1200 which gives seamless experience for your 100 MBPS Spectra connection.
+     Symmetric speed up to 100 MBPS. Same speed for upload and download. Buﬀer free gaming, video calls, social sharing and cloud backup.
+
+     We are there for you 24X7. Call for support at 1800 121 5678 or email us at care@spectra.co</item>
+        <item>You can do various things through our App –
+
+View your Spectra Account – Account Name, View Email Id, Spectra Account id (CAN ID) , Installation &amp; Billing Address &amp; Registered Mobile Number
+Our new offerings
+Check Data usage
+Create SR /View  SR Status &amp; Check SR History
+Make payment (multiple payment modes are available),
+Plan Details &amp; Change your plan.</item>
+        <item>Go to My SR option available on the footnote of app &amp; click on raise new request &amp; select the issue observed by you. . Our support team will call u shortly for assisting you. Please do not submit the request again if submitted already.</item>
+        <item>Go to Payments option available on the footnote of the app . Latest 3 invoice are available on the screen or alternatively you may select date range from the option on the app. You have an option to view or email invoice details of last 12 months .</item>
+        <item>Go to Payments option available on the footnote of the app &amp; select Transactions - Latest 3 payments with payment mode, amount , transaction id &amp; payment date  are available on the screen or alternatively you may select date range from the option on the app.Details of last 12 months are available on the App.</item>
+        <item>Clear Phone Cache/RAM from your phone stings &amp; also clear App Data from Application Manager of the Phone</item>
+
+
+        <item>Spectra Voice is a VoIP calling app that comes with your Spectra broadband connection. It lets you enjoy unlimited HD quality voice calls to any Local or STD number in India using your home Wi-Fi. Because it doesn’t depend on mobile phone network or copper-based landlines, you are never unreachable.</item>
+        <item>Spectra Voice is the best VoIP calling app in the market. It comes loaded with the following features:\n
+* 3-way conferencing\n
+* Call waiting\n
+* Call forwarding\n
+* Speed dial\n
+* Called ID block\n
+* Anonymous call rejection\n
+* DND\n
+* Parallel ringing\n
+And all this backed by Spectra’s blazing fast speeds on Fiber broadband ensuring uninterrupted HD quality calls.</item>
+        <item>Using Spectra Voice, you can make unlimited HD quality voice calls to any Local or STD connection of any operator in India (Both Landline &amp; Mobile phones).</item>
+        <item>No, you can make Unlimited local &amp; STD calls to any Landline or Mobile number in India for a nominal charge.</item>
+        <item>No, Spectra Voice is a HD quality voice calling service, with unlimited Local &amp; STD calling facility for a nominal monthly charge.</item>
+        <item>Yes, Spectra Voice works on all smartphones on Android OS v4.1 &amp; above or iOS v 9.0.1 &amp; above. You can get started by downloading the app from Goggle Play (hyperlinked) for android and App Store(hyperlinked) for iOS.</item>
+        <item>No. Spectra Voice works only with your home Wi-Fi of Spectra broadband connection. The device using the voice app, should stay within the range of the connected Spectra Broadband WiFi signals. </item>
+        <item>Spectra Voice subscription comes bundled with Spectra broadband subscription. Check out and purchase our broadband packages at www.spectra.co. If you are an existing Spectra customer, you can raise your request here.</item>
+        <item>A single Spectra connection can avail one Spectra Voice subscription. This means you will have one calling number that can be shared between a maximum of 4 users of the house. You can manage these users on the app.</item>
+        <item>Yes, you can have multiple downloads for multiple users (up to 4) but the phone number, login credentials will remain the same for all of them.</item>
+        <item>No, only one call at a time can be placed using the app.</item>
+        <item>You can configure this on app settings. All four user phones can ring simultaneously if required. You can opt of receiving calls if you do not wish to receive the incoming calls on multiple devices.</item>
+        <item>No, once the call is answered by any receiver, another user will not have access to any of the call features.</item>
+        <item>The call will get disconnected.</item>
+
+
+    </string-array>
+    <string-array name="faq_question_b2c">
+        <item>I have seen a new plan which meets my requirement, but my bill cycle is not over, can I change the plan in between?</item>
+        <item>How do I check my Bill?</item>
+        <item>How can I make the bill Payment?</item>
+        <item>How can I change my tariff Plan?</item>
+        <item>What is my due date for bill payment?</item>
+        <item>I need help with my router as my internet connection is not working?</item>
+        <item>My internet is not working, what should I do?</item>
+        <item>How can I Check the data consumed?</item>
+        <item>Is 100 GB data good to use. How can I use it?</item>
+        <item>What is data volume?</item>
+        <item>How can I check my usage?</item>
+        <item>how do I install Spectra FTTH (Fiber to the Home) Connection?</item>
+        <item>What will happen if my installation does not happen on account of wiring issues?</item>
+        <item>How do I check Internet speed of my Spectra Connection?</item>
+        <item>What documents do I need to give while applying for Spectra FTTH connection?</item>
+        <item>What documents can I give as Identity Proof and address Proof?</item>
+        <item>can I have multiple connection in my house?</item>
+        <item>My friend in adjacent society has Spectra connection but I do not have it in my society?</item>
+        <item>What is asymmetric and symmetric bandwidth?</item>
+        <item>What is an IP address?</item>
+        <item>What is static and dynamic IP address?</item>
+        <item>What is FTTH?</item>
+        <item>What is FUP?</item>
+        <item>I am not getting the promised speed, what do I do?</item>
+        <item>What are the available payment options?</item>
+        <item>How can I change my registered mobile number?</item>
+        <item>How can I change my registered e-mail id?</item>
+        <item>Can I transfer the ownership of my internet connection?</item>
+        <item>What is the procedure to shift within the society?</item>
+        <item>What is the procedure to shift my internet connection to a different room?</item>
+        <item>How do I update my alternate number?</item>
+      <!--  <item>I am travelling for 3 months, how can I put my connection on safe custody?</item>-->
+        <item>How long does it take to process a refund?</item>
+        <item>In case we’re on Wi-Fi, what are the quick checks to ensure that we get the best from your spectra internet connection?</item>
+        <item>What is 1 Gbps?</item>
+        <item>Why 1 Gbps/ or Why do I need such high speed?</item>
+        <item>What can I do with 1 Gbps?</item>
+        <item>My consumption is low. Why should I take 1 Gbps connection?</item>
+        <item>What all equipment ill you give? Will you give a Wi-Fi router / modem?</item>
+        <item>Will I get 1 Gbps?</item>
+        <item>Is there capping on data or is unlimited? There must be some capping!!</item>
+        <item>What factors could affect my speed? Or why am I not getting 1 Gbps speed? Or why am I getting only 100 MBP when my neighbor is getting 900 BPS, while we both are subscribed to 1 Gbps package?</item>
+        <item>How can I test the Internet speed that I’ getting at my home?</item>
+        <item> How do I get the most out of 1 Gbps?</item>
+        <item>By When will 1 Gbps come to my residence area?</item>
+        <item>I am a B2B customer for broadband for 100 MBPS. I see that you are now offering 1 Gbps for home. By hen can I expect this to be made available for businesses like mine?</item>
+        <item>Why should I choose Spectra over other providers?</item>
+        <item>What all I can do with my Spectra App?</item>
+        <item>I am facing issue with Spectra Services , how can I seek support through App?</item>
+        <item>I have not received my bill/Duplicate Bill required ?</item>
+        <item>I want to know all my payments to Spectra?</item>
+        <item>Crash/App Slow/Something went wrong</item>
+
+
+        <item>What is SPECTRA VOICE and why should I use it?</item>
+        <item>How is Spectra Voice different from other calling apps?</item>
+        <item>Whom can I call using this service?</item>
+        <item>Is there is limit to the calling?</item>
+        <item>Is this a free Service with my Spectra Broadband?</item>
+        <item>How do I get started? Will it work on my phone?</item>
+        <item>Does it work on all data networks and public Wi-Fi?</item>
+        <item>How can I get Spectra Voice?</item>
+        <item>How many connections can I get on my connection?</item>
+        <item>Do I need to have multiple downloads for multiple users?</item>
+        <item>Can we have multiple calls by multiple users at home at one time?</item>
+        <item>Will the call ring simultaneously for all users?</item>
+        <item>If call rings and I answer- can anybody else hear my conversation?</item>
+        <item>What happens if I go out of the Spectra WiFi Range while on an ongoing call?</item>
+
+
+    </string-array>
+
+    <string-array name="faq_question_b2b">
+        <item>I have seen a new plan which meets my requirement, but my bill cycle is not over, can I change the plan in between?</item>
+        <item>How can I view my bill/bill amount in App?</item>
+        <item>What is my due date for bill payment?</item>
+        <item>How can I change my tariff plan?</item>
+        <item>I am not getting the promised speed, what do I do?</item>
+        <item>What is FUP?</item>
+        <item>is 100 GB data good to use. How can I use it?</item>
+        <item>What is asymmetric and symmetric bandwidth?</item>
+        <item>What is an IP address?</item>
+        <item>I am not getting the promised speed, what do I do?</item>
+        <item>What is static and dynamic IP address?</item>
+        <item>How can I change my registered mobile number?</item>
+        <item>How can I change my registered email id?</item>
+        <item>Can I transfer the ownership of my internet connection?</item>
+        <item>What is the procedure to shift within the building? </item>
+        <item>What is the procedure to shift my internet connection to a different room?</item>
+        <!--<item>I am travelling for 3 months, how can I put my connection on safe custody?</item>-->
+        <item>What are the available payment options?</item>
+        <item>How can I check my usage?</item>
+        <item>How long does it take to process a refund?</item>
+        <item>What all I can do with my Spectra App?</item>
+        <item>I am facing issue with Spectra Services , how can I seek support through App?</item>
+        <item>I have not received my bill/Duplicate Bill required ?</item>
+        <item>I want to know all my payments to Spectra?</item>
+        <item>Crash/App Slow/Something went wrong</item>
+
+        <item>What is SPECTRA VOICE and why should I use it?</item>
+        <item>How is Spectra Voice different from other calling apps?</item>
+        <item>Whom can I call using this service?</item>
+        <item>Is there is limit to the calling?</item>
+        <item>Is this a free Service with my Spectra Broadband?</item>
+        <item>How do I get started? Will it work on my phone?</item>
+        <item>Does it work on all data networks and public Wi-Fi?</item>
+        <item>How can I get Spectra Voice?</item>
+        <item>How many connections can I get on my connection?</item>
+        <item>Do I need to have multiple downloads for multiple users?</item>
+        <item>Can we have multiple calls by multiple users at home at one time?</item>
+        <item>Will the call ring simultaneously for all users?</item>
+        <item>If call rings and I answer- can anybody else hear my conversation?</item>
+        <item>What happens if I go out of the Spectra WiFi Range while on an ongoing call?</item>
+
+    </string-array>
+    <string-array name="faq_answer_b2b">
+        <item>Yes, you can change the plan in between the bill cycle. You can contact your relationship manager.</item>
+        <item>To view your bill, click on \‘Invoices\' menu.</item>
+        <item>To view due date of your bill click on \'Invoices\' option.</item>
+        <item>You can change plan by writing us at support@spectra.co or contact your relationship manager.</item>
+        <item>You need to check the speed on direct LAN cable connectivity. To perform a speed test refer to fiber.spectra.co or you may contact your relationship manager.</item>
+        <item>Fair Usage Policy (also known as Fair Access Policy or Bandwidth Cap) is implemented by Internet Service Providers (ISPs) where once you reach data transfer limit as per the plan opted, speed reduces to as stated in your plan and is reset as per plan at the start of your next monthly billing cycle.</item>
+        <item>100 GB data gives you practically unlimited access for Watching 50 HD movies, or Streaming a whole month of music streaming (that’s 650 hours!), or Half a month of continuous HD video calling on Skype (that’s 320 hours!), or Thousands of hours of web browsing and thousands of emails.</item>
+        <item>Asymmetric bandwidth gives you different speeds for upload and download (Download like browsing, watching movies, downloading songs, etc. is usually higher than uploads like file upload, etc.). Symmetric bandwidth allows you the same speed for both upload and download.</item>
+        <item>On connecting to the internet your device is automatically given IP (Internet Protocol) address to identify it to the outside world. There are two types of IP address – Static and dynamic.</item>
+        <item>You need to check the speed on direct LAN cable connectivity. To perform a speed test refer to fiber.spectra.co or you may contact your relationship manager.</item>
+        <item>Static IP address remains the same while Dynamic IP address changes from session to session and is given to Business users.</item>
+        <item>You can change your registered mobile number by writing us at support@spectra.co from your registered email id.</item>
+        <item>You can change your registered email id by writing us at support@spectra.co from your registered email id.</item>
+        <item>Yes, you can transfer the ownership of your internet connection.</item>
+        <item>You can contact your relationship manager for submit the required documents. Charges will be informed by relationship manager.</item>
+        <item>You can submit a request for internal shifting by writing us at support@spectra.co. Your relationship manager will inform about the charges applicable.</item>
+        <item>You can submit a request for safe custody by writing us at support@spectra.co . Your outstanding needs to be cleared.</item>
+        <item>Customer can make payment through app by using Debit card, Credit card, UPI or Netbanking.</item>
+        <item>To check your account data usage in app under ‘Data usage’ menu.</item>
+        <item>It takes 21 days post device recovery to process your refund into your bank account.</item>
+        <item>You can do various things through our App –
+
+View your Spectra Account – Account Name, View Email Id, Spectra Account id (CAN ID) , Installation &amp; Billing Address &amp; Registered Mobile Number
+Our new offerings
+Check Data usage
+Create SR /View  SR Status &amp; Check SR History
+Make payment (multiple payment modes are available),
+Plan Details &amp; Change your plan.</item>
+        <item>Go to My SR option available on the footnote of app &amp; click on raise new request &amp; select the issue observed by you. . Our support team will call u shortly for assisting you. Please do not submit the request again if submitted already.</item>
+        <item>Go to Payments option available on the footnote of the app . Latest 3 invoice are available on the screen or alternatively you may select date range from the option on the app. You have an option to view or email invoice details of last 12 months .</item>
+        <item>Go to Payments option available on the footnote of the app &amp; select Transactions - Latest 3 payments with payment mode, amount , transaction id &amp; payment date  are available on the screen or alternatively you may select date range from the option on the app.Details of last 12 months are available on the App.</item>
+        <item>Clear Phone Cache/RAM from your phone stings &amp; also clear App Data from Application Manager of the Phone</item>
+
+
+        <item>Spectra Voice is a VoIP calling app that comes with your Spectra broadband connection. It lets you enjoy unlimited HD quality voice calls to any Local or STD number in India using your home Wi-Fi. Because it doesn’t depend on mobile phone network or copper-based landlines, you are never unreachable.</item>
+        <item>Spectra Voice is the best VoIP calling app in the market. It comes loaded with the following features:\n
+* 3-way conferencing\n
+* Call waiting\n
+* Call forwarding\n
+* Speed dial\n
+* Called ID block\n
+* Anonymous call rejection\n
+* DND\n
+* Parallel ringing\n
+And all this backed by Spectra’s blazing fast speeds on Fiber broadband ensuring uninterrupted HD quality calls.</item>
+        <item>Using Spectra Voice, you can make unlimited HD quality voice calls to any Local or STD connection of any operator in India (Both Landline &amp; Mobile phones).</item>
+        <item>No, you can make Unlimited local &amp; STD calls to any Landline or Mobile number in India for a nominal charge.</item>
+        <item>No, Spectra Voice is a HD quality voice calling service, with unlimited Local &amp; STD calling facility for a nominal monthly charge.</item>
+        <item>Yes, Spectra Voice works on all smartphones on Android OS v4.1 &amp; above or iOS v 9.0.1 &amp; above. You can get started by downloading the app from Goggle Play (hyperlinked) for android and App Store(hyperlinked) for iOS.</item>
+        <item>No. Spectra Voice works only with your home Wi-Fi of Spectra broadband connection. The device using the voice app, should stay within the range of the connected Spectra Broadband WiFi signals. </item>
+        <item>Spectra Voice subscription comes bundled with Spectra broadband subscription. Check out and purchase our broadband packages at www.spectra.co. If you are an existing Spectra customer, you can raise your request here.</item>
+        <item>A single Spectra connection can avail one Spectra Voice subscription. This means you will have one calling number that can be shared between a maximum of 4 users of the house. You can manage these users on the app.</item>
+        <item>Yes, you can have multiple downloads for multiple users (up to 4) but the phone number, login credentials will remain the same for all of them.</item>
+        <item>No, only one call at a time can be placed using the app.</item>
+        <item>You can configure this on app settings. All four user phones can ring simultaneously if required. You can opt of receiving calls if you do not wish to receive the incoming calls on multiple devices.</item>
+        <item>No, once the call is answered by any receiver, another user will not have access to any of the call features.</item>
+        <item>The call will get disconnected.</item>
+
+
+    </string-array>
+    <string name="mrtg_graph">mrtg graph</string>
+    <string name="cancel">Cancel</string>
+    <string name="change">change</string>
+    <string name="plan_request_raised">Your change plan request has been \n submitted successfully. Our Spectra \n executive will contact you soon.</string>
+    <string name="plan_request_not_raised">Plan has not been changed.</string>
+    <string name="back">back</string>
+    <string name="name">Name</string>
+    <string name="gst">GSTN</string>
+    <string name="tan">TAN</string>
+    <string name="mobile_no">Mobile Number</string>
+    <string name="payment_incl_adj">Payment(Incl. Adj)</string>
+    <string name="from_date">From Date</string>
+    <string name="to_date">To Date</string>
+    <string name="email">Email ID</string>
+    <string name="my_account">My Account</string>
+    <string name="reactivate_now">Reactivate now</string>
+    <string name="edit_profile">Update Profile</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="rate_app">Rate App</string>
+    <string name="new_connection_number">1860 266 0099</string>
+    <string name="support_line_number">1800 121 5678</string>
+    <string name="support_email">info@spectra.co</string>
+    <string name="raise_new_sr">RAISE NEW SR</string>
+    <string name="request_type">Request Type</string>
+    <string name="description">Description</string>
+    <string name="data_in_gb">Data in GB</string>
+    <string name="total_data_usage">Total Data Usage</string>
+    <string name="custom">custom</string>
+    <string name="txt_six_months">6 Months</string>
+    <string name="txt_one_month">1 Month</string>
+    <string name="faq">FAQ</string>
+    <string name="menu">Menu</string>
+    <string name="my_sr">My SR</string>
+    <string name="payments">Payments</string>
+    <string name="home">Home</string>
+    <string name="view_all">View All</string>
+    <string name="status">Status</string>
+    <string name="created_on">Created on</string>
+    <string name="due_on">Due on </string>
+    <string name="out_of">Out of</string>
+    <string name="data_left">Data Left</string>
+    <string name="invoices">Invoices</string>
+    <string name="transactions">Transactions</string>
+    <string name="invoice_detail">INVOICE DETAIL</string>
+    <string name="share">SHARE</string>
+    <string name="login_via">Login via</string>
+    <string name="my_plans">My Plan</string>
+    <string name="my_transactions">My Transactions</string>
+    <string name="get_help">Get Help</string>
+    <string name="troubleshooting">Troubleshooting</string>
+    <string name="create_sr">Create SR</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="legal_disclaimer">Legal Disclaimer</string>
+    <string name="logout">Logout</string>
+    <string name="my_plan">MY PLAN</string>
+    <string name="data">Data:</string>
+    <string name="speed">Speed:</string>
+    <string name="frequency">Frequency:</string>
+    <string name="otp_blank_validation">OTP cannot be blank</string>
+    <string name="otp_has_been_sent_to">OTP has been sent to</string>
+    <string name="payment_declined">Payment Declined</string>
+    <string name="unable_to_pay">We were unable to process  your payment.</string>
+    <string name="service_requests">SERVICE REQUESTS</string>
+    <string name="transaction_amount">Transaction Amount</string>
+    <string name="payment_mode">Payment Mode</string>
+    <string name="charges_holder">Charges:</string>
+    <string name="update">Update</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="update_account">Update Account</string>
+    <string name="updatedEmail">Your Email ID Changed Successfully</string>
+    <string name="updatedMobile">Your Mobile Number Changed Successfully</string>
+    <string name="otpVerified">OTP Verified</string>
+    <string name="memoryExceeded">Memory size exceeded cannot fetch this image </string>
+    <string name="done">Done</string>
+    <string name="dataWarning">Your data is about \nto complete.</string>
+    <string name="upgradePlan">Upgrade Plan</string>
+    <string name="txtAutopay">Auto Pay: Set up a standing instruction to pay your spectra bills using your Credit card (Visa &amp; Master Card) with ease your future payments on this card will be charged automatically on 6th day from bill generation date.
+        \n Note: Rs 10 will be charged for Card auto pay enablement and same will adjusted in O/S amount.</string>
+    <string name="standingInstructions">Auto Pay</string>
+    <string name="setupAutopay">Set up Auto Pay</string>
+    <string name="changesi">Change</string>
+    <string name="disable">Disable</string>
+    <string name="selectTerms">Please Accept Terms And Conditions</string>
+    <string name="accept_terms">I accept the <a href="https://custappmw.spectra.co/autopay_t_c.html">Terms &amp; Conditions</a></string>
+    <string name="price">Price:</string>
+    <string name="tax">Tax:</string>
+    <string name="total">Total:</string>
+    <string name="pay">pay</string>
+    <string name="invoice">invoice</string>
+    <string name="topup">Top-up</string>
+    <string name="amountExceededLimit">TDS amount exceeded the maximum limit</string>
+    <string name="autopayEnabled">Success! Thank you. Your auto pay is registered with us.</string>
+    <string name="autopayEnabledfail">Oops! Something has gone wrong. We are unable to process your request now.</string>
+    <string name="autopayDisabled">Success! Thank you. Your auto pay is disabled.</string>
+    <string name="contact">Contacts</string>
+    <string name="add_new_contact">Add New Contact</string>
+    <string name="edit_contact">Edit Contact</string>
+    <string name="addNew">ADD NEW</string>
+    <string name="no_contact">No Contact Found</string>
+    <string name="uploadProfilePicture">Upload Profile Picture</string>
+    <string name="changeProfilePicture">Change Profile Picture</string>
+    <string name="companyName">Company Name</string>
+    <string name="pay_bill_for_other_account">Pay for Another Account</string>
+    <string name="rs">\u20B9</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="You_password_has_been_changed">You password has been changed</string>
+    <string name="login">LOGIN</string>
+
+    <string name="password_should_contain_1_capital_letter_and_1_special_character">New password must be at least 8 characters long. Must contains capitals, numerals (0 through 9) &amp; non-alphabets (for example, !, $, #, %)</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="pleaseAddyourCanID">Please add your CAN ID</string>
+    <string name="addCanId">Add CAN ID</string>
+    <string name="no_linked">No Account Found</string>
+    <string name="link">Link</string>
+    <string name="remove">Remove</string>
+    <string name="recuringMassage">Prorated Top-up charges will be applicable from today, till the next invoice date based on your remaining plan duration</string>
+    <string name="topupAmountTopay">Amount to pay – (Top-up Rental + 18% Taxes)</string>
+    <string name="oneTimePopMessage"><![CDATA[One time charges (not prorated) will be applicable & add-on data will be available till next Quota Reset date.]]></string>
+    <string name="sorry_">Sorry to hear that you are experiencing a network issue.\n\nWhile we identify the issue please ensure that you are connected to mobile network for effective troubleshooting side by side.\n\nAlso, ensure your ONT &amp;
+ Router/ ONT &amp;
+ Switch are connected.</string>
+    <string name="sr_heding">An SR is already created for this\n issue. SR details below</string>
+    <string name="TrackYourOrder">Track Your Order</string>
+
+    <string name="fd_trouble_msg">Sorry to hear that. \n\nPlease ensure your ONT (White box) is properly plugged in and connected to Spectra WiFi Router/Switch while we troubleshoot.</string>
+    <string name="fd_trouble_sub">I am facing frequent disconnection</string>
+    <string name="fd_trouble_btn">TROUBLESHOOT</string>
+
+    <string name="ss_trouble_msg">Sorry to hear that. \n\nPlease ensure your ONT (White box) is properly plugged in and connected to Spectra WiFi Router/Switch while we troubleshoot.</string>
+    <string name="ss_trouble_sub">I am facing slow speed</string>
+
+    <!-- Slow Speed -->
+
+    <string name="ss_selection_sub">"Before we proceed Kindly\nlet us know, how are you connected…"</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="wan_light">WAN Light</string>
+    <string name="wifi_light">Wifi Light</string>
+    <string name="wifi_router">WiFi Router</string>
+    <string name="inteno_ex">Inteno EX400</string>
+    <string name="switch_text">Switch</string>
+    <string name="ont">ONT</string>
+    <string name="router">Router</string>
+    <string name="detecting_problems">Detecting Problems</string>
+
+    <string name="lan">LAN</string>
+    <string name="wifi">WIFI</string>
+    <string name="inteno">INTENO</string>
+    <string name="d_link">"D-Link"</string>
+    <string name="lan_result_sub_msg">"You are requested to reboot your ONT and Router and wait."</string>
+    <string name="timer_msg">00:00</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="yes_btn">YES</string>
+    <string name="no_btn">NO</string>
+    <string name="ok_btn">OKAY</string>
+    <string name="continue_btn">CONTINUE</string>
+    <string name="back_to_home_btn">BACK TO HOME</string>
+
+    <string name="signal_strength">Signal Strength</string>
+    <string name="signal_strength_weak">Weak</string>
+    <string name="signal_strength_excellent">Excellent</string>
+
+    <string name="ss_wifi_not_detect_msg">"Wifi connectivity not detected.\nAre you connected through LAN"</string>
+
+    <string name="ss_2_4_weak_signal_msg">"You are too far from the Wifi router.\nPlease move closer for signal strength to become Excellent. Also please shift to 5 Ghz band."</string>
+    <string name="ss_2_4_excellent_signal_msg">"Please shift to 5 Ghz band."</string>
+
+    <string name="ss_5_weak_signal_msg">"You are too far from the Wifi router.\nPlease move closer for signal strength to become Excellent."</string>
+    <string name="ss_5_excellent_signal_msg">""</string>
+
+    <string name="ss_2_4_exit_msg">"You are too far from Wi-Fi router. Please come close and switch to 5Ghz and restart the troubleshooting."</string>
+    <string name="ss_5_exit_msg">"You are too far from Wi-Fi router. Please come close and restart the troubleshooting."</string>
+
+
+    <string name="speed_test_msg">"CLICK HERE FOR \nSPEED TEST"</string>
+    <string name="ss_restart_trouble_shoot_msg">"Connect your device to Spectra network either through LAN / Wi-Fi and re-start the troubleshooting."</string>
+    <string name="ss_inteno_restart_trouble_shoot_msg">"INTENO does not support 2.4Ghz band. Please shift to 5 Ghz band and re-start the troubleshooting."</string>
+
+
+
+    <!-- Sprint 2 -->
+    <string name="know_more">KNOW MORE</string>
+    <string name="compare_plans">COMPARE PLANS</string>
+    <string name="proceed_plan">PROCEED</string>
+</resources>

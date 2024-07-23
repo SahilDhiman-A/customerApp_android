@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/layout_plan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_20sdp"
+        android:background="#ffffff"
+        android:visibility="visible"
+        app:cardCornerRadius="@dimen/_15sdp">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp">
+     <androidx.appcompat.widget.AppCompatTextView
+         android:id="@+id/tvHeading"
+         android:layout_width="wrap_content"
+         android:textSize="@dimen/_14sdp"
+         android:layout_gravity="center"
+         android:layout_marginTop="@dimen/_10sdp"
+         android:textColor="@color/colorPrimaryDark"
+         android:text="@string/add_new_contact"
+         android:layout_height="wrap_content"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:id="@+id/inlFirstName"
+                app:errorTextAppearance="@style/errorAppearance"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_25sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etFirstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="First Name"
+                    android:textSize="@dimen/_12sdp"
+                    android:maxLength="20"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:textColor="@color/colorPrimaryDark" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:id="@+id/inlLastName"
+                app:errorTextAppearance="@style/errorAppearance"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Last Name"
+                    android:textSize="@dimen/_12sdp"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:maxLength="20"
+                    android:textColor="@color/colorPrimaryDark" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:id="@+id/inlEmailId"
+                app:errorTextAppearance="@style/errorAppearance"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmailId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email ID"
+                    android:textSize="@dimen/_12sdp"
+                    android:imeOptions="actionNext"
+                    android:maxLength="30"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/colorPrimaryDark" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:id="@+id/inlDesignation"
+                app:errorTextAppearance="@style/errorAppearance"
+
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDesignation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Designation"
+                    android:textSize="@dimen/_12sdp"
+                    android:maxLength="30"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:textColor="@color/colorPrimaryDark" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:id="@+id/inlMobileNumber"
+                app:errorTextAppearance="@style/errorAppearance"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Mobile Number"
+                    android:textSize="@dimen/_12sdp"
+                    android:maxLength="10"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:textColor="@color/colorPrimaryDark" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:padding="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/tvCancel"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/back_color"
+                    android:text="cancel"
+                    android:paddingTop="@dimen/_8sdp"
+                   android:textAllCaps="true"
+                    android:paddingEnd="@dimen/_19sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:drawablePadding="@dimen/_15sdp"
+                 android:layout_alignParentStart="true"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save"
+                    android:textAllCaps="true"
+                    android:drawableEnd="@drawable/ic_arrow_white"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/white"
+                    android:layout_alignParentEnd="true"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingStart="@dimen/_19sdp"
+                    android:paddingEnd="@dimen/_19sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:drawablePadding="@dimen/_35sdp"
+                    android:background="@drawable/login_background"
+                    />
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:visibility="gone"
+            android:indeterminateTint="@color/back_color"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"/>
+</RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</RelativeLayout>

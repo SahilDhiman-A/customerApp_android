@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "949456884341",
+    "firebase_url": "https://spectra-consumer.firebaseio.com",
+    "project_id": "spectra-consumer",
+    "storage_bucket": "spectra-consumer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949456884341:android:22bc753807b758c6905e3c",
+        "android_client_info": {
+          "package_name": "com.spectra.consumer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "949456884341-f5b0o30ds5sgo0luqbnvlq6bgpgdgs6i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACuAN5jFm5eHzO78_HsKcYXBGKaWXClI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "949456884341-f5b0o30ds5sgo0luqbnvlq6bgpgdgs6i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

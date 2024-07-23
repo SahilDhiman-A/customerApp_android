@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    android:background="@color/colorPrimaryDark">
+    <include layout="@layout/toolbar_head"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/toolbar_head"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:id="@+id/layout_content"
+        android:layout_width="match_parent"
+        android:visibility="visible"
+        android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_autopayText"
+        android:layout_marginTop="@dimen/_60sdp"
+        android:orientation="vertical">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_rupee"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/ic_rupee_colord"
+            android:layout_height="@dimen/_60sdp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:padding="@dimen/_5sdp"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/payment_amount"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:textAlignment="center"
+            android:fontFamily="@font/helvetica_neue_light"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:textColor="@color/colorAccent"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/txtAutopay"/>
+    </LinearLayout>
+<LinearLayout
+    android:id="@+id/layout_terms"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/_25sdp"
+    android:layout_marginEnd="@dimen/_20sdp"
+    android:layout_marginStart="@dimen/_25sdp"
+    android:layout_below="@+id/layout_autopayText">
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/check_termsAndConditions"
+        android:layout_width="wrap_content"
+        android:textColor="@color/white"
+        android:buttonTint="@color/white"
+        android:textSize="16sp"
+        android:layout_height="wrap_content"/>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_terms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/helvetica_neue_light"
+        android:text="@string/accept_terms"
+        android:textSize="16sp"
+        android:textColor="@color/colorAccent" />
+</LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/setup_Autopay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_terms"
+        android:text="@string/setupAutopay"
+        android:textAllCaps="true"
+        android:drawableEnd="@drawable/ic_arrow_white"
+        android:textSize="16sp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/_30sdp"
+        android:textColor="@color/white"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingStart="@dimen/_19sdp"
+        android:paddingEnd="@dimen/_19sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:drawablePadding="@dimen/_15sdp"
+        android:background="@drawable/login_background" />
+    <RelativeLayout
+        android:id="@+id/layoutChangeDisable"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:visibility="gone"
+        android:layout_below="@+id/layout_terms"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/change_si"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/changesi"
+            android:textAllCaps="true"
+            android:drawableEnd="@drawable/ic_arrow_white"
+            android:textSize="14sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:textColor="@color/white"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingStart="@dimen/_19sdp"
+            android:paddingEnd="@dimen/_19sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:drawablePadding="@dimen/_15sdp"
+            android:background="@drawable/login_background" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/disable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/disable"
+            android:textAllCaps="true"
+            android:drawableEnd="@drawable/ic_arrow_white"
+            android:textSize="14sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:textColor="@color/white"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingStart="@dimen/_19sdp"
+            android:paddingEnd="@dimen/_19sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:drawablePadding="@dimen/_15sdp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/login_background"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/back_color"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+    </ScrollView>
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_head"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:visibility="gone" />
+</RelativeLayout>

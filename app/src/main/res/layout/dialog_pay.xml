@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/llPayDialog"
+    android:layout_margin="@dimen/_20sdp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dial_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/_20sdp">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtUpdateHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="@string/pay_bill_for_other_account"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/_16sdp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:padding="@dimen/_5sdp">
+
+            <RelativeLayout
+                android:id="@+id/btn_updateLayout"
+                android:layout_width="60dp"
+                android:layout_height="@dimen/_60sdp"
+                android:layout_alignParentEnd="true"
+                android:background="@color/white"
+                android:visibility="visible">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btn_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/back_color"
+                    app:srcCompat="@drawable/ic_arrow_white" />
+            </RelativeLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tiL"
+                android:layout_toStartOf="@+id/btn_updateLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_update_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:inputType="number"
+                    android:layout_centerHorizontal="true"
+                    android:singleLine="true"
+
+                    android:hint="Enter CAN ID"
+                    app:errorTextAppearance="@style/errorAppearance"
+                    android:maxLength="15"
+                    android:textSize="@dimen/_15sdp" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </RelativeLayout>
+    </LinearLayout>
+<ProgressBar
+    android:id="@+id/progress_bar"
+    android:layout_width="wrap_content"
+    android:layout_centerInParent="true"
+    android:visibility="gone"
+    android:indeterminateTint="@color/back_color"
+    android:layout_height="wrap_content"/>
+</RelativeLayout>

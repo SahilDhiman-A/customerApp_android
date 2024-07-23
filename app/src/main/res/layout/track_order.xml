@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_head" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/back_color"
+        android:visibility="visible" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_head">
+
+        <LinearLayout
+            android:id="@+id/layout_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_60sdp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Customer Name"
+
+                        android:fontFamily="@font/helveticaneue_medium"
+                        android:textColor="@color/color_text_gary"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:fontFamily="@font/helveticaneue_medium"
+                        android:id="@+id/tvName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:maxLength="21"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_13sdp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:fontFamily="@font/helveticaneue_medium"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="CAN ID"
+                        android:textColor="@color/color_text_gary"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCustNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/helveticaneue_medium"
+
+                        android:textSize="@dimen/_13sdp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/layoutCv2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="#ffffff"
+                android:visibility="gone"
+                app:cardCornerRadius="@dimen/_15sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_20sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/imgCAF"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/group_gray" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvCAFSubmitted"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:drawableStart="@drawable/order_made"
+                            android:drawablePadding="@dimen/_15sdp"
+                            android:paddingStart="@dimen/_19sdp"
+                            android:text="CAF Submitted\n "
+                            android:fontFamily="@font/helveticaneue_medium"
+                            android:textColor="@color/color_text_gary"
+                            android:textSize="@dimen/_11sdp"
+                            app:drawableTint="@color/color_text_gary" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="2dp"
+                        android:background="@color/color_text_gary"
+                        android:layout_marginStart="11dp"
+                        android:layout_height="@dimen/_45sdp"/>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgDocumentsVerified"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/group_gray" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvDocumentsVerified"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:drawableStart="@drawable/documents_verified"
+                            android:drawablePadding="@dimen/_15sdp"
+                            android:paddingStart="@dimen/_19sdp"
+                            android:text="Documents Verified\n "
+                            android:fontFamily="@font/helveticaneue_medium"
+                            android:textColor="@color/color_text_gary"
+                            android:textSize="@dimen/_11sdp"
+                            app:drawableTint="@color/color_text_gary" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="2dp"
+                        android:background="@color/color_text_gary"
+                        android:layout_marginStart="11dp"
+                        android:layout_height="@dimen/_45sdp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgInstallationCompleted"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/group_gray" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvInstallationCompleted"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:drawableStart="@drawable/installation_done"
+                            android:drawablePadding="@dimen/_15sdp"
+                            android:paddingStart="@dimen/_19sdp"
+
+                            android:text="Installation Completed\n "
+                            android:fontFamily="@font/helveticaneue_medium"
+                            android:textColor="@color/color_text_gary"
+                            android:textSize="@dimen/_11sdp"
+                            app:drawableTint="@color/color_text_gary" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="2dp"
+                        android:background="@color/color_text_gary"
+                        android:layout_marginStart="11dp"
+                        android:layout_height="@dimen/_45sdp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgHappyBrowsing"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/group_gray" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvHappyBrowsing"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:drawableStart="@drawable/internet_working"
+                            android:drawablePadding="@dimen/_15sdp"
+                            android:paddingStart="@dimen/_19sdp"
+                            android:text="Happy Browsing\n "
+                            android:fontFamily="@font/helveticaneue_medium"
+                            android:textColor="@color/color_text_gary"
+                            android:textSize="@dimen/_11sdp"
+                            app:drawableTint="@color/color_text_gary" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/llCall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/helveticaneue_medium"
+                    android:text="Need help? Call"
+                    android:textColor="@color/color_text_gary"
+                    android:textSize="@dimen/_12sdp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="1800 121 5678"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:fontFamily="@font/helveticaneue_medium"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14sdp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:id="@+id/llMyAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layout_logout"
+        android:layout_gravity="bottom"
+        android:background="#191919"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="@dimen/_13sdp">
+
+        <ImageView
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            app:srcCompat="@drawable/ic_my_account" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="@string/my_account"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_logout"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+
+        android:background="#191919"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="@dimen/_13sdp">
+
+        <ImageView
+            android:id="@+id/img_logout"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            app:srcCompat="@drawable/ic_logout" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="@string/logout"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+</RelativeLayout>

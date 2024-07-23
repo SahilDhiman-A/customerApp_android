@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <FrameLayout
+            android:id="@+id/lay_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/llBackToHome"
+            android:padding="@dimen/_15sdp"
+            android:visibility="gone"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/layout_name"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:background="#ffffff"
+                app:cardCornerRadius="@dimen/_15sdp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_15sdp"
+                    android:visibility="visible">
+                    <TextView
+                        android:id="@+id/tvBackToHomeTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/shadow_color"
+                        android:textSize="@dimen/btn_text" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvBackToHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Back to HOME"
+                        android:textAllCaps="true"
+                        android:drawableEnd="@drawable/arrow"
+                        android:textSize="@dimen/btn_text"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:textColor="@color/white"
+                        android:paddingTop="@dimen/_8sdp"
+                        android:paddingStart="@dimen/_19sdp"
+                        android:paddingEnd="@dimen/_19sdp"
+                        android:paddingBottom="@dimen/_8sdp"
+                        android:drawablePadding="@dimen/_15sdp"
+                        android:background="@drawable/login_background"
+                        />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rlAcountDeactive"
+            android:visibility="gone"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/topMeassge"
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:padding="@dimen/_20sdp"
+                android:visibility="gone"
+                android:layout_gravity="center_horizontal"
+                android:text="Your account is currently Barred due to nonpayment of your dues/pending payment."
+                android:textColor="#ffffff"
+                android:textSize="@dimen/sub_header_text" />
+            <LinearLayout
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/dial_background"
+                android:padding="@dimen/_18sdp">
+
+                <TextView
+                    android:id="@+id/tvSelectOptTitle"
+                    android:textAlignment="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Your account is deactivate since 02/14/02. Would you like to reactivate it ?"
+                    android:textColor="#3D3D3D"
+                    android:textSize="@dimen/sub_header_text" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_10sdp">
+
+
+                    <TextView
+                        android:id="@+id/tvNo"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:background="@drawable/login_background"
+                        android:drawableEnd="@drawable/ic_arrow_white"
+                        android:padding="@dimen/_10sdp"
+                        android:text="No"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/btn_text" />
+
+                    <TextView
+                        android:id="@+id/tvYes"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:background="@drawable/login_background"
+                        android:drawableEnd="@drawable/ic_arrow_white"
+                        android:padding="@dimen/_10sdp"
+                        android:text="Yes"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/btn_text" />
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:id="@+id/rlFdssSpeedLayout"
+            android:visibility="gone"
+            android:padding="@dimen/_15sdp"
+            android:layout_gravity="bottom"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/layout_speed_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:background="#ffffff"
+                android:visibility="visible"
+                app:cardCornerRadius="@dimen/_15sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_15sdp"
+                    android:visibility="visible">
+
+                    <com.github.anastr.speedviewlib.SpeedView
+                        android:id="@+id/speedView"
+                        android:layout_width="@dimen/_202sdp"
+                        android:layout_height="@dimen/_161sdp"
+                        android:layout_gravity="center"
+                        app:sv_centerCircleRadius="@dimen/_8sdp"
+                        app:sv_centerCircleColor="@color/black"
+                        app:sv_speedometerMode="NORMAL"
+                        app:sv_speedometerWidth="@dimen/_10sdp"
+                        app:sv_unit=""
+                        app:sv_textColor="@color/white"
+                        app:sv_withIndicatorLight="true"
+                        app:sv_speedTextColor="@color/white"
+                        app:sv_markColor="@color/transparent"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvSpeedTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="Current bandwidth utilization more than 80%.\n\n\nUpgrade?"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/color_text_grey"
+                        android:textSize="@dimen/sub_header_text" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvSpeedOkay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="OKAY"
+                        android:textAllCaps="true"
+                        android:drawableEnd="@drawable/ic_arrow_white"
+                        android:textSize="@dimen/btn_text"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:visibility="visible"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:textColor="@color/white"
+                        android:paddingTop="@dimen/_8sdp"
+                        android:paddingStart="@dimen/_19sdp"
+                        android:paddingEnd="@dimen/_19sdp"
+                        android:paddingBottom="@dimen/_8sdp"
+                        android:drawablePadding="@dimen/_15sdp"
+                        android:background="@drawable/login_background"
+                        />
+
+                    <RelativeLayout
+                        android:id="@+id/laySpeedyesno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/tvSpeedNo"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:background="@drawable/login_background"
+                            android:drawableEnd="@drawable/ic_arrow_white"
+                            android:padding="@dimen/_10sdp"
+                            android:textSize="@dimen/btn_text"
+                            android:text="NO"
+                            android:textAllCaps="true"
+                            android:textColor="@color/white"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvSpeedYes"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:background="@drawable/login_background"
+                            android:drawableEnd="@drawable/ic_arrow_white"
+                            android:padding="@dimen/_10sdp"
+                            android:text="YES"
+                            android:textSize="@dimen/btn_text"
+                            android:textAllCaps="true"
+                            android:textColor="@color/white"
+                            />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/pro2"
+            android:layout_width="match_parent"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:indeterminateTint="@color/back_color"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints" />
+
+    </RelativeLayout>
+</layout>

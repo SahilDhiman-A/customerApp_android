@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/rlSrDetail"
+    android:padding="@dimen/_5sdp"
+    android:visibility="gone"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/sub_header_text"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:text="@string/sr_heding"/>
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@drawable/dial_background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/_15sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/normal_text"
+                android:textColor="@color/black"
+                android:text="SR Details"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/_12sdp"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:textSize="@dimen/_11sdp"
+                        android:textColor="@color/txt_mobile_number"
+                        android:text="@string/sr_number"/>
+                    <TextView
+                        android:id="@+id/txt_sr_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@android:color/black"
+                        android:text="@string/invoice_no"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:textSize="@dimen/_11sdp"
+                        android:textColor="@color/txt_mobile_number"
+                        android:text="Problem Type"/>
+
+                    <TextView
+                        android:id="@+id/txtProblemType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@android:color/black"
+                        android:text="@string/invoice_no"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:text="Problem Sub Type"
+                        android:textColor="@color/txt_mobile_number"
+                        android:textSize="@dimen/_11sdp" />
+                    <TextView
+                        android:id="@+id/txt_prob_sub_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@android:color/black"
+                        android:text="@string/invoice_no"/>
+
+                    <TextView
+                        android:id="@+id/tvDisHint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:text="Description"
+                        android:textColor="@color/txt_mobile_number"
+                        android:textSize="@dimen/_11sdp" />
+
+                    <TextView
+                        android:id="@+id/txtDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/invoice_no"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_12sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:text="Expected Resolution Time"
+                        android:textColor="@color/txt_mobile_number"
+                        android:textSize="@dimen/_11sdp" />
+                    <TextView
+                        android:id="@+id/txtExpectedResolutionTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@android:color/black"
+                        android:text="@string/invoice_no"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:textSize="@dimen/_11sdp"
+                        android:textColor="@color/txt_mobile_number"
+                        android:text="Created Date"/>
+
+                    <TextView
+                        android:id="@+id/txt_Created_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@android:color/black"
+                        android:text="@string/invoice_no"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:textSize="@dimen/_11sdp"
+                        android:textColor="@color/txt_mobile_number"
+                        android:text="Created Time"/>
+
+                    <TextView
+                        android:id="@+id/txtCreatedTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@android:color/black"
+                        android:text="@string/invoice_no"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvBackToHomeSr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back to HOME"
+                android:textAllCaps="true"
+                android:drawableEnd="@drawable/arrow"
+                android:textSize="@dimen/btn_text"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingStart="@dimen/_19sdp"
+                android:paddingEnd="@dimen/_19sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:drawablePadding="@dimen/_15sdp"
+                android:background="@drawable/login_background"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
