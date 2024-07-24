@@ -63,10 +63,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         holder.txt_payment_mode.setText(transactionData.getPaymentMode());
         holder.txt_description.setText(transactionData.getDescription());
-
-
-
-
     }
 
     @Override

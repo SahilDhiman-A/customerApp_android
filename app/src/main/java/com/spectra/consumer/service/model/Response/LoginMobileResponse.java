@@ -237,9 +237,28 @@ public class LoginMobileResponse implements Serializable
     @SerializedName("actInProgressFlag")
     @Expose
     private String actInProgressFlag;
+
+    @SerializedName("FUPResetDate")
+    @Expose
+    private String FUPResetDate;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    @SerializedName("token")
+    @Expose
+    private String token;
+
+
     @SerializedName("ivrNotification")
     @Expose
     private List<IvrNotificationResponse> ivrNotification = null;
+
     private final static long serialVersionUID = -7178158992312808228L;
 
     public String getCANId() {
@@ -773,5 +792,13 @@ public class LoginMobileResponse implements Serializable
 
     public void setUserImage(String userImage) {
         UserImage = userImage;
+    }
+
+    public String getFUPResetDate() {
+        return FUPResetDate;
+    }
+
+    public void setFUPResetDate(String FUPResetDate) {
+        this.FUPResetDate = FUPResetDate;
     }
 }

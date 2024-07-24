@@ -27,6 +27,8 @@ public class OfferListResponse implements Serializable
     @Expose
     private String frequency;
 
+    private boolean isSelected = false;
+
     public String getPlanid() {
         return planid;
     }

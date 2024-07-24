@@ -33,6 +33,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.spectra.consumer.Activities.AddCanIdActivity;
 import com.spectra.consumer.Activities.CreateSrActivity;
 import com.spectra.consumer.Activities.HomeActivity;
+import com.spectra.consumer.Activities.SpectraApplication;
 import com.spectra.consumer.Activities.TopUpListActivity;
 import com.spectra.consumer.Adapters.SRAdapter;
 import com.spectra.consumer.BuildConfig;
@@ -41,6 +42,7 @@ import com.spectra.consumer.R;
 import com.spectra.consumer.Utils.Constant;
 import com.spectra.consumer.Utils.DroidPrefs;
 import com.spectra.consumer.service.model.ApiResponse;
+import com.spectra.consumer.service.model.CAN_ID;
 import com.spectra.consumer.service.model.Request.GetSrRequest;
 import com.spectra.consumer.service.model.Response.Contact;
 import com.spectra.consumer.service.model.Response.GetSrStatusResponse;
@@ -50,14 +52,21 @@ import com.spectra.consumer.viewModel.SpectraViewModel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import activeandroid.util.Log;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.spectra.consumer.Utils.Constant.BASE_CAN;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_DASHBOARD;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_GET_HELP;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_MY_SR;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_SERVICE;
 import static com.spectra.consumer.Utils.Constant.STATUS_SUCCESS;
 import static com.spectra.consumer.Utils.SiUtils.getSrDate;
 import static com.spectra.consumer.service.repository.ApiConstant.CHECK_SR;
@@ -91,12 +100,16 @@ public class SRFragment extends Fragment {
     private SpectraViewModel spectraViewModel;
     private static String TYPE_SR;
     AlertDialog dial;
+    String canIdAnalytics;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         homeActivity = (HomeActivity) context;
         this.context = context;
+        CAN_ID canIdNik = DroidPrefs.get(context, BASE_CAN, CAN_ID.class);
+        Log.d("Nik Can", canIdNik.baseCanID);
+        canIdAnalytics = canIdNik.baseCanID;
     }
 
     public static Fragment newInstance(Bundle bundle) {
@@ -349,6 +362,9 @@ public class SRFragment extends Fragment {
             getSrRequest.setAction(GET_SR_STATUS);
             getSrRequest.setCanID(userData.CANId);
             if (type.equalsIgnoreCase("search")) {
+                String key=Objects.requireNonNull(search.getText()).toString().trim();
+                SpectraApplication.getInstance().addKey("search_query",key);
+                SpectraApplication.getInstance().postEvent(CATEGORY_SERVICE,"search_by_sr_number","search", canIdAnalytics);
                 getSrRequest.setSrNumber(Objects.requireNonNull(search.getText()).toString().trim());
             } else {
                 getSrRequest.setSrNumber("");
@@ -361,6 +377,8 @@ public class SRFragment extends Fragment {
         if (TextUtils.isEmpty(SrNumber)) {
             return;
         }
+        SpectraApplication.getInstance().postEvent(CATEGORY_SERVICE,"service_request_know_more","know_more_click",canIdAnalytics);
+
         if (Constant.isInternetConnected(context)) {
             GetSrRequest getSrRequest = new GetSrRequest();
             getSrRequest.setAuthkey(BuildConfig.AUTH_KEY);
@@ -377,6 +395,7 @@ public class SRFragment extends Fragment {
         switch (view.getId()) {
             case R.id.raise_new_request:
             case R.id.layout_raise_new_request:
+                SpectraApplication.getInstance().postEvent(CATEGORY_MY_SR, "raise_new_service_request", "Service request clicked",canIdAnalytics);
                 Intent intent = new Intent(homeActivity, CreateSrActivity.class);
                 startActivity(intent);
                 break;

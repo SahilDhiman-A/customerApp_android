@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_layout"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    app:draggedItem="@id/view_foreground"
+    app:rightItem="@id/right_view"
+    app:swipeDirection="left">
+    <RelativeLayout
+        android:id="@+id/right_view"
+        android:layout_width="180dp"
+        android:padding="@dimen/_10sdp"
+        android:layout_gravity="end"
+        android:layout_height="120dp"
+        android:background="@android:color/black">
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:visibility="visible"
+            app:cardBackgroundColor="@color/notbg2"
+
+            app:cardCornerRadius="@dimen/_15sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_10sdp"
+                    android:src="@drawable/ic_archive_red"
+                    android:background="#E6E6E6" />
+
+                <ImageView
+                    android:src="@drawable/ic_delete_red"
+                    android:padding="@dimen/_15sdp"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF"
+                    />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

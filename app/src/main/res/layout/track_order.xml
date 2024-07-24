@@ -266,7 +266,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="1800 121 5678"
+                    android:text="011 4003 3100"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:fontFamily="@font/helveticaneue_medium"
                     android:textAllCaps="true"

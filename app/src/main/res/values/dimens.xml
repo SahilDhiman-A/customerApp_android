@@ -15,4 +15,7 @@
 
     <dimen name="network_strength_size">20sp</dimen>
 
+    <dimen name="step_tv_dim">@dimen/_30sdp</dimen>
+    <dimen name="step_line_dim">@dimen/_65sdp</dimen>
+
 </resources>

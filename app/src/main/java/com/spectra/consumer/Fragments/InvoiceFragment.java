@@ -6,10 +6,9 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.StrictMode;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,7 +33,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.spectra.consumer.Activities.HomeActivity;
 import com.spectra.consumer.Activities.InvoiceDetailsActivity;
+import com.spectra.consumer.Activities.InvoiceDetailsActivityOne;
 import com.spectra.consumer.Activities.PayNowActivity;
+import com.spectra.consumer.Activities.SpectraApplication;
 import com.spectra.consumer.Adapters.InvoiceAdapter;
 import com.spectra.consumer.Adapters.InvoiceB2BAdapter;
 import com.spectra.consumer.Adapters.TransactionAdapter;
@@ -43,6 +45,7 @@ import com.spectra.consumer.R;
 import com.spectra.consumer.Utils.Constant;
 import com.spectra.consumer.Utils.DroidPrefs;
 import com.spectra.consumer.service.model.ApiResponse;
+import com.spectra.consumer.service.model.CAN_ID;
 import com.spectra.consumer.service.model.Request.GetInvoiceContentRequest;
 import com.spectra.consumer.service.model.Request.GetInvoiceListRequest;
 import com.spectra.consumer.service.model.Request.GetTransactionListRequest;
@@ -55,7 +58,6 @@ import com.spectra.consumer.viewModel.SpectraViewModel;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -72,16 +74,21 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.lucasfsc.html2pdf.Html2Pdf;
 
+import static com.spectra.consumer.Utils.Constant.BASE_CAN;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_INVOICE;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_PAYMENTS;
 import static com.spectra.consumer.Utils.Constant.STATUS_SUCCESS;
+import static com.spectra.consumer.Utils.Constant.shareFile;
 import static com.spectra.consumer.service.repository.ApiConstant.GET_INVOICE_CONTENT;
 import static com.spectra.consumer.service.repository.ApiConstant.GET_INVOICE_LIST;
 import static com.spectra.consumer.service.repository.ApiConstant.PAYMENT_TRANSACTIONDETAIL;
 
 public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConversion {
     private static final String ARG_PARAM1 = "param1";
-    private HomeActivity homeActivity;
-    private View view;
-    private Context context;
+    private static String INVOICE_NO;
+    private static String INVOICE_DISPLAY_NO;
+    private final int PERMISSION_ALL = 1;
+    private final int PDFREQUESTCODE = 101;
     @BindView(R.id.view_invoiceList)
     RecyclerView view_invoiceList;
     @BindView(R.id.select_from_date)
@@ -114,34 +121,45 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
     ImageView img_reset;
     @BindView(R.id.layout_submit_date)
     RelativeLayout layout_submit_date;
-    private List<InvoiceListResponse> invoiceDataList = new ArrayList<>();
-    private CurrentUserData userData;
-    private String from_date, to_date;
     @BindView(R.id.view_transactions)
     RecyclerView view_transactions;
     @BindView(R.id.txt_pay)
     AppCompatTextView txt_pay;
-    private boolean is_valid_invoice_date;
-    private String type;
     @BindView(R.id.txt_due)
     TextView txt_due;
     @BindView(R.id.progress_bar)
     ProgressBar progress_bar;
+    String canIdAnalytics;
+    File myNewFile;
+    private HomeActivity homeActivity;
+    private View view;
+    private Context context;
+    private List<InvoiceListResponse> invoiceDataList = new ArrayList<>();
+    private CurrentUserData userData;
+    private String from_date, to_date;
+    private boolean is_valid_invoice_date;
+    private String type, myResponseData;
     private String[] PERMISSIONS;
-    private int PERMISSION_ALL = 1;
     private File file;
+    private int myPosition;
     private SpectraViewModel spectraViewModel;
-    private static String INVOICE_NO;
-    private static String INVOICE_DISPLAY_NO;
+    private boolean didClickOnImgSubmit = false;  //onclick submit = true
 
+    public static String getPathForClaim() {
+        String MAX_DIRECTORY_PATH = Environment
+                .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                .getAbsolutePath();
+        return MAX_DIRECTORY_PATH + File.separator;
+    }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         homeActivity = (HomeActivity) context;
         this.context = context;
+        CAN_ID canIdNik = DroidPrefs.get(context, BASE_CAN, CAN_ID.class);
+        canIdAnalytics = canIdNik.baseCanID;
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -151,7 +169,6 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
         }
     }
 
-
     @SuppressLint({"InflateParams", "SetTextI18n"})
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -160,7 +177,10 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
             ButterKnife.bind(this, view);
             userData = DroidPrefs.get(context, Constant.CurrentuserKey, CurrentUserData.class);
             spectraViewModel = ViewModelProviders.of(this).get(SpectraViewModel.class);
-            PERMISSIONS = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            PERMISSIONS = new String[]{
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            };
             LinearLayoutManager invoice_manager = new LinearLayoutManager(context);
             LinearLayoutManager ledger_manager = new LinearLayoutManager(context);
             view_invoiceList.setLayoutManager(invoice_manager);
@@ -169,12 +189,14 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
             view_transactions.setNestedScrollingEnabled(false);
             if (userData.OutStandingAmount.equalsIgnoreCase("0")) {
                 txt_outstanding_amount.setText(R.string.no_dues);
+//                SpectraApplication.getInstance().postEvent(CATEGORY_PAYMENTS, "Pay_advance", "Pay in Advance " + userData.OutStandingAmount, canIdAnalytics);
                 txt_pay.setVisibility(View.GONE);
                 due_date.setVisibility(View.GONE);
                 txt_due.setVisibility(View.GONE);
             } else {
                 txt_outstanding_amount.setText("₹ " + Constant.Round(Float.parseFloat(userData.OutStandingAmount), 2));
                 txt_pay.setVisibility(View.VISIBLE);
+//                SpectraApplication.getInstance().postEvent(CATEGORY_PAYMENTS, "Pay_Now", "pay now clicked " + userData.OutStandingAmount, canIdAnalytics);
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
                 Date parse = null;
@@ -195,13 +217,10 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
                     due_date.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                 }
             }
-
             select_invoice();
         }
 
-
         txt_pay.setOnClickListener(view -> {
-
             String amount = userData.OutStandingAmount;
             if (TextUtils.isEmpty(amount)) {
                 amount = "0";
@@ -222,6 +241,7 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
         layout_select_ledger.setOnClickListener(view -> {
             from_date = "";
             to_date = "";
+            didClickOnImgSubmit = false;
             select_ledger();
         });
 
@@ -255,7 +275,6 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
                     }
 
                     if (diff >= 0) {
-
                         long days = diff / (24 * 60 * 60 * 1000);
                         if (days <= 365) {
                             is_valid_invoice_date = true;
@@ -337,9 +356,10 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
         return view;
     }
 
-
     private void getTransactionDetails() {
         if (Constant.isInternetConnected(context)) {
+            SpectraApplication.getInstance().addKey("from_date", from_date);
+            SpectraApplication.getInstance().addKey("to_date", to_date);
             view_transactions.setVisibility(View.GONE);
             GetTransactionListRequest getTransactionListRequest = new GetTransactionListRequest();
             getTransactionListRequest.setAuthkey(BuildConfig.AUTH_KEY);
@@ -347,9 +367,13 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
             getTransactionListRequest.setCanID(userData.CANId);
             getTransactionListRequest.setFromDate(from_date);
             getTransactionListRequest.setToDate(to_date);
+            //Nikhil - Transaction filter
+            if (from_date != null && !from_date.isEmpty() && to_date != null && !to_date.isEmpty() && didClickOnImgSubmit) {
+                Log.d("Trans_filter", "Success");
+                SpectraApplication.getInstance().postEvent(CATEGORY_PAYMENTS, "apply_filter_transactions", "Transactions Filter", canIdAnalytics);
+            }
             spectraViewModel.getTransactionList(getTransactionListRequest).observe(this, this::consumeResponse);
         }
-
     }
 
     private void consumeResponse(ApiResponse apiResponse) {
@@ -362,7 +386,6 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
                 showLoadingView(false);
                 break;
             case ERROR:
-
                 showLoadingView(false);
                 break;
             default:
@@ -380,6 +403,7 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
                         if (status.contains(STATUS_SUCCESS)) {
                             String data = jsonObject.getString("response");
                             if (!TextUtils.isEmpty(data)) {
+                                myResponseData = data;
                                 createWebPrintJob(data, INVOICE_DISPLAY_NO);
                             }
                         }
@@ -400,7 +424,8 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
                         }
                     } else {
                         view_invoiceList.setVisibility(View.GONE);
-                        Constant.MakeToastMessage(context, getInvoicelistResponse.getMessage());
+                        //Nikhil - Response was null
+                        Toast.makeText(requireContext(), "No Records Found", Toast.LENGTH_SHORT).show();
                     }
                     break;
                 case PAYMENT_TRANSACTIONDETAIL:
@@ -414,14 +439,12 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
                             TransactionAdapter transactionAdapter = new TransactionAdapter(context, transactionDataList);
                             view_transactions.setAdapter(transactionAdapter);
                         }
-
                     } else {
-                        Constant.MakeToastMessage(context, getTransactionListResponse.getMessage());
+                        //Nikhil - Msg was a null
+                        Toast.makeText(context, "No Records Found", Toast.LENGTH_SHORT).show();
                     }
                     break;
-
             }
-
         }
     }
 
@@ -441,6 +464,9 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
             getInvoiceListRequest.setAction(GET_INVOICE_LIST);
             getInvoiceListRequest.setCanID(userData.CANId);
             if (type.equalsIgnoreCase("filter")) {
+                SpectraApplication.getInstance().addKey("from_date", from_date);
+                SpectraApplication.getInstance().addKey("to_date", to_date);
+                SpectraApplication.getInstance().postEvent(CATEGORY_INVOICE, "apply_invoice_filter", "apply_invoice_filter", canIdAnalytics);
                 getInvoiceListRequest.setEndDate(to_date);
                 getInvoiceListRequest.setStartDate(from_date);
             } else {
@@ -449,7 +475,6 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
             }
             spectraViewModel.getInvoiceList(getInvoiceListRequest).observe(this, this::consumeResponse);
         }
-
     }
 
     private void select_invoice() {
@@ -465,7 +490,6 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
         view_transactions.setVisibility(View.GONE);
         getInvoicedetails("normal");
     }
-
 
     private void select_ledger() {
         view_invoiceList.setVisibility(View.GONE);
@@ -490,34 +514,61 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
         view_invoice.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
     }
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        for (String permission : permissions) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(homeActivity, permission)) {
-                //denied
-                Log.e("denied", permission);
+        switch (requestCode) {
+            case PDFREQUESTCODE: {
+                for (String permission : permissions) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(homeActivity, permission)) {
+                        //denied
+                        Log.e("denied", permission);
 
-                if (permission.equalsIgnoreCase("android.permission.READ_EXTERNAL_STORAGE") || permission.equalsIgnoreCase("android.permission.WRITE_EXTERNAL_STORAGE")) {
-                }
+                        if (permission.equalsIgnoreCase("android.permission.READ_EXTERNAL_STORAGE")
+                                || permission.equalsIgnoreCase("android.permission.WRITE_EXTERNAL_STORAGE")) {
+                        }
 
-            } else {
-                if (ActivityCompat.checkSelfPermission(homeActivity, permission) == PackageManager.PERMISSION_GRANTED) {
-                    //allowed
-                    Log.e("allowed", permission);
+                    } else {
+                        if (ActivityCompat.checkSelfPermission(homeActivity, permission) == PackageManager.PERMISSION_GRANTED) {
+                            //allowed
+                            Log.e("allowed", permission);
+                            doPrint(myNewFile, myResponseData);
+                        } else {
+                            //set to never ask again
+                            Log.e("set to never ask again", permission);
 
-                } else {
-                    //set to never ask again
-                    Log.e("set to never ask again", permission);
+                            if (permission.equalsIgnoreCase("android.permission.READ_EXTERNAL_STORAGE") || permission.equalsIgnoreCase("android.permission.WRITE_EXTERNAL_STORAGE")) {
+                            }
+                        }
 
-                    if (permission.equalsIgnoreCase("android.permission.READ_EXTERNAL_STORAGE") || permission.equalsIgnoreCase("android.permission.WRITE_EXTERNAL_STORAGE")) {
                     }
                 }
+            }
+            case PERMISSION_ALL: {
+                for (String permission : permissions) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(homeActivity, permission)) {
+                        //denied
+                        Log.e("denied", permission);
 
+                        if (permission.equalsIgnoreCase("android.permission.READ_EXTERNAL_STORAGE")
+                                || permission.equalsIgnoreCase("android.permission.WRITE_EXTERNAL_STORAGE")) {
+                        }
+                    } else {
+                        if (ActivityCompat.checkSelfPermission(homeActivity, permission) == PackageManager.PERMISSION_GRANTED) {
+                            //allowed
+                            Log.e("allowed", permission);
+                        } else {
+                            //set to never ask again
+                            Log.e("set to never ask again", permission);
+
+                            if (permission.equalsIgnoreCase("android.permission.READ_EXTERNAL_STORAGE") || permission.equalsIgnoreCase("android.permission.WRITE_EXTERNAL_STORAGE")) {
+                            }
+                        }
+
+                    }
+                }
             }
         }
-
     }
 
     //getting invoice content
@@ -531,64 +582,35 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
         spectraViewModel.getInvoiceContent(getInvoiceListRequest).observe(this, this::consumeResponse);
     }
 
-
-    private void createWebPrintJob(String invoiceData, String display_no) {
-        try {
-            File myDir = new File(Objects.requireNonNull(getActivity()).getCacheDir(), "folder");
-            final boolean mkdir = myDir.mkdir();
-            String rootPath = Environment.getExternalStorageDirectory()
-                    .getAbsolutePath() + "/SPECTRA/";
-            File root = new File(rootPath);
-            if (!root.exists()) {
-                boolean mkdirs = root.mkdirs();
-            }
-            file = new File(rootPath + "INV_" + display_no + ".pdf");
-            if (file.exists()) {
-                final boolean delete = file.delete();
-            }
-            final boolean newFile = file.createNewFile();
-
-            FileOutputStream out = new FileOutputStream(file);
-
-            out.flush();
-            out.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void createWebPrintJob(String invoiceData, String displayno) {
+        String fileName = "INV_" + displayno + new Date().getTime() + ".pdf";
+        file = new File(getPathForClaim());
+        myNewFile = new File(file.getAbsolutePath(), fileName);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+            doPrint(myNewFile, invoiceData);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(PERMISSIONS, PDFREQUESTCODE);
         }
+    }
+
+    private void doPrint(File myNewFile, String response) {
         try {
             Html2Pdf converter = new Html2Pdf.Companion.Builder()
-                    .context(Objects.requireNonNull(getActivity()))
-                    .html(invoiceData)
-                    .file(file)
+                    .context(requireContext())
+                    .html(response)
+                    .file(myNewFile)
                     .build();
-            converter.convertToPdf(this);
-            converter.convertToPdf();
+            try {
+                converter.convertToPdf(this);
+            } catch (Exception e) {
+                Log.i("converter", Objects.requireNonNull(e.getMessage()));
+            }
         } catch (Exception e) {
-            Log.i("converter", e.getMessage());
-            e.printStackTrace();
+            Log.i("converter", Objects.requireNonNull(e.getMessage()));
         }
     }
-
-    //sharing pdf via email
-    private void share_file(File file, String display_no) {
-        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        StrictMode.setVmPolicy(builder.build());
-        if (file != null && file.exists()) {
-            Uri uri = Uri.fromFile(file);
-            Intent share = new Intent();
-            share.setAction(Intent.ACTION_SEND);
-            share.putExtra(Intent.EXTRA_EMAIL, "");
-            share.putExtra(Intent.EXTRA_SUBJECT, "Spectra Invoice - " + display_no);
-            share.putExtra(Intent.EXTRA_TEXT, "");
-            share.setType("application/pdf");
-            share.putExtra(Intent.EXTRA_STREAM, uri);
-            startActivity(share);
-        }
-    }
-
 
     //setting invoice list for B2C user
-
     private void setInvoiceAdapter() {
         InvoiceAdapter invoiceAdapter = new InvoiceAdapter(context, invoiceDataList, (view, position) -> {
             int id = view.getId();
@@ -596,46 +618,45 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
                 Constant.MakeToastMessage(context, context.getString(R.string.no_internet));
                 return;
             }
-
             if (id == R.id.view_invoice) {
-                if (!Constant.hasPermissions(context, PERMISSIONS)) {
-                    ActivityCompat.requestPermissions(homeActivity, PERMISSIONS, PERMISSION_ALL);
-                } else {
-                    Intent intent = new Intent(homeActivity, InvoiceDetailsActivity.class);
-                    intent.putExtra("invoice_no", invoiceDataList.get(position).getInvoiceNo());
-                    intent.putExtra("display_no", invoiceDataList.get(position).getDisplayInvNo());
-                    startActivity(intent);
-                }
-
-
+                SpectraApplication.getInstance().addKey("invoice_id", invoiceDataList.get(position).getInvoiceNo());
+                SpectraApplication.getInstance().addKey("invoice_date", invoiceDataList.get(position).getStartdt());
+                SpectraApplication.getInstance().addKey("invoice_period", "");
+                SpectraApplication.getInstance().addKey("invoice_amount", invoiceDataList.get(position).getAmount());
+                SpectraApplication.getInstance().addKey("due_date", invoiceDataList.get(position).getDuedt());
+                SpectraApplication.getInstance().postEvent(CATEGORY_INVOICE, "view_invoice_details", "view_invoice_details", canIdAnalytics);
+                navigateToInvoiceDetailsActivity(position);
             } else if (id == R.id.email_invoice) {
-                if (!Constant.hasPermissions(context, PERMISSIONS)) {
-                    ActivityCompat.requestPermissions(homeActivity, PERMISSIONS, PERMISSION_ALL);
-                } else {
-                    share_data(invoiceDataList.get(position).getInvoiceNo(), invoiceDataList.get(position).getDisplayInvNo());
-                }
+                myPosition = position;
+                shareDetailsOfInvoice(position);
             }
         });
-
         view_invoiceList.setVisibility(View.VISIBLE);
         view_invoiceList.setAdapter(invoiceAdapter);
     }
 
+    private void shareDetailsOfInvoice(int position) {
+        SpectraApplication.getInstance().addKey("invoice_id", invoiceDataList.get(position).getInvoiceNo());
+        SpectraApplication.getInstance().addKey("invoice_amount", invoiceDataList.get(position).getAmount());
+        SpectraApplication.getInstance().addKey("due_date", invoiceDataList.get(position).getDuedt());
+        SpectraApplication.getInstance().postEvent(CATEGORY_PAYMENTS, "share_invoice_via_email", "Invoice shared - Email", canIdAnalytics);
+        share_data(invoiceDataList.get(position).getInvoiceNo(), invoiceDataList.get(position).getDisplayInvNo());
+    }
+
+    private void navigateToInvoiceDetailsActivity(int position) {
+        Intent intent = new Intent(homeActivity, InvoiceDetailsActivity.class);
+//        Intent intent = new Intent(homeActivity, InvoiceDetailsActivityOne.class);
+        intent.putExtra("invoice_no", invoiceDataList.get(position).getInvoiceNo());
+        intent.putExtra("display_no", invoiceDataList.get(position).getDisplayInvNo());
+        startActivity(intent);
+    }
 
     //setting invoice list for B2B user
     private void setInvoiceAdapterB2B() {
         InvoiceB2BAdapter invoiceB2BAdapter = new InvoiceB2BAdapter(context, invoiceDataList, (view, position) -> {
             int id = view.getId();
             if (id == R.id.view_invoice) {
-                if (!Constant.hasPermissions(context, PERMISSIONS)) {
-                    ActivityCompat.requestPermissions(homeActivity, PERMISSIONS, PERMISSION_ALL);
-                } else {
-                    Intent intent = new Intent(homeActivity, InvoiceDetailsActivity.class);
-                    intent.putExtra("invoice_no", invoiceDataList.get(position).getInvoiceNo());
-                    intent.putExtra("display_no", invoiceDataList.get(position).getDisplayInvNo());
-                    startActivity(intent);
-                }
-
+                navigateToInvoiceDetailsActivity(position);
             } else if (id == R.id.pay_now_invoice) {
                 String amount = invoiceDataList.get(position).getUnPaidBalance();
                 if (TextUtils.isEmpty(amount)) {
@@ -652,12 +673,9 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
                     intent.putExtra("tdsSlab", invoiceDataList.get(position).getTdsSlab());
                     intent.putExtra("subType", "normal");
                     startActivity(intent);
-
                 } else {
                     Constant.MakeToastMessage(context, "Payable amount can't be 0");
                 }
-
-
             }
         });
         view_invoiceList.setVisibility(View.VISIBLE);
@@ -668,6 +686,7 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.layout_select_invoice:
+                didClickOnImgSubmit = false;
                 select_invoice();
                 break;
             case R.id.img_reset:
@@ -685,10 +704,11 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
                 img_reset.setVisibility(View.GONE);
                 break;
             case R.id.img_submit:
-                if (is_valid_invoice_date) {
+                if (is_valid_invoice_date && from_date != null && to_date != null) {
                     if (type.equalsIgnoreCase("invoice")) {
                         getInvoicedetails("filter");
                     } else {
+                        didClickOnImgSubmit = true;
                         getTransactionDetails();
                     }
                     img_submit.setVisibility(View.GONE);
@@ -698,17 +718,16 @@ public class InvoiceFragment extends Fragment implements Html2Pdf.OnCompleteConv
                     Constant.MakeToastMessage(homeActivity, getString(R.string.please_select_dates));
                 }
                 break;
-
         }
     }
 
     @Override
     public void onFailed() {
-
+        Toast.makeText(homeActivity, "Failed to Display....", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onSuccess() {
-        share_file(file, INVOICE_DISPLAY_NO);
+        shareFile(context, myNewFile, INVOICE_DISPLAY_NO);
     }
 }

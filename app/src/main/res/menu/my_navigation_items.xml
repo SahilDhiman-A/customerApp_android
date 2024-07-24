@@ -15,6 +15,10 @@
         android:icon="@drawable/ic_sr_unselect"
         android:title="@string/my_sr"/>
     <item
+        android:id="@+id/navigation_gethelp"
+        android:icon="@drawable/ic_get_help"
+        android:title="@string/get_help"/>
+    <item
         android:id="@+id/navigation_more"
         android:icon="@drawable/ic_menu_unselect"
         android:title="@string/menu"/>

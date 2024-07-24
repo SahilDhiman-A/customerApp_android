@@ -8,7 +8,6 @@ import com.spectra.consumer.service.model.Request.AddContactRequest;
 import com.spectra.consumer.service.model.Request.AddLinkAccountRequest;
 import com.spectra.consumer.service.model.Request.AddTopUpRequest;
 import com.spectra.consumer.service.model.Request.ChangePlanRequest;
-import com.spectra.consumer.service.model.Request.ConsumedTopupRequest;
 import com.spectra.consumer.service.model.Request.ContactRequest;
 import com.spectra.consumer.service.model.Request.CreateSrRequest;
 import com.spectra.consumer.service.model.Request.ForgotPasswordRequest;
@@ -27,7 +26,6 @@ import com.spectra.consumer.service.model.Request.GetTransactionListRequest;
 import com.spectra.consumer.service.model.Request.InvoiceDetailRequest;
 import com.spectra.consumer.service.model.Request.LoginViaMobileRequest;
 import com.spectra.consumer.service.model.Request.LoginViapasswordRequest;
-import com.spectra.consumer.service.model.Request.PostFUPFlagRequest;
 import com.spectra.consumer.service.model.Request.RemoveLinkAccountRequest;
 import com.spectra.consumer.service.model.Request.ResendOtpRequest;
 import com.spectra.consumer.service.model.Request.RestPasswordRequest;
@@ -39,6 +37,7 @@ import com.spectra.consumer.service.model.Request.TrackOrderRequest;
 import com.spectra.consumer.service.model.Request.UpdateEmailRequest;
 import com.spectra.consumer.service.model.Request.UpdateGSTNRequest;
 import com.spectra.consumer.service.model.Request.UpdateMobileRequest;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -47,11 +46,12 @@ public class SpectraRepository {
     private static SpectraRepository repository;
     private static ApiService apiService;
     private final CompositeDisposable disposables = new CompositeDisposable();
+
     public static SpectraRepository getRepository() {
-            synchronized (SpectraRepository.class) {
-                    repository = new SpectraRepository();
-                    apiService = ApiClient.getClient().create(ApiService.class);
-            }
+        synchronized (SpectraRepository.class) {
+            repository = new SpectraRepository();
+            apiService = ApiClient.getClient().create(ApiService.class);
+        }
         return repository;
     }
 
@@ -67,6 +67,7 @@ public class SpectraRepository {
                 ));
         return data;
     }
+
     public MutableLiveData<ApiResponse> trackOrder(TrackOrderRequest trackOrderRequest) {
         final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
         disposables.add(apiService.trackOrder(trackOrderRequest)
@@ -93,6 +94,7 @@ public class SpectraRepository {
                 ));
         return data;
     }
+
     public MutableLiveData<ApiResponse> getAccountByCanId(GetAccountDataRequest getAccountDataRequest) {
         final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
         disposables.add(apiService.getAccountByCanId(getAccountDataRequest)
@@ -199,7 +201,6 @@ public class SpectraRepository {
     }
 
 
-
     public MutableLiveData<ApiResponse> updateGSTAN(UpdateGSTNRequest request) {
         final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
         disposables.add(apiService.updateGSTAN(request)
@@ -212,6 +213,7 @@ public class SpectraRepository {
                 ));
         return data;
     }
+
     public MutableLiveData<ApiResponse> updateMobile(UpdateMobileRequest otpRequest) {
         final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
         disposables.add(apiService.updateMobile(otpRequest)
@@ -251,7 +253,7 @@ public class SpectraRepository {
         return data;
     }
 
-    public MutableLiveData<ApiResponse> getInvoiceDetail( InvoiceDetailRequest invoiceDetailRequest) {
+    public MutableLiveData<ApiResponse> getInvoiceDetail(InvoiceDetailRequest invoiceDetailRequest) {
         final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
         disposables.add(apiService.getInvoiceDetail(invoiceDetailRequest)
                 .subscribeOn(Schedulers.io())
@@ -277,30 +279,6 @@ public class SpectraRepository {
                 ));
         return data;
     }
-    public MutableLiveData<ApiResponse> getTopUpList(TopupRequest topupRequest) {
-        final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
-        disposables.add(apiService.getTopUpList(topupRequest)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe((d) -> data.setValue(ApiResponse.loading()))
-                .subscribe(
-                        result -> data.setValue(ApiResponse.success(result, topupRequest.getAction())),
-                        throwable -> data.setValue(ApiResponse.error(throwable))
-                ));
-        return data;
-    }
-    public MutableLiveData<ApiResponse> consumedTopup(ConsumedTopupRequest topupRequest) {
-        final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
-        disposables.add(apiService.consumedTopup(topupRequest)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe((d) -> data.setValue(ApiResponse.loading()))
-                .subscribe(
-                        result -> data.setValue(ApiResponse.success(result, topupRequest.getAction())),
-                        throwable -> data.setValue(ApiResponse.error(throwable))
-                ));
-        return data;
-    }
 
     public MutableLiveData<ApiResponse> getContactList(ContactRequest contactRequest) {
         final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
@@ -314,6 +292,7 @@ public class SpectraRepository {
                 ));
         return data;
     }
+
     public MutableLiveData<ApiResponse> addContact(AddContactRequest contactRequest) {
         final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
         disposables.add(apiService.addContact(contactRequest)
@@ -328,7 +307,6 @@ public class SpectraRepository {
     }
 
 
-
     public MutableLiveData<ApiResponse> changePlan(ChangePlanRequest changePlanRequest) {
         final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
         disposables.add(apiService.changePlan(changePlanRequest)
@@ -341,6 +319,7 @@ public class SpectraRepository {
                 ));
         return data;
     }
+
     public MutableLiveData<ApiResponse> getOffers(GetOffersRequest getOffersRequest) {
         final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
         disposables.add(apiService.getOffers(getOffersRequest)
@@ -366,6 +345,7 @@ public class SpectraRepository {
                 ));
         return data;
     }
+
     public MutableLiveData<ApiResponse> addTopUp(AddTopUpRequest addTopUpRequest) {
         final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
         disposables.add(apiService.addTopUp(addTopUpRequest)
@@ -378,6 +358,7 @@ public class SpectraRepository {
                 ));
         return data;
     }
+
     public MutableLiveData<ApiResponse> getCaseType(GetCasetypeRequest getCasetypeRequest) {
         final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
         disposables.add(apiService.getCaseType(getCasetypeRequest)
@@ -405,7 +386,6 @@ public class SpectraRepository {
     }
 
 
-
     public MutableLiveData<ApiResponse> getratePlanByCan(GetRatePlanRequest getRatePlanRequest) {
         final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
         disposables.add(apiService.getratePlanByCan(getRatePlanRequest)
@@ -418,8 +398,6 @@ public class SpectraRepository {
                 ));
         return data;
     }
-
-
 
 
     public MutableLiveData<ApiResponse> getProfile(GetProfileRequest getProfileRequest) {
@@ -475,18 +453,19 @@ public class SpectraRepository {
         return data;
     }
 
-public MutableLiveData<ApiResponse> getInvoiceList(GetInvoiceListRequest getInvoiceListRequest) {
-    final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
-    disposables.add(apiService.getInvoiceList(getInvoiceListRequest)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe((d) -> data.setValue(ApiResponse.loading()))
-            .subscribe(
-                    result -> data.setValue(ApiResponse.success(result, getInvoiceListRequest.getAction())),
-                    throwable -> data.setValue(ApiResponse.error(throwable))
-            ));
-    return data;
-}
+    public MutableLiveData<ApiResponse> getInvoiceList(GetInvoiceListRequest getInvoiceListRequest) {
+        final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
+        disposables.add(apiService.getInvoiceList(getInvoiceListRequest)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe((d) -> data.setValue(ApiResponse.loading()))
+                .subscribe(
+                        result -> data.setValue(ApiResponse.success(result, getInvoiceListRequest.getAction())),
+                        throwable -> data.setValue(ApiResponse.error(throwable))
+                ));
+        return data;
+    }
+
     public MutableLiveData<ApiResponse> getTransactionList(GetTransactionListRequest getTransactionListRequest) {
         final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
         disposables.add(apiService.getTransactionList(getTransactionListRequest)
@@ -526,4 +505,21 @@ public MutableLiveData<ApiResponse> getInvoiceList(GetInvoiceListRequest getInvo
                 ));
         return data;
     }
+
+
+    public MutableLiveData<ApiResponse> getTopUpList(TopupRequest topupRequest) {
+        final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
+        disposables.add(apiService.getTopUpList(topupRequest)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe((d) -> data.setValue(ApiResponse.loading()))
+                .subscribe(
+                        result -> data.setValue(ApiResponse.success(result, topupRequest.getAction())),
+                        throwable -> data.setValue(ApiResponse.error(throwable))
+                ));
+        return data;
+    }
+
+
+
 }

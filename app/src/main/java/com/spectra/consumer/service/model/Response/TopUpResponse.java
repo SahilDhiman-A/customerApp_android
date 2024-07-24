@@ -6,19 +6,13 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
-public class TopUpResponse implements Serializable
-{
-
-
-
-
+public class TopUpResponse implements Serializable {
     @SerializedName("created_date")
     @Expose
     private String created_date;
     @SerializedName("description")
     @Expose
     private String description;
-
 
     @SerializedName("type")
     @Expose
@@ -40,7 +34,9 @@ public class TopUpResponse implements Serializable
     @Expose
     private String topup_id;
 
-
+    @SerializedName("deactivateFlag")
+    @Expose
+    private boolean deactivateFlag;
 
     @SerializedName("id")
     @Expose
@@ -64,6 +60,39 @@ public class TopUpResponse implements Serializable
     @SerializedName("status")
     @Expose
     private String status;
+
+    @SerializedName("proDataCharges")
+    @Expose
+    private String proDataCharges;
+
+    @SerializedName("pgDataCharges")
+    @Expose
+    private String pgDataCharges;
+
+
+    public String getProDataCharges() {
+        return proDataCharges;
+    }
+
+    public void setProDataCharges(String proDataCharges) {
+        this.proDataCharges = proDataCharges;
+    }
+
+    public String getPgDataCharges() {
+        return pgDataCharges;
+    }
+
+    public void setPgDataCharges(String pgDataCharges) {
+        this.pgDataCharges = pgDataCharges;
+    }
+
+    public boolean isDeactivateFlag() {
+        return deactivateFlag;
+    }
+
+    public void setDeactivateFlag(boolean deactivateFlag) {
+        this.deactivateFlag = deactivateFlag;
+    }
 
     public String getId() {
         return id;

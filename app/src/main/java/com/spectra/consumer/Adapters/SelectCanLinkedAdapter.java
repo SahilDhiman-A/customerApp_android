@@ -53,8 +53,6 @@ public class SelectCanLinkedAdapter extends RecyclerView.Adapter<SelectCanLinked
             holder.ivSelected.setVisibility(View.VISIBLE);
             holder.ivMore.setOnClickListener(view -> {
                 if (context instanceof LinkedCanLdListActivity) {
-
-
                     ((LinkedCanLdListActivity) context).showPopupMenu(holder.ivMore,holder.getAdapterPosition(),userData.isLinked(), true);
                 }
             });
@@ -66,11 +64,6 @@ public class SelectCanLinkedAdapter extends RecyclerView.Adapter<SelectCanLinked
                 }
             });
         }
-
-
-
-
-
         holder.txtAccount_number.setText("Account "+(position+1));
         holder.tvCanId.setText("CAN ID - "+userData.getLink_canid());
     }

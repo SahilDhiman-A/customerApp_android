@@ -27,6 +27,7 @@ public class GetSrRequest implements Serializable
     @SerializedName("canID")
     @Expose
     private String canID;
+
     @SerializedName("srNumber")
     @Expose
     private String srNumber;

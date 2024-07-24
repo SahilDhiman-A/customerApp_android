@@ -132,16 +132,17 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/login_txt"
                         android:text="@string/get_the_code"/>
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/txt_resend"
-                        android:layout_toEndOf="@+id/txt_get_the_code"
-                        android:layout_width="wrap_content"
-                        android:textSize="18sp"
-                        android:fontFamily="@font/helveticaneue_medium"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/resend_txt_color"
-                        android:text="@string/txt_resend"/>
+
+                  <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_resend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_toEndOf="@+id/txt_get_the_code"
+                    android:fontFamily="@font/helveticaneue_medium"
+                    android:text="@string/txt_resend"
+                    android:textColor="@color/resend_txt_color"
+                    android:textSize="18sp" />
                 </RelativeLayout>
 
             </LinearLayout>

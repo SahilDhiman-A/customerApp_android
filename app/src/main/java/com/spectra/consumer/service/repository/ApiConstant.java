@@ -1,5 +1,7 @@
 package com.spectra.consumer.service.repository;
 
+import org.jetbrains.annotations.NotNull;
+
 public class ApiConstant {
     public static final String GET_ACCOUNT_BY_MOBILE="getAccountByMobile";
     public static final String GET_ACCOUNT_BY_PASSWORD="getAccountByPassword";
@@ -36,7 +38,11 @@ public class ApiConstant {
     public static final String NO_FDSS_INTERNET="getFDSSInternetNotWorking";
     public static final String REACTIVE_PLAN="reactivateAccount";
     public static final String ENABLE_CASE_STUDY="enableSafeCustodytoActive";
-
+    public static final String KNOW_MORE="knowMoreForPlan";
+    public static final String COMPARISION_PLAN = "comparisonPlan";
+    public static final String PRO_DATA_CHARGES_PLAN = "proDataChargesForPlan";
+    public static final String PRO_DATA_CHARGES_TOPUP_PLAN = "proDataChargesForTopup";
+    public static final String DEACTIVE_TOPUP = "deactivateTopup";
 
 
     public static final String UPDATE_TAN="updateTAN";
@@ -56,5 +62,36 @@ public class ApiConstant {
     public static final String SEND_OTP_LINK_ACCOUNT="sendOTPLinkAccount";
     public static final String RESEND_OTP_LINK_ACCOUNT="reSendOTPLinkAccount";
     public static final String ADD_LINK_ACCOUNT="addLinkAccount";
+    public static final String TEST_NOTIFICATION="testnotification";
+    public static final String DYNAMIC_NOTIFICATION="dynamicnotificationsent";
+    public static final String ALL_NOTIFICATION="getallnotifications";
+    public static final String GET_ARCHIVED_NOTIFICATION="getallarchievenotifications";
 
+    public static final String SEARCH_NOTIFICATION="searchnotification";
+    public static final String DELETE_NOTIFICATION="deletenotifications";
+    public static final String ARCHIVED_NOTIFICATION="archievenotifications";
+    public static final String READ_NOTIFICATION="readnotifications";
+    public static final String DEVICE_SIGN_IN="deviceSignIn";
+    public static final String DEVICE_SIGN_OUT="deviceSignOut";
+
+    public static final String CREATE_TRANSACTION="createTransaction";
+    public static final String UPDATE_PAYMENT_STATUS="responsePayment";
+    public static final String CREATE_ORDER="createOrder";
+    public static final String UPDATE_STATUS_AUTO_PAY="responsePaymentForAutopay";
+    public static final String DISABLE_ORDER="disableOrder";
+    public static final String PAGE_ID="RAZORPAY";
+    public static final String SENGMENT="segment";
+    public static final String ACTION_SEGMENT="action_segement";
+
+
+    public static final String SENGMENTBYID = "segment_by_id";
+    public static final String GET_SEGMENT_BY_ID = "get_segment_by_id";
+    public static final String FAQCATEGORY = "faqcategory";
+    public static final String LIKE_FAQ = "likefaq";
+    public static final String UNLIKE_FAQ = "unlikefaq";
+    public static final String VIEWCOUNT = "viewcount";
+    public static final String GETTHOUMBCOUNT = "getthumbscount";
+
+    @NotNull
+    public static final String ACTION_RECENTSEARCH="RecentSearch";
 }

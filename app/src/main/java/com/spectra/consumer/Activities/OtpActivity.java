@@ -14,11 +14,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.spectra.consumer.BuildConfig;
 import com.spectra.consumer.Models.CurrentUserData;
 import com.spectra.consumer.R;
@@ -33,13 +35,18 @@ import com.spectra.consumer.service.model.Request.UpdateMobileRequest;
 import com.spectra.consumer.service.model.Response.BaseResponse;
 import com.spectra.consumer.service.model.Response.UpdateMobileResponse;
 import com.spectra.consumer.viewModel.SpectraViewModel;
+
 import java.util.Objects;
+
+import activeandroid.util.Log;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.spectra.consumer.Utils.Constant.BASE_CAN;
 import static com.spectra.consumer.Utils.Constant.CurrentuserKey;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_ALL_MENU;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_LOGIN;
 import static com.spectra.consumer.Utils.Constant.LINKED_ACCOUNT;
 import static com.spectra.consumer.Utils.Constant.LOGIN_VERIFY_TYPE;
 import static com.spectra.consumer.Utils.Constant.PROFILE_VERIFY_TYPE_EMAIL;
@@ -79,6 +86,7 @@ public class OtpActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         intent = getIntent();
         phone_number = intent.getStringExtra("phone");
+        Log.d("Phone OA", phone_number);
         otp = intent.getStringExtra("otp");
         if (otp == null) {
             otp = "";
@@ -87,6 +95,8 @@ public class OtpActivity extends AppCompatActivity {
         if (intent.hasExtra("canID")) {
             canID = intent.getStringExtra("canID");
         }
+
+
         context = OtpActivity.this;
         txt_edit.setText(phone_number);
         spectraViewModel = ViewModelProviders.of(this).get(SpectraViewModel.class);
@@ -146,6 +156,10 @@ public class OtpActivity extends AppCompatActivity {
             if (code.equals(UPDATE_EMAIL_VIA_OTP) || code.equals(UPDATE_MOBILE_VIA_OTP) || code.equals(ADD_LINK_ACCOUNT)) {
                 BaseResponse baseResponse = (BaseResponse) response;
                 if (baseResponse.getStatus().equalsIgnoreCase(STATUS_SUCCESS)) {
+                    //Nikhil -Add new Can Id
+                    if (code.equals(ADD_LINK_ACCOUNT)) {
+                        SpectraApplication.getInstance().postEvent(CATEGORY_ALL_MENU + "My Account", "Add_new_CanID", "New Can ID added", canID);
+                    }
                     setVerifiedDialog(baseResponse.getMessage());
                 } else {
                     Constant.MakeToastMessage(context, baseResponse.getMessage());
@@ -153,10 +167,12 @@ public class OtpActivity extends AppCompatActivity {
             } else {
                 if (code.equals(RESEND_OTP) || code.equals(RESEND_OTP_UPDATE_EMAIL) || code.equals(RESEND_OTP_UPDATE_MOBILE) ||
                         code.equals(RESEND_OTP_LINK_ACCOUNT)) {
+                    SpectraApplication.getInstance().postEvent(CATEGORY_LOGIN, "otp_resend", "otp_resend", "");
                     updateMobileResponse = (UpdateMobileResponse) response;
-                    if (updateMobileResponse.getStatus().equalsIgnoreCase(STATUS_SUCCESS)) {
-                        Constant.MakeToastMessage(context, updateMobileResponse.getMessage());
-                    }
+                    //Nikhil - commented if block for resend otp
+//                    if (updateMobileResponse.getStatus().equalsIgnoreCase(STATUS_SUCCESS)) {
+//                        Constant.MakeToastMessage(context, updateMobileResponse.getMessage());
+//                    }
                 }
             }
         }
@@ -175,7 +191,9 @@ public class OtpActivity extends AppCompatActivity {
     public void onClick(View view) {
         hideKeyboard(OtpActivity.this);
         pinCode = otpEntry.getText().toString();
+
         switch (view.getId()) {
+
             case R.id.txt_resend:
                 progress.setVisibility(View.VISIBLE);
                 ResendOtpRequest request = new ResendOtpRequest();
@@ -198,7 +216,6 @@ public class OtpActivity extends AppCompatActivity {
                         request.setAction(RESEND_OTP_LINK_ACCOUNT);
                         request.setMobileNo(phone_number);
                         break;
-
                 }
                 spectraViewModel.resendOtp(request).observe(OtpActivity.this, OtpActivity.this::consumeResponse);
                 break;
@@ -214,20 +231,20 @@ public class OtpActivity extends AppCompatActivity {
                     }
                     isCall = false;
                     progress.setVisibility(View.VISIBLE);
+                    SpectraApplication.getInstance().postEvent(CATEGORY_LOGIN, "otp_validation", "otp_validation", "");
                     CurrentUserData userData = DroidPrefs.get(OtpActivity.this, CurrentuserKey, CurrentUserData.class);
                     switch (type) {
                         case LOGIN_VERIFY_TYPE:
                             userData.is_Login = true;
                             DroidPrefs.apply(this, CurrentuserKey, userData);
+                            Intent intent;
                             if (userData.actInProgressFlag.equals("false")) {
-                                Intent intent = new Intent(OtpActivity.this, HomeActivity.class);
-                                startActivity(intent);
-                                finish();
+                                intent = new Intent(OtpActivity.this, HomeActivity.class);
                             } else {
-                                Intent intent = new Intent(OtpActivity.this, TrackActivity.class);
-                                startActivity(intent);
-                                finish();
+                                intent = new Intent(OtpActivity.this, TrackActivity.class);
                             }
+                            startActivity(intent);
+                            finish();
                             break;
                         case PROFILE_VERIFY_TYPE_EMAIL:
                             UpdateEmailRequest request1 = new UpdateEmailRequest();
@@ -259,7 +276,6 @@ public class OtpActivity extends AppCompatActivity {
                             addLinkAccountRequest.setuserName("");
                             spectraViewModel.addLinkAccount(addLinkAccountRequest).observe(OtpActivity.this, OtpActivity.this::consumeResponse);
                             break;
-
                     }
                 }
         }
@@ -302,8 +318,6 @@ public class OtpActivity extends AppCompatActivity {
         if (!isFinishing()) {
             dial.show();
         }
-
         Objects.requireNonNull(dial.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
-
 }

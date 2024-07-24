@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:orientation="vertical"
+        tools:ignore="ContentDescription">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="left"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_gravity="left"
+                >
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_checked"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    />
+
+
+
+                <TextView
+                    android:id="@+id/tvPayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/payment_successful_msg"
+                    android:textColor="#6AC259"
+                    android:textSize="25sp" />
+
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginLeft="@dimen/_15sdp"
+                    android:layout_marginRight="@dimen/_15sdp"
+                    android:text="@string/payment_done_msg"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/header_text" />
+
+                <RelativeLayout
+                    android:id="@+id/layRouter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    >
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_back_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/back_to_home"
+                        android:textAllCaps="true"
+                        android:drawableEnd="@drawable/ic_expand_button"
+                        android:textSize="@dimen/btn_text"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        android:visibility="visible"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:textColor="@color/white"
+                        android:paddingTop="@dimen/_8sdp"
+                        android:paddingStart="@dimen/_19sdp"
+                        android:paddingEnd="@dimen/_19sdp"
+                        android:paddingBottom="@dimen/_8sdp"
+                        android:drawablePadding="@dimen/_15sdp"
+                        android:background="@drawable/login_background"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+        <ProgressBar
+            android:id="@+id/pro2"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:indeterminateTint="@color/back_color"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</layout>

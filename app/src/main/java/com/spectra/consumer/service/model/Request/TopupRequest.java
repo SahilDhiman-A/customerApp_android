@@ -8,6 +8,11 @@ import java.io.Serializable;
 public class TopupRequest implements Serializable
 {
 
+    //"Authkey":"AdgT68HnjkehEqlkd4",
+    //"Action":"getTopup",
+    //"canID":"139525",
+    //"basePlan":"HBB_250_1000_HY"
+
     @SerializedName("Authkey")
     @Expose
     private String authkey;

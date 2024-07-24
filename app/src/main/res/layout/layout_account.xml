@@ -1,562 +1,687 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/black">
-    <include layout="@layout/toolbar_head" />
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:indeterminateTint="@color/back_color"
-        android:layout_centerInParent="true"/>
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@android:color/black"
+  android:orientation="vertical">
+
+  <include layout="@layout/toolbar_head" />
+
+  <ProgressBar
+    android:id="@+id/progress_bar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:indeterminateTint="@color/back_color"
+    android:visibility="gone" />
+
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_below="@+id/toolbar_head"
-        android:layout_height="wrap_content">
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/toolbar_head">
 
-    <LinearLayout
-        android:id="@+id/layout_view"
-        android:visibility="visible"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginRight="@dimen/_20sdp"
-        android:layout_marginLeft="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_60sdp">
-
-     <RelativeLayout
-         android:layout_width="match_parent"
-         android:layout_marginTop="@dimen/_30sdp"
-         android:layout_height="wrap_content">
-         <RelativeLayout
-             android:layout_width="wrap_content"
-             android:paddingStart="@dimen/_10sdp"
-             android:layout_height="wrap_content">
-             <androidx.appcompat.widget.AppCompatTextView
-                 android:id="@+id/view_can_select"
-                 android:layout_width="wrap_content"
-
-                 android:layout_height="wrap_content"
-                 android:textAllCaps="true"
-                 android:drawableEnd="@drawable/ic_arrow_white"
-                 android:textSize="@dimen/_13sdp"
-                 android:layout_gravity="center_horizontal"
-                 android:textColor="@color/white"
-                 android:paddingTop="@dimen/_8sdp"
-                 android:paddingStart="@dimen/_19sdp"
-                 android:text="Can ID - 25461528"
-                 android:paddingEnd="@dimen/_19sdp"
-                 android:paddingBottom="@dimen/_8sdp"
-                 android:drawablePadding="@dimen/_15sdp"
-                 android:background="@drawable/can_id_background"
-                 />
-             <androidx.appcompat.widget.AppCompatTextView
-                 android:id="@+id/tvLinkedCanID"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_gravity="center_horizontal"
-                 android:padding="@dimen/_5sdp"
-                 android:layout_below="@+id/view_can_select"
-                 android:text=""
-                 android:layout_centerHorizontal="true"
-                 android:textColor="#FEC66F"
-                 android:textSize="@dimen/_11sdp" />
-
-         </RelativeLayout>
-
-         <androidx.appcompat.widget.AppCompatTextView
-             android:layout_width="wrap_content"
-             android:id="@+id/tvAddNew"
-             android:textSize="@dimen/_12sdp"
-             android:layout_gravity="center"
-             android:textColor="@color/back_color"
-             android:text="Add new"
-             android:layout_alignParentRight="true"
-             android:paddingTop="@dimen/_8sdp"
-             android:textAllCaps="true"
-             android:paddingEnd="@dimen/_19sdp"
-             android:paddingBottom="@dimen/_8sdp"
-             android:drawablePadding="@dimen/_15sdp"
-
-             android:layout_height="wrap_content"/>
-
-
-     </RelativeLayout>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/layout_name"
-        android:visibility="visible"
-        android:layout_marginRight="@dimen/_5sdp"
-        android:layout_marginLeft="@dimen/_5sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_5sdp"
-        android:background="#ffffff"
-        app:cardCornerRadius="@dimen/_15sdp"
-        >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/_10sdp">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_gravity="center_horizontal">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/user_image"
-                android:layout_width="@dimen/_70sdp"
-                android:layout_centerHorizontal="true"
-                android:layout_height="@dimen/_60sdp"
-                tools:ignore="ContentDescription,VectorDrawableCompat" />
-            <ImageView
-                android:id="@+id/imageHolder"
-                android:layout_width="@dimen/_70sdp"
-                android:src="@drawable/ic_user_img"
-                android:layout_centerHorizontal="true"
-                android:layout_height="@dimen/_60sdp"
-                tools:ignore="ContentDescription,VectorDrawableCompat" />
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:id="@+id/tvChangeProfilePic"
-                android:textSize="@dimen/_12sdp"
-                android:visibility="visible"
-                android:layout_gravity="center"
-                android:layout_below="@+id/user_image"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="Upload Profile Picture"
-                android:layout_height="wrap_content"/>
-<androidx.appcompat.widget.AppCompatTextView
-    android:id="@+id/txt_edit_profile"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textAllCaps="true"
-    android:layout_marginTop="@dimen/_10sdp"
-    android:textSize="@dimen/_14sdp"
-    android:visibility="visible"
-    android:textColor="@color/back_color"
-    android:text="@string/txt_edit"
-    android:layout_alignParentEnd="true"/>
-        </RelativeLayout>
-<LinearLayout
-    android:id="@+id/account_b_2_c"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:visibility="gone">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:padding="@dimen/_10sdp">
-            <LinearLayout
-                android:id="@+id/layout_named"
-                android:layout_width="match_parent"
-                android:layout_toStartOf="@+id/layout_mobile"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/txt_name"
-                    android:layout_width="wrap_content"
-                    android:textSize="12sp"
-                    android:textColor="@color/txt_mobile_number"
-                    android:text="@string/name"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:id="@+id/txt_user_name"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_width="wrap_content"
-                    android:maxLines="2"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:text=""
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/layout_mobile"
-                android:layout_alignParentEnd="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:textSize="12sp"
-                    android:textColor="@color/txt_mobile_number"
-                    android:text="@string/mobile_no"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:id="@+id/txt_mobile_number"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_width="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:text=""
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-        </RelativeLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/_10sdp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:textSize="12sp"
-                    android:textColor="@color/txt_mobile_number"
-                    android:text="@string/email_id"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:id="@+id/txt_email_id"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_width="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:text=""
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/_10sdp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:textSize="12sp"
-                    android:textColor="@color/txt_mobile_number"
-                    android:text="@string/installation_address"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:id="@+id/txt_installation_add"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_width="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:text=""
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-</LinearLayout>
         <LinearLayout
-            android:id="@+id/layout_b2B"
-            android:visibility="visible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="@dimen/_20sdp">
+          android:id="@+id/layout_view"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/_20sdp"
+          android:layout_marginRight="@dimen/_20sdp"
+          android:layout_marginBottom="@dimen/_60sdp"
+          android:orientation="vertical"
+          android:visibility="visible">
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:padding="@dimen/_10sdp">
-                <LinearLayout
-                    android:id="@+id/layout_company"
-                     android:layout_alignParentStart="true"
-                    android:layout_width="match_parent"
-                    android:layout_toStartOf="@+id/layout_can"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textSize="12sp"
-                        android:textColor="@color/txt_mobile_number"
-                        android:text="@string/company_name"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:id="@+id/txt_company_name"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_width="wrap_content"
-                        android:textSize="14sp"
-                        android:maxLines="2"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:text=""
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/layout_can"
-                    android:layout_alignParentEnd="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textSize="12sp"
-                        android:textColor="@color/txt_mobile_number"
-                        android:text="@string/can_id"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:id="@+id/txt_can"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_width="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:text=""
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_30sdp">
+
+                <RelativeLayout
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:paddingStart="@dimen/_10sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                      android:id="@+id/view_can_select"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_horizontal"
+                      android:background="@drawable/can_id_background"
+                      android:drawableEnd="@drawable/ic_arrow_white"
+                      android:drawablePadding="@dimen/_15sdp"
+                      android:paddingStart="@dimen/_19sdp"
+                      android:paddingTop="@dimen/_8sdp"
+                      android:paddingEnd="@dimen/_19sdp"
+                      android:paddingBottom="@dimen/_8sdp"
+                      android:text="Can ID - 25461528"
+                      android:textAllCaps="true"
+                      android:textColor="@color/white"
+                      android:textSize="@dimen/_13sdp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                      android:id="@+id/tvLinkedCanID"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_below="@+id/view_can_select"
+                      android:layout_centerHorizontal="true"
+                      android:layout_gravity="center_horizontal"
+                      android:padding="@dimen/_5sdp"
+                      android:text=""
+                      android:textColor="#FEC66F"
+                      android:textSize="@dimen/_11sdp" />
+
+                </RelativeLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                  android:id="@+id/tvAddNew"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentRight="true"
+                  android:layout_gravity="center"
+                  android:drawablePadding="@dimen/_15sdp"
+                  android:paddingTop="@dimen/_8sdp"
+                  android:paddingEnd="@dimen/_19sdp"
+                  android:paddingBottom="@dimen/_8sdp"
+                  android:text="Add new"
+                  android:textAllCaps="true"
+                  android:textColor="@color/back_color"
+
+                  android:textSize="@dimen/_12sdp" />
+
+
             </RelativeLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_10sdp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textSize="12sp"
-                        android:textColor="@color/txt_mobile_number"
-                        android:text="@string/email_id"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:id="@+id/txt_email"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_width="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:text=""
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-            <RelativeLayout
-                android:id="@+id/rlTAN"
-                android:layout_width="match_parent"
-                android:padding="@dimen/_10sdp"
-                android:visibility="visible"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:id="@+id/layout"
-                    android:layout_width="match_parent"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/tvGSt"
-                        android:layout_width="wrap_content"
-                        android:textSize="12sp"
-                        android:textColor="@color/txt_mobile_number"
-                        android:text="@string/gst"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:id="@+id/tvGST"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_width="wrap_content"
-                        android:maxLines="2"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:text=""
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/layout_TAN"
-                    android:layout_alignParentEnd="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textSize="12sp"
-                        android:textColor="@color/txt_mobile_number"
-                        android:text="TAN"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:id="@+id/tvTAN"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_width="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:text=""
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-            </RelativeLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_10sdp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textSize="12sp"
-                        android:textColor="@color/txt_mobile_number"
-                        android:text="@string/installation_address"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:id="@+id/txt_installation_address"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_width="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:text=""
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+            <androidx.cardview.widget.CardView
+              android:id="@+id/layout_name"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center_horizontal"
+              android:layout_marginLeft="@dimen/_5sdp"
+              android:layout_marginTop="@dimen/_10sdp"
+              android:layout_marginRight="@dimen/_5sdp"
+              android:layout_marginBottom="@dimen/_5sdp"
+              android:background="#ffffff"
+              android:visibility="visible"
+              app:cardCornerRadius="@dimen/_15sdp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_10sdp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textSize="12sp"
-                        android:textColor="@color/txt_mobile_number"
-                        android:text="@string/billing_address"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:id="@+id/txt_billing_address"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_width="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:text=""
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:padding="@dimen/_10sdp">
 
-                android:padding="@dimen/_10sdp">
-                <LinearLayout
-                    android:layout_toStartOf="@+id/layout_technical_contact"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_alignParentStart="true"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textSize="12sp"
-                        android:textColor="@color/txt_mobile_number"
-                        android:text="@string/billing_contact"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:id="@+id/txt_billing_contact"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_width="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:text=""
-                        android:layout_height="wrap_content" />
+                    <RelativeLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_marginTop="@dimen/_10sdp"
+                      android:orientation="vertical">
+
+<!--                        <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                          android:id="@+id/user_image"-->
+<!--                          android:layout_width="@dimen/_70sdp"-->
+<!--                          android:layout_height="@dimen/_60sdp"-->
+<!--                          android:layout_centerHorizontal="true"-->
+<!--                          tools:ignore="ContentDescription,VectorDrawableCompat" />-->
+
+<!--                        <ImageView-->
+<!--                          android:id="@+id/imageHolder"-->
+<!--                          android:layout_width="@dimen/_70sdp"-->
+<!--                          android:layout_height="@dimen/_60sdp"-->
+<!--                          android:layout_centerHorizontal="true"-->
+<!--                          android:src="@drawable/ic_user_img"-->
+<!--                          tools:ignore="ContentDescription,VectorDrawableCompat" />-->
+
+<!--                        <androidx.appcompat.widget.AppCompatTextView-->
+<!--                          android:id="@+id/tvChangeProfilePic"-->
+<!--                          android:layout_width="wrap_content"-->
+<!--                          android:layout_height="wrap_content"-->
+<!--                          android:layout_below="@+id/user_image"-->
+<!--                          android:layout_centerHorizontal="true"-->
+<!--                          android:layout_gravity="center"-->
+<!--                          android:layout_marginTop="@dimen/_10sdp"-->
+<!--                          android:text="Upload Profile Picture"-->
+<!--                          android:textColor="@color/colorPrimaryDark"-->
+<!--                          android:textSize="@dimen/_12sdp"-->
+<!--                          android:visibility="visible" />-->
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                          android:id="@+id/txt_edit_profile"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_alignParentEnd="true"
+                          android:layout_marginTop="@dimen/_10sdp"
+                          android:text="@string/txt_edit"
+                          android:textAllCaps="true"
+                          android:textColor="@color/back_color"
+                          android:textSize="@dimen/_14sdp"
+                          android:visibility="visible" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                      android:id="@+id/account_b_2_c"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical"
+                      android:visibility="gone">
+
+                        <RelativeLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="@dimen/_20sdp"
+                          android:padding="@dimen/_10sdp">
+
+                            <LinearLayout
+                              android:id="@+id/layout_named"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginEnd="@dimen/_10sdp"
+                              android:layout_toStartOf="@+id/layout_mobile"
+                              android:orientation="vertical">
+
+                                <TextView
+                                  android:id="@+id/txt_name"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:text="@string/name"
+                                  android:textColor="@color/txt_mobile_number"
+                                  android:textSize="12sp" />
+
+                                <TextView
+                                  android:id="@+id/txt_user_name"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="@dimen/_5sdp"
+                                  android:maxLines="2"
+                                  android:text=""
+                                  android:textColor="@color/colorPrimaryDark"
+                                  android:textSize="14sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                              android:id="@+id/layout_mobile"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_alignParentEnd="true"
+                              android:layout_marginEnd="@dimen/_20sdp"
+                              android:orientation="vertical">
+
+                                <TextView
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:text="@string/mobile_no"
+                                  android:textColor="@color/txt_mobile_number"
+                                  android:textSize="12sp" />
+
+                                <TextView
+                                  android:id="@+id/txt_mobile_number"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="@dimen/_5sdp"
+                                  android:text=""
+                                  android:textColor="@color/colorPrimaryDark"
+                                  android:textSize="14sp" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <LinearLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:padding="@dimen/_10sdp">
+
+                            <TextView
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="@string/email_id"
+                              android:textColor="@color/txt_mobile_number"
+                              android:textSize="12sp" />
+
+                            <TextView
+                              android:id="@+id/txt_email_id"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="@dimen/_5sdp"
+                              android:text=""
+                              android:textColor="@color/colorPrimaryDark"
+                              android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:padding="@dimen/_10sdp">
+
+                            <TextView
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="@string/installation_address"
+                              android:textColor="@color/txt_mobile_number"
+                              android:textSize="12sp" />
+
+                            <TextView
+                              android:id="@+id/txt_installation_add"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="@dimen/_5sdp"
+                              android:text=""
+                              android:textColor="@color/colorPrimaryDark"
+                              android:textSize="14sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                      android:id="@+id/layout_b2B"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginBottom="@dimen/_20sdp"
+                      android:orientation="vertical"
+                      android:visibility="visible">
+
+                        <RelativeLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="@dimen/_20sdp"
+                          android:padding="@dimen/_10sdp">
+
+                            <LinearLayout
+                              android:id="@+id/layout_company"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_alignParentStart="true"
+                              android:layout_marginEnd="@dimen/_10sdp"
+                              android:layout_toStartOf="@+id/layout_can"
+                              android:orientation="vertical">
+
+                                <TextView
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:text="@string/company_name"
+                                  android:textColor="@color/txt_mobile_number"
+                                  android:textSize="12sp" />
+
+                                <TextView
+                                  android:id="@+id/txt_company_name"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="@dimen/_5sdp"
+                                  android:maxLines="2"
+                                  android:text=""
+                                  android:textColor="@color/colorPrimaryDark"
+                                  android:textSize="14sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                              android:id="@+id/layout_can"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_alignParentEnd="true"
+                              android:layout_marginEnd="@dimen/_20sdp"
+                              android:orientation="vertical">
+
+                                <TextView
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:text="@string/can_id"
+                                  android:textColor="@color/txt_mobile_number"
+                                  android:textSize="12sp" />
+
+                                <TextView
+                                  android:id="@+id/txt_can"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="@dimen/_5sdp"
+                                  android:text=""
+                                  android:textColor="@color/colorPrimaryDark"
+                                  android:textSize="14sp" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <LinearLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:padding="@dimen/_10sdp">
+
+                            <TextView
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="@string/email_id"
+                              android:textColor="@color/txt_mobile_number"
+                              android:textSize="12sp" />
+
+                            <TextView
+                              android:id="@+id/txt_email"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="@dimen/_5sdp"
+                              android:text=""
+                              android:textColor="@color/colorPrimaryDark"
+                              android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <RelativeLayout
+                          android:id="@+id/rlTAN"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:padding="@dimen/_10sdp"
+                          android:visibility="visible">
+
+                            <LinearLayout
+                              android:id="@+id/layout"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginEnd="@dimen/_10sdp"
+                              android:orientation="vertical">
+
+                                <TextView
+                                  android:id="@+id/tvGSt"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:text="@string/gst"
+                                  android:textColor="@color/txt_mobile_number"
+                                  android:textSize="12sp" />
+
+                                <TextView
+                                  android:id="@+id/tvGST"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="@dimen/_5sdp"
+                                  android:maxLines="2"
+                                  android:text=""
+                                  android:textColor="@color/colorPrimaryDark"
+                                  android:textSize="14sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                              android:id="@+id/layout_TAN"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_alignParentEnd="true"
+                              android:layout_marginEnd="@dimen/_20sdp"
+                              android:orientation="vertical">
+
+                                <TextView
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:text="TAN"
+                                  android:textColor="@color/txt_mobile_number"
+                                  android:textSize="12sp" />
+
+                                <TextView
+                                  android:id="@+id/tvTAN"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="@dimen/_5sdp"
+                                  android:text=""
+                                  android:textColor="@color/colorPrimaryDark"
+                                  android:textSize="14sp" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <LinearLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:padding="@dimen/_10sdp">
+
+                            <TextView
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="@string/installation_address"
+                              android:textColor="@color/txt_mobile_number"
+                              android:textSize="12sp" />
+
+                            <TextView
+                              android:id="@+id/txt_installation_address"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="@dimen/_5sdp"
+                              android:text=""
+                              android:textColor="@color/colorPrimaryDark"
+                              android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:padding="@dimen/_10sdp">
+
+                            <TextView
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="@string/billing_address"
+                              android:textColor="@color/txt_mobile_number"
+                              android:textSize="12sp" />
+
+                            <TextView
+                              android:id="@+id/txt_billing_address"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="@dimen/_5sdp"
+                              android:text=""
+                              android:textColor="@color/colorPrimaryDark"
+                              android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <RelativeLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+
+                          android:padding="@dimen/_10sdp">
+
+                            <LinearLayout
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_alignParentStart="true"
+                              android:layout_marginEnd="@dimen/_10sdp"
+                              android:layout_toStartOf="@+id/layout_technical_contact"
+                              android:orientation="vertical">
+
+                                <TextView
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:text="@string/billing_contact"
+                                  android:textColor="@color/txt_mobile_number"
+                                  android:textSize="12sp" />
+
+                                <TextView
+                                  android:id="@+id/txt_billing_contact"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="@dimen/_5sdp"
+                                  android:text=""
+                                  android:textColor="@color/colorPrimaryDark"
+                                  android:textSize="14sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                              android:id="@+id/layout_technical_contact"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_alignParentEnd="true"
+                              android:layout_marginEnd="@dimen/_20sdp"
+                              android:orientation="vertical">
+
+                                <TextView
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:text="@string/technical_contact"
+                                  android:textColor="@color/txt_mobile_number"
+                                  android:textSize="12sp" />
+
+                                <TextView
+                                  android:id="@+id/txt_technical_contact"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="@dimen/_5sdp"
+                                  android:text=""
+                                  android:textColor="@color/colorPrimaryDark"
+                                  android:textSize="14sp" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
                 </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+              android:id="@+id/layoutCv3"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center_horizontal"
+              android:layout_marginLeft="@dimen/_5sdp"
+              android:layout_marginTop="@dimen/_10sdp"
+              android:layout_marginRight="@dimen/_5sdp"
+              android:layout_marginBottom="@dimen/_10sdp"
+              android:background="#ffffff"
+              android:visibility="visible"
+              app:cardCornerRadius="@dimen/_15sdp">
+
                 <LinearLayout
-                    android:id="@+id/layout_technical_contact"
-                    android:layout_alignParentEnd="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:orientation="vertical">
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:padding="@dimen/_20sdp">
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:textSize="12sp"
-                        android:textColor="@color/txt_mobile_number"
-                        android:text="@string/technical_contact"
-                        android:layout_height="wrap_content" />
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginBottom="@dimen/_10sdp"
+                      android:text="Account Manager Infromation"
+                      android:textColor="@color/colorPrimaryDark"
+                      android:textSize="14sp" />
+
                     <TextView
-                        android:id="@+id/txt_technical_contact"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_width="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:text=""
-                        android:layout_height="wrap_content" />
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Name"
+                      android:textColor="@color/txt_mobile_number"
+                      android:textSize="12sp" />
+
+                    <TextView
+                      android:id="@+id/account_manager_name"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginBottom="@dimen/_5sdp"
+                      android:text=""
+                      android:textColor="@color/colorPrimaryDark"
+                      android:textSize="14sp" />
+
+                    <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Email"
+                      android:textColor="@color/txt_mobile_number"
+                      android:textSize="12sp" />
+
+                    <TextView
+                      android:id="@+id/account_manager_email"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginBottom="@dimen/_5sdp"
+                      android:text=""
+                      android:textColor="@color/colorPrimaryDark"
+                      android:textSize="14sp" />
+
+                    <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Phone Number"
+                      android:textColor="@color/txt_mobile_number"
+                      android:textSize="12sp" />
+
+                    <TextView
+                      android:id="@+id/account_manager_phone"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text=""
+                      android:textColor="@color/colorPrimaryDark"
+                      android:textSize="14sp" />
+
                 </LinearLayout>
-            </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+              android:id="@+id/layoutCv2"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center_horizontal"
+              android:layout_marginLeft="@dimen/_5sdp"
+              android:layout_marginTop="@dimen/_10sdp"
+              android:layout_marginRight="@dimen/_5sdp"
+              android:layout_marginBottom="@dimen/_30sdp"
+              android:background="#ffffff"
+              android:visibility="visible"
+              app:cardCornerRadius="@dimen/_15sdp">
+
+                <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+
+                  android:padding="@dimen/_10sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                      android:id="@+id/tvResetPassword"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_horizontal"
+                      android:drawableStart="@drawable/ic_reset"
+                      android:drawableEnd="@drawable/ic_arrow_white"
+                      android:drawablePadding="@dimen/_15sdp"
+                      android:paddingStart="@dimen/_15sdp"
+                      android:paddingTop="@dimen/_10sdp"
+                      android:paddingEnd="@dimen/_19sdp"
+
+                      android:paddingBottom="@dimen/_10sdp"
+                      android:text="Reset Password"
+                      android:textAllCaps="true"
+                      android:textColor="@color/cancel_background_color"
+                      android:textSize="16sp"
+                      app:drawableTint="@color/cancel_background_color" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                      android:id="@+id/tvDeleteAccount"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_horizontal"
+                      android:drawableStart="@drawable/ic_arrow_white"
+                      android:drawableEnd="@drawable/ic_arrow_white"
+                      android:drawablePadding="@dimen/_15sdp"
+                      android:paddingStart="@dimen/_19sdp"
+                      android:paddingTop="@dimen/_10sdp"
+                      android:paddingEnd="@dimen/_19sdp"
+                      android:paddingBottom="@dimen/_10sdp"
+                      android:text="Delete Account"
+                      android:textAllCaps="true"
+                      android:textColor="@color/cancel_background_color"
+                      android:textSize="16sp"
+                      app:drawableTint="@color/cancel_background_color" />
+
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                      android:id="@+id/tvManegeContact"-->
+<!--                      android:layout_width="match_parent"-->
+<!--                      android:layout_height="wrap_content"-->
+<!--                      android:layout_gravity="center_horizontal"-->
+<!--                      android:drawableStart="@drawable/ic_my_account"-->
+<!--                      android:drawableEnd="@drawable/ic_arrow_white"-->
+<!--                      android:drawablePadding="@dimen/_15sdp"-->
+<!--                      android:paddingStart="@dimen/_19sdp"-->
+<!--                      android:paddingTop="@dimen/_10sdp"-->
+<!--                      android:paddingEnd="@dimen/_19sdp"-->
+<!--                      android:paddingBottom="@dimen/_10sdp"-->
+<!--                      android:text="Manage Contact"-->
+<!--                      android:textAllCaps="true"-->
+<!--                      android:textColor="@color/cancel_background_color"-->
+<!--                      android:textSize="16sp"-->
+<!--                      app:drawableTint="@color/cancel_background_color" />-->
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
-    </LinearLayout>
-    </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/layoutCv2"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_5sdp"
-            android:layout_marginLeft="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_30sdp"
-            android:background="#ffffff"
-            app:cardCornerRadius="@dimen/_15sdp"
-            >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-
-                android:padding="@dimen/_10sdp">
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvResetPassword"
-                    android:layout_width="match_parent"
-                    android:text="Reset Password"
-                    android:layout_height="wrap_content"
-                    android:textAllCaps="true"
-                    app:drawableTint="@color/cancel_background_color"
-                    android:drawableStart="@drawable/ic_reset"
-                    android:drawableEnd="@drawable/ic_arrow_white"
-                    android:textColor="@color/cancel_background_color"
-                    android:textSize="16sp"
-
-                    android:layout_gravity="center_horizontal"
-                    android:paddingTop="@dimen/_10sdp"
-                    android:paddingStart="@dimen/_15sdp"
-                    android:paddingEnd="@dimen/_19sdp"
-                    android:paddingBottom="@dimen/_10sdp"
-                    android:drawablePadding="@dimen/_15sdp"
-                    />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvDeleteAccount"
-                    android:layout_width="match_parent"
-                    android:text="Delete Account"
-                    android:layout_height="wrap_content"
-                    android:textAllCaps="true"
-                    app:drawableTint="@color/cancel_background_color"
-                    android:drawableStart="@drawable/ic_arrow_white"
-                    android:drawableEnd="@drawable/ic_arrow_white"
-                    android:textColor="@color/cancel_background_color"
-
-                    android:textSize="16sp"
-                    android:layout_gravity="center_horizontal"
-                    android:paddingTop="@dimen/_10sdp"
-                    android:paddingStart="@dimen/_19sdp"
-                    android:paddingEnd="@dimen/_19sdp"
-                    android:paddingBottom="@dimen/_10sdp"
-                    android:drawablePadding="@dimen/_15sdp"
-                    />
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvManegeContact"
-                    android:layout_width="match_parent"
-                    android:text="Manage Contact"
-                    android:layout_height="wrap_content"
-                    android:textAllCaps="true"
-                    app:drawableTint="@color/cancel_background_color"
-                    android:drawableStart="@drawable/ic_my_account"
-                    android:drawableEnd="@drawable/ic_arrow_white"
-                    android:textSize="16sp"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="@color/cancel_background_color"
-                    android:paddingTop="@dimen/_10sdp"
-                    android:paddingStart="@dimen/_19sdp"
-                    android:paddingEnd="@dimen/_19sdp"
-                    android:paddingBottom="@dimen/_10sdp"
-                    android:drawablePadding="@dimen/_15sdp"
-                    />
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
     </ScrollView>
 </RelativeLayout>

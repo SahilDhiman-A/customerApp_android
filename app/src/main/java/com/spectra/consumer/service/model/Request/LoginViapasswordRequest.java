@@ -2,11 +2,9 @@ package com.spectra.consumer.service.model.Request;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 
-public class LoginViapasswordRequest implements Serializable
-{
+public class LoginViapasswordRequest implements Serializable {
 
     @SerializedName("Action")
     @Expose
@@ -21,7 +19,7 @@ public class LoginViapasswordRequest implements Serializable
     @Expose
     private String authkey;
 
-    public String getAction() {
+    public String getAction(){
         return action;
     }
 

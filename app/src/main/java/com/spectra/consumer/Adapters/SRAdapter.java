@@ -61,7 +61,8 @@ public class SRAdapter extends RecyclerView.Adapter<SRAdapter.SRViewholder> {
         holder.txt_problem_type.setText(srData.getProblemType());
 
         holder.txt_prob_sub_type.setText(srData.getSubType());
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy' 'hh:mm:ss a");
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy' 'hh:mm:ss a");
         Date parse=null;
         try {
             parse=sdf.parse(srData.getETR());

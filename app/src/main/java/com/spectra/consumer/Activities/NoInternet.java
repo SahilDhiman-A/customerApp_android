@@ -1,5 +1,13 @@
 package com.spectra.consumer.Activities;
 
+import static com.spectra.consumer.Utils.Constant.CurrentuserKey;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_SERVICE;
+import static com.spectra.consumer.Utils.Constant.STATUS_SUCCESS;
+import static com.spectra.consumer.service.repository.ApiConstant.CHECK_SR;
+import static com.spectra.consumer.service.repository.ApiConstant.CREATE_SR;
+import static com.spectra.consumer.service.repository.ApiConstant.GET_SR_STATUS;
+import static com.spectra.consumer.service.repository.ApiConstant.NO_INTERNET;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +18,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,6 +35,7 @@ import com.spectra.consumer.Utils.SiUtils;
 import com.spectra.consumer.service.model.ApiResponse;
 import com.spectra.consumer.service.model.Request.CreateSrRequest;
 import com.spectra.consumer.service.model.Request.GetSrRequest;
+import com.spectra.consumer.service.model.Response.CreateSrResponse;
 import com.spectra.consumer.service.model.Response.GetSrStatusResponse;
 import com.spectra.consumer.service.model.Response.InternetNotWorkModelDTO;
 import com.spectra.consumer.service.model.Response.InvoiceDTO;
@@ -40,15 +48,10 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import static com.spectra.consumer.Utils.Constant.CurrentuserKey;
-import static com.spectra.consumer.Utils.Constant.STATUS_SUCCESS;
-import static com.spectra.consumer.service.repository.ApiConstant.CHECK_SR;
-import static com.spectra.consumer.service.repository.ApiConstant.CREATE_SR;
-import static com.spectra.consumer.service.repository.ApiConstant.GET_SR_STATUS;
-import static com.spectra.consumer.service.repository.ApiConstant.NO_INTERNET;
 
 public class NoInternet extends AppCompatActivity {
     @BindView(R.id.img_back)
@@ -101,7 +104,6 @@ public class NoInternet extends AppCompatActivity {
     TextView progressTitle;
     @BindView(R.id.progressTitleBelow)
     TextView progressTitleBelow;
-
     @BindView(R.id.tvBackToHomeSr)
     TextView tvBackToHomeSr;
     @BindView(R.id.txtExpectedResolutionTime)
@@ -114,18 +116,14 @@ public class NoInternet extends AppCompatActivity {
     TextView txtProblemType;
     @BindView(R.id.tvDisHint)
     TextView tvDisHint;
-
     @BindView(R.id.txtDescription)
     TextView txtDescription;
-
     @BindView(R.id.txtCreatedTime)
     TextView txtCreatedTime;
     @BindView(R.id.rlSrDetail)
     RelativeLayout rlSrDetail;
-
     @BindView(R.id.txt_prob_sub_type)
     TextView txt_prob_sub_type;
-
     @BindView(R.id.pro2)
     ProgressBar pro2;
     @BindView(R.id.img_cross)
@@ -173,7 +171,6 @@ public class NoInternet extends AppCompatActivity {
             }
         }).start();
     }
-
 
     public void getIssue() {
         if (Constant.isInternetConnected(this)) {
@@ -233,7 +230,6 @@ public class NoInternet extends AppCompatActivity {
                     } else {
                         backToHome("Oops. Something went wrong. Please try again later.");
                     }
-
                     break;
 
                 case CHECK_SR:
@@ -246,17 +242,27 @@ public class NoInternet extends AppCompatActivity {
                     }
                     break;
                 case CREATE_SR:
+                    try {
+                        CreateSrResponse createSrResponse = (CreateSrResponse) response;
+                        if (createSrResponse.getStatus().equalsIgnoreCase(STATUS_SUCCESS)) {
+                            String sr_no = createSrResponse.getResponse();
+                            SpectraApplication.getInstance().addKey("sr_number", createSrResponse.getResponse());
+                            SpectraApplication.getInstance().addKey("request_type", "");
+                            SpectraApplication.getInstance().addKey("descreption", "");
+                            SpectraApplication.getInstance().postEvent(CATEGORY_SERVICE, "raise_new_service_request_Submit", "raise_new_service_request_Submit",canId);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     goToHome();
                     break;
-                case NO_INTERNET:
 
+                case NO_INTERNET:
                     InternetNotWorkModelDTO responseDTO = (InternetNotWorkModelDTO) response;
                     if (responseDTO.getStatus().equalsIgnoreCase(STATUS_SUCCESS)) {
-
                         pStatus = 100;
                         progressBar.setProgress(100);
                         ResponseDTO response1 = responseDTO.getResponse();
-
                         int problumCode = Integer.parseInt(response1.getMessageCode());
                         if (problumCode > 299) {
                             backToHome(response1.getMessageDescription());
@@ -271,7 +277,7 @@ public class NoInternet extends AppCompatActivity {
                             String text;
                             rlTrubbleShootProgressbar.setVisibility(View.GONE);
                             switch (problumCode) {
-
+                                case 210:
                                 case 211:
                                     tvYes.setText("yes");
                                     tvNo.setText("no");
@@ -291,6 +297,7 @@ public class NoInternet extends AppCompatActivity {
                                     }
                                     tvSelectOptTitle.setText(Html.fromHtml(text));
                                     break;
+
                                 case 212:
                                     findViewById(R.id.topMeassge).setVisibility(View.VISIBLE);
                                     tvYes.setText("PAY NOW");
@@ -334,16 +341,17 @@ public class NoInternet extends AppCompatActivity {
                                         text = "Can you please check if the<br/>9F/10F light on your Switch is<br/><big>ON</big> or <big>OFF</big> ?";
                                         timerWork(text, problumCode);
                                     }
-
                                     break;
+
                                 case 216:
-                                    codeAPi = 216;
-                                    getSRDetails(response1);
+                                    text = "Customer is connected via GPON and SR is raised based on Power level & Alarm Type.";
+                                    backToHome(text);
+                                    break;
 
                                 case 218:
                                     getSRDetails(response1);
-
                                     break;
+
                                 case 219:
                                     tvYes.setText("PAY NOW");
                                     tvNo.setText("NOT NOW");
@@ -355,6 +363,7 @@ public class NoInternet extends AppCompatActivity {
                                     String message = "There is an outstanding of<br/><br/>" + text + "<br/><br/>in your account.<br/><br/><br/>Kindly clear this to get account activated and enjoy uninterrupted services.";
                                     tvSelectOptTitle.setText(Html.fromHtml(message));
                                     break;
+
                                 case 220:
                                     text = "Your account has been activated now.<br/><br/>Please continue enjoying Spectra services.";
                                     String amount = safeCastdyAmount;
@@ -378,11 +387,9 @@ public class NoInternet extends AppCompatActivity {
                                     } else {
                                         backToHome(text);
                                     }
-
-
                                     break;
-                                case 222:
 
+                                case 222:
                                     tvYes.setText("yes");
                                     tvNo.setText("no");
                                     tvYes.setOnClickListener(v -> updateStatus("enableSafeCustodytoActive", "True"));
@@ -392,7 +399,6 @@ public class NoInternet extends AppCompatActivity {
                                     text = response1.getEndDate();
                                     text = "<b>" + text + "</b> ";
                                     text = "Your account is under<br/> safe custody till<br/>" + text + ".<br/><br/>Would you like to remove your<br/> account from Safe Custody ?";
-
                                     tvSelectOptTitle.setText(Html.fromHtml(text));
                                     break;
 
@@ -411,11 +417,12 @@ public class NoInternet extends AppCompatActivity {
                                         tvSelectOptTitle.setText(Html.fromHtml(text));
                                     }
                                     rlAcountDeactive.setVisibility(View.VISIBLE);
-
                                     break;
+
                                 case 226:
                                     getSRDetails(response1);
                                     break;
+
                                 case 227:
                                     text = "<big><b>" + "Great!" + "<b></big> ";
                                     text = "<font color=black>" + text + "</font>";
@@ -426,24 +433,21 @@ public class NoInternet extends AppCompatActivity {
                                 case 228:
                                     getSRDetails(response1);
                                     break;
+
                                 case 238:
                                     this.response1 = response1;
                                     if (response1.getAlarmType().equals("DGI") && response1.getPowerLevel().equals("-40")) {
-                                        text = "While our connectivity to your<br/>premises is fine, it seems that<br/>your WiFi Router/Switch is<br/>powered OFF. Kindly switch<br/>on the power supply and wait<br/>for 1 minute.";
+                                        text = "While our connectivity to your<br/>premises is fine, it seems that<br/>your WiFi Router/Switch is<br/>powered OFF. Kindly switch<br/>on the power supply and wait<br/>for 2 minutes.";
                                     } else {
-                                        text = "While our connectivity to your<br/> premises is fine, we have found<br/> an issue in the equipment at your premises.<br/> Please reboot your ONT (white box)<br/> and your WiFi Router/Switch and <br/>wait for 1 minute.";
+                                        text = "While our connectivity to your<br/> premises is fine, we have found<br/> an issue in the equipment at your premises.<br/> Please reboot your ONT (white box)<br/> and your WiFi Router/Switch and <br/>wait for 2 minutes.";
                                     }
                                     timerWork(text, problumCode);
                                     break;
                             }
                         }, 1500);
-
-
                     }
                     break;
             }
-
-
         }
     }
 
@@ -462,8 +466,9 @@ public class NoInternet extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void timerWork(String text2, int code) {
-        long time = 60000;
-        //long time = 60;
+        //Nikhil-> Time changed to 2 mins
+        long time = 120000;
+        //long time = 120;
         tvYes.setVisibility(View.GONE);
         tvNo.setVisibility(View.GONE);
         tvYes.setText("yes");
@@ -485,7 +490,6 @@ public class NoInternet extends AppCompatActivity {
                 }
                 tvYes.setOnClickListener(v -> updateStatus("statusof9F/10Flight", "ON"));
                 tvNo.setOnClickListener(v -> updateStatus("statusof9F/10Flight", "OFF"));
-
                 break;
             case 224:
                 if (!isPatner) {
@@ -493,13 +497,13 @@ public class NoInternet extends AppCompatActivity {
                 } else {
                     isPatner = false;
                 }
-
+                tvYes.setOnClickListener(v -> updateStatus("isInternetWorking", "Yes"));
+                tvNo.setOnClickListener(v -> updateStatus("isInternetWorking", "No"));
+            case 238:
                 tvYes.setOnClickListener(v -> updateStatus("isInternetWorking", "Yes"));
                 tvNo.setOnClickListener(v -> updateStatus("isInternetWorking", "No"));
                 break;
         }
-
-
         rlAcountDeactive.setVisibility(View.VISIBLE);
         String text = "<br><br/><font color=red size=23>01:00</font>";
         text = "<b>" + text + "</b> ";
@@ -525,11 +529,8 @@ public class NoInternet extends AppCompatActivity {
                 tvNo.setVisibility(View.VISIBLE);
             }
         }.
-
                 start();
-
     }
-
 
     public void viewBill(InvoiceDTO invoiceDTO) {
         rlInvoiceDetail.setVisibility(View.VISIBLE);
@@ -563,7 +564,6 @@ public class NoInternet extends AppCompatActivity {
         } else {
             Constant.MakeToastMessage(this, "Payable amount can't be 0");
         }
-
     }
 
     public void updateStatus(String type, String status) {
@@ -610,10 +610,8 @@ public class NoInternet extends AppCompatActivity {
         }
     }
 
-
     public void createSr() {
         llSr.setVisibility(View.VISIBLE);
-
         tvSubmitSr.setOnClickListener(v -> {
             if (TextUtils.isEmpty(etSrMessage.getText())) {
                 Constant.MakeToastMessage(this, "Please add comment first");
@@ -646,7 +644,6 @@ public class NoInternet extends AppCompatActivity {
             case R.id.tvTROUBLESHOOT:
                 getIssue();
                 break;
-
         }
     }
 
@@ -668,7 +665,6 @@ public class NoInternet extends AppCompatActivity {
                     getSrRequest.setSrNumber(response1.getSrNo());
                     spectraViewModel.getSrStatus(getSrRequest).observe(this, this::consumeResponse);
                 }
-
             }
         } else {
             rlAcountDeactive.setVisibility(View.GONE);
@@ -690,7 +686,6 @@ public class NoInternet extends AppCompatActivity {
         if (TextUtils.isEmpty(dateString)) {
             return str;
         }
-
         String inputPattern = "MM/dd/yyyy hh:mm:ss a";
         String outputPattern = "dd/MM/yyyy hh:mm a";
         @SuppressLint("SimpleDateFormat") SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
@@ -745,8 +740,6 @@ public class NoInternet extends AppCompatActivity {
         if (isDate) {
             outputPattern = "dd-MM-yyyy";
         }
-
-
         @SuppressLint("SimpleDateFormat") SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
         @SuppressLint("SimpleDateFormat") SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
         try {
@@ -761,4 +754,3 @@ public class NoInternet extends AppCompatActivity {
     }
 
 }
-//215

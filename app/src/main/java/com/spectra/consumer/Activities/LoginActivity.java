@@ -1,21 +1,16 @@
 package com.spectra.consumer.Activities;
 
-
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.View;
@@ -25,13 +20,12 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProviders;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.spectra.consumer.BuildConfig;
 import com.spectra.consumer.Models.CurrentUserData;
 import com.spectra.consumer.Models.UserDataDB;
@@ -40,38 +34,39 @@ import com.spectra.consumer.Utils.Constant;
 import com.spectra.consumer.Utils.DroidPrefs;
 import com.spectra.consumer.service.model.ApiResponse;
 import com.spectra.consumer.service.model.CAN_ID;
+import com.spectra.consumer.service.model.Request.DeviceData;
 import com.spectra.consumer.service.model.Request.LoginViaMobileRequest;
 import com.spectra.consumer.service.model.Request.LoginViapasswordRequest;
 import com.spectra.consumer.service.model.Request.SendOtpRequest;
+import com.spectra.consumer.service.model.Request.UpdateTokenRequest;
 import com.spectra.consumer.service.model.Response.LoginMobileResponse;
 import com.spectra.consumer.service.model.Response.LoginViaMobileResponse;
 import com.spectra.consumer.service.model.Response.UpdateMobileResponse;
+import com.spectra.consumer.viewModel.PlanAndTopupViewModel;
 import com.spectra.consumer.viewModel.SpectraViewModel;
-
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+import static com.spectra.consumer.Activities.HomeActivity.TOKEN;
+import static com.spectra.consumer.Activities.HomeActivity.canID;
+import static com.spectra.consumer.Activities.HomeActivity.canIDS1;
 import static com.spectra.consumer.Utils.CommonUtils.saveUser;
 import static com.spectra.consumer.Utils.Constant.BASE_CAN;
 import static com.spectra.consumer.Utils.Constant.CurrentuserKey;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_LOGIN;
 import static com.spectra.consumer.Utils.Constant.LOGIN_VERIFY_TYPE;
 import static com.spectra.consumer.Utils.Constant.STATUS_SUCCESS;
 import static com.spectra.consumer.Utils.Constant.USER_DB;
 import static com.spectra.consumer.Utils.Constant.hideKeyboard;
+import static com.spectra.consumer.service.repository.ApiConstant.DEVICE_SIGN_OUT;
 import static com.spectra.consumer.service.repository.ApiConstant.GET_ACCOUNT_BY_MOBILE;
 import static com.spectra.consumer.service.repository.ApiConstant.GET_ACCOUNT_BY_PASSWORD;
 import static com.spectra.consumer.service.repository.ApiConstant.SEND_OTP;
@@ -139,6 +134,8 @@ public class LoginActivity extends AppCompatActivity {
     AlertDialog dialog;
     boolean is_error = false;
     UserDataDB userDataDB;
+    private long pressedTime;
+    private FirebaseAnalytics firebaseAnalytics;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -148,16 +145,14 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         is_error = false;
         Constant.ShowPassword(input_password, txt_show_password);
-
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         spectraViewModel = ViewModelProviders.of(this).get(SpectraViewModel.class);
-
 
         input_mobile.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 btn_login_layout.setVisibility(View.GONE);
             }
-
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -183,10 +178,7 @@ public class LoginActivity extends AppCompatActivity {
         input_username.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
-
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.length() >= 1) {
@@ -248,8 +240,12 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-       new GetVersionCode().execute();
+        if (!BuildConfig.DEBUG) {
+            new GetVersionCode().execute();
+        }
         userDataDB = DroidPrefs.get(this, USER_DB, UserDataDB.class);
+        //TODO SP3
+        getUpdateToken();
     }
 
     private void consumeResponse(ApiResponse apiResponse) {
@@ -270,11 +266,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-
     private void renderSuccessResponse(Object response, String code) {
         if (response != null) {
             switch (code) {
                 case GET_ACCOUNT_BY_PASSWORD:
+                    SpectraApplication.getInstance().postEvent(CATEGORY_LOGIN, "login_user_pwd", "username_password", "");
                     LoginViaMobileResponse loginViaMobileResponse = (LoginViaMobileResponse) response;
                     if (loginViaMobileResponse.getStatus().equalsIgnoreCase(STATUS_SUCCESS) && loginViaMobileResponse.response != null) {
                         is_error = false;
@@ -284,7 +280,7 @@ public class LoginActivity extends AppCompatActivity {
                             responseHashMap.put(loginMobileResponses.get(0).getCANId(), loginMobileResponses.get(0));
                             userDataDB.setResponseHashMap(responseHashMap);
                             LoginMobileResponse data = loginMobileResponses.get(0);
-                            saveUser(LoginActivity.this, data);
+                            saveUser(LoginActivity.this, data, false);
                             DroidPrefs.apply(LoginActivity.this, USER_DB, userDataDB);
                             CAN_ID can_id = new CAN_ID();
                             can_id.baseCanID = data.getCANId();
@@ -315,6 +311,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     break;
                 case GET_ACCOUNT_BY_MOBILE:
+                    SpectraApplication.getInstance().postEvent(CATEGORY_LOGIN, "login_rmn", "registered_mobile_number", "");
                     LoginViaMobileResponse res = (LoginViaMobileResponse) response;
                     if (res.getStatus().equalsIgnoreCase(STATUS_SUCCESS) && res.response != null) {
                         user_data_list = res.getResponse();
@@ -327,7 +324,7 @@ public class LoginActivity extends AppCompatActivity {
                             userDataDB.setResponseHashMap(responseHashMap);
                             DroidPrefs.apply(LoginActivity.this, USER_DB, userDataDB);
                             LoginMobileResponse data = user_data_list.get(0);
-                            saveUser(LoginActivity.this, data);
+                            saveUser(LoginActivity.this, data, false);
                             CAN_ID can_id = new CAN_ID();
                             can_id.baseCanID = data.getCANId();
                             String mobile = input_mobile.getText().toString().trim();
@@ -347,12 +344,13 @@ public class LoginActivity extends AppCompatActivity {
                 case SEND_OTP:
                     UpdateMobileResponse updateMobileResponse = (UpdateMobileResponse) response;
                     if (updateMobileResponse.getStatus().equalsIgnoreCase(STATUS_SUCCESS)) {
+
                         Intent intent = new Intent(LoginActivity.this, OtpActivity.class);
                         try {
                             JSONObject jsonObject = new JSONObject(updateMobileResponse.getResponse().toString());
                             String phone = jsonObject.getString("mobileNo");
                             String otp = "" + jsonObject.getInt("OTP");
-                           // Toast.makeText(this, otp, Toast.LENGTH_LONG).show();
+                            // Toast.makeText(this, otp, Toast.LENGTH_LONG).show();
                             intent.putExtra("phone", phone);
                             intent.putExtra("otp", otp);
                         } catch (Exception e) {
@@ -405,18 +403,16 @@ public class LoginActivity extends AppCompatActivity {
         if (Constant.isInternetConnected(this)) {
             hideKey();
             showLoadingView(true);
-            btn_login_layout.setClickable(false);
-            btn_login_layout.setEnabled(false);
             LoginViaMobileRequest loginViaMobileRequest = new LoginViaMobileRequest();
             loginViaMobileRequest.setAction(GET_ACCOUNT_BY_MOBILE);
             loginViaMobileRequest.setAuthkey(BuildConfig.AUTH_KEY);
             loginViaMobileRequest.setMobile(mobile);
             spectraViewModel.getAccountByMobile(loginViaMobileRequest).observe(this, this::consumeResponse);
         }
-
     }
 
     public void generate_otp(String mobile) {
+
         if (Constant.isInternetConnected(this)) {
             SendOtpRequest sendOtpRequest = new SendOtpRequest();
             sendOtpRequest.setAction(SEND_OTP);
@@ -424,12 +420,18 @@ public class LoginActivity extends AppCompatActivity {
             sendOtpRequest.setMobileNo(mobile);
             spectraViewModel.sendOtp(sendOtpRequest).observe(this, this::consumeResponse);
         }
+
     }
 
     @OnClick({R.id.txt_forgot_password, R.id.img_cross, R.id.txt_login_via_username, R.id.btn_login_layout, R.id.btn_login_username_layout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.txt_forgot_password:
+                if (canID != null) {
+                    SpectraApplication.getInstance().postEvent(CATEGORY_LOGIN, "forgot_password", "username" , canID);
+                }else{
+                    SpectraApplication.getInstance().postEvent(CATEGORY_LOGIN, "forgot_password", "username", "");
+                }
                 Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
                 startActivity(intent);
                 break;
@@ -440,7 +442,9 @@ public class LoginActivity extends AppCompatActivity {
                 login_via_username();
                 break;
             case R.id.btn_login_layout:
-                login_using_mobile(Objects.requireNonNull(input_mobile.getText()).toString().trim());
+                if (progress_bar != null && progress_bar.getVisibility() != View.VISIBLE) {
+                    login_using_mobile(Objects.requireNonNull(input_mobile.getText()).toString().trim());
+                }
                 break;
             case R.id.btn_login_username_layout:
                 hideKey();
@@ -501,11 +505,11 @@ public class LoginActivity extends AppCompatActivity {
             String latestVersion = null;
 
             try {
-                if (progress_bar!=null) {
+                if (progress_bar != null) {
                     Document doc = Jsoup.connect("https://play.google.com/store/apps/details?id=com.spectra.consumer&hl=en").get();
                     latestVersion = doc.getElementsContainingOwnText("Current Version").parents().first().getAllElements().last().text();
                     return latestVersion;
-                }else {
+                } else {
                     return latestVersion;
                 }
             } catch (Exception e) {
@@ -516,34 +520,32 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String onlineVersion) {
             super.onPostExecute(onlineVersion);
-            if (progress_bar!=null&&onlineVersion != null && !onlineVersion.isEmpty()) {
-                if (compareVersion(BuildConfig.VERSION_NAME, onlineVersion)<0){
-                    onUpdateNeeded(onlineVersion,"market://details?id=" + BuildConfig.APPLICATION_ID);
+            if (progress_bar != null && onlineVersion != null && !onlineVersion.isEmpty()) {
+                if (compareVersion(BuildConfig.VERSION_NAME, onlineVersion) < 0) {
+                    onUpdateNeeded(onlineVersion, "market://details?id=" + BuildConfig.APPLICATION_ID);
                 }
             }
         }
     }
+
     public int compareVersion(String version1, String version2) {
         String[] arr1 = version1.split("\\.");
         String[] arr2 = version2.split("\\.");
 
-        int i=0;
-        while(i<arr1.length || i<arr2.length){
-            if(i<arr1.length && i<arr2.length){
-                if(Integer.parseInt(arr1[i]) < Integer.parseInt(arr2[i])){
+        int i = 0;
+        while (i < arr1.length || i < arr2.length) {
+            if (i < arr1.length && i < arr2.length) {
+                if (Integer.parseInt(arr1[i]) < Integer.parseInt(arr2[i])) {
                     return -1;
-                }else if(Integer.parseInt(arr1[i]) > Integer.parseInt(arr2[i])){
+                } else if (Integer.parseInt(arr1[i]) > Integer.parseInt(arr2[i])) {
                     return 1;
                 }
-            }
-            else
-            if(i<arr1.length){
-                if(Integer.parseInt(arr1[i]) != 0){
+            } else if (i < arr1.length) {
+                if (Integer.parseInt(arr1[i]) != 0) {
                     return 1;
                 }
-            }
-            else {
-                if(Integer.parseInt(arr2[i]) != 0){
+            } else {
+                if (Integer.parseInt(arr2[i]) != 0) {
                     return -1;
                 }
             }
@@ -553,10 +555,11 @@ public class LoginActivity extends AppCompatActivity {
 
         return 0;
     }
-    public void onUpdateNeeded(final String onlineVersion,final String updateUrl) {
+
+    public void onUpdateNeeded(final String onlineVersion, final String updateUrl) {
         dialog = new AlertDialog.Builder(this)
                 .setTitle("New Version Alert").setCancelable(false)
-                .setMessage("A new version of My Spectra App is available. Update to version "+onlineVersion+", now!")
+                .setMessage("A new version of My Spectra App is available. Update to version " + onlineVersion + ", now!")
                 .setPositiveButton("Update",
                         (dialog1, which) -> redirectStore(updateUrl)).create();
         dialog.setOnShowListener(arg0 -> {
@@ -569,7 +572,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if(dialog!=null){
+        if (dialog != null) {
             dialog.cancel();
         }
     }
@@ -583,16 +586,57 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(dialog!=null){
+        if (dialog != null) {
             dialog.cancel();
         }
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        if(dialog!=null){
+        if (dialog != null) {
             dialog.cancel();
         }
+        if (pressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+            finish();
+        } else {
+            Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+        }
+        pressedTime = System.currentTimeMillis();
     }
+
+
+    private void getUpdateToken() {
+
+        if (TextUtils.isEmpty(TOKEN) || canIDS1 == null || canIDS1.size() == 0) {
+            return;
+        }
+        if (Constant.isInternetConnected(this)) {
+            UpdateTokenRequest updateTokenRequest = new UpdateTokenRequest();
+            updateTokenRequest.setAuthkey(BuildConfig.AUTH_KEY);
+            updateTokenRequest.setAction(DEVICE_SIGN_OUT);
+            updateTokenRequest.setDeviceData(setDeviceData());
+            PlanAndTopupViewModel spectraViewModel = ViewModelProviders.of(this).get(PlanAndTopupViewModel.class);
+            spectraViewModel.getDeviceSignOut(updateTokenRequest).observe(LoginActivity.this, LoginActivity.this::consumeResponse);
+        }
+    }
+
+    public DeviceData setDeviceData() {
+        DeviceData deviceData = new DeviceData();
+        ArrayList<String> token = new ArrayList<>();
+        ArrayList<String> device = new ArrayList<>();
+        for (String s : canIDS1) {
+            token.add(TOKEN);
+            device.add("Android");
+        }
+        deviceData.setCanIds(canIDS1);
+        deviceData.setDeviceToken(token);
+        deviceData.setDeviceType(device);
+        CurrentUserData userData = DroidPrefs.get(this, CurrentuserKey, CurrentUserData.class);
+        userData.linkedIDs = "";
+        userData.linkedIDsList = new ArrayList<>();
+        DroidPrefs.apply(this, CurrentuserKey, userData);
+        return deviceData;
+    }
+
 }

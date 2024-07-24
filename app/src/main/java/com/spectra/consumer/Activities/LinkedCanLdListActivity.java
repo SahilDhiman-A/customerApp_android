@@ -63,6 +63,9 @@ import butterknife.OnClick;
 
 import static com.spectra.consumer.Utils.Constant.BASE_CAN;
 import static com.spectra.consumer.Utils.Constant.CurrentuserKey;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_ACCOUNT;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_CHANGE_PLANE;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_INVOICE;
 import static com.spectra.consumer.Utils.Constant.STATUS_SUCCESS;
 import static com.spectra.consumer.Utils.Constant.USER_DB;
 import static com.spectra.consumer.service.repository.ApiConstant.GET_LINK_ACCOUNT;
@@ -234,7 +237,6 @@ public class LinkedCanLdListActivity extends AppCompatActivity {
             removeLinkAccountRequest.setCanID(can_id.baseCanID);
         }
         spectraViewModel.removeLinkAccountRequest(removeLinkAccountRequest).observe(LinkedCanLdListActivity.this, LinkedCanLdListActivity.this::consumeResponse);
-
     }
 
     @OnClick({R.id.img_back, R.id.txt_share})
@@ -252,7 +254,6 @@ public class LinkedCanLdListActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         if (isChange) {
             Intent intent = new Intent(context, MyAccountActivity.class);
             startActivity(intent);
@@ -285,11 +286,11 @@ public class LinkedCanLdListActivity extends AppCompatActivity {
                 inflater.inflate(R.menu.unlink_popup, popupMenu.getMenu());
             }
         }
-
         popupMenu.show();
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.link:
+//                    SpectraApplication.getInstance().postEvent(CATEGORY_ACCOUNT,"change_account","change_account", can_id.baseCanID);
                     CurrentUserData Data = DroidPrefs.get(context, CurrentuserKey, CurrentUserData.class);
                     CAN_ID can_id = DroidPrefs.get(LinkedCanLdListActivity.this, BASE_CAN, CAN_ID.class);
                     Data.CANId = canResponseArrayListMain.get(pos).getLink_canid();
@@ -327,12 +328,4 @@ public class LinkedCanLdListActivity extends AppCompatActivity {
         });
         Objects.requireNonNull(dial.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
-
 }
-
-
-
-
-
-
-

@@ -3,6 +3,7 @@ package com.spectra.consumer.Models;
 import com.spectra.consumer.service.model.Response.IvrNotificationResponse;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CurrentUserData implements Serializable {
@@ -27,5 +28,10 @@ public class CurrentUserData implements Serializable {
     public String DataConsumption;
     public String Email;
     public String Number;
+    public String FUPResetDate;
     public  List<IvrNotificationResponse> ivrNotification ;
+    public String linkedIDs ;
+    public ArrayList<String> linkedIDsList ;
+    public String TOKEN ;
+    public boolean isNot ;
 }

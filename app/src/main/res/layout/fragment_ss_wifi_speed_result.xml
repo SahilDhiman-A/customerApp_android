@@ -251,27 +251,26 @@
                             android:orientation="horizontal"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:layout_centerHorizontal="true"
-                            >
+                            android:layout_centerHorizontal="true">
 
                             <RelativeLayout
                                 android:layout_width="@dimen/_50sdp"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
+
                                 <EditText
-                                    android:id="@+id/ed_mbps"
-                                    android:layout_width="@dimen/_50sdp"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/transparent"
-                                    android:inputType="number"
-                                    android:layout_marginBottom="2dp"
-                                    android:textColor="@color/timer_color"
-                                    android:gravity="center"
-                                    android:imeOptions="actionDone"
-                                    android:maxLines="1"
-                                    android:maxLength="3"
-                                    android:digits="0123456789"
-                                    />
+                                  android:id="@+id/ed_mbps"
+                                  android:layout_width="@dimen/_50sdp"
+                                  android:layout_height="match_parent"
+                                  android:layout_marginBottom="2dp"
+                                  android:background="@color/transparent"
+                                  android:digits="0123456789"
+                                  android:gravity="center"
+                                  android:imeOptions="actionDone"
+                                  android:inputType="number"
+                                  android:maxLength="3"
+                                  android:maxLines="1"
+                                  android:textColor="@color/timer_color" />
 
                                 <View
                                     android:layout_width="@dimen/_50sdp"
@@ -288,6 +287,36 @@
                                 android:textColor="@color/black"
                                 android:text="Mbps"
                                 android:layout_gravity="center_horizontal"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center"
+                          android:layout_marginTop="@dimen/_10sdp"
+                          android:orientation="vertical">
+
+                            <TextView
+                              android:layout_width="@dimen/_150sdp"
+                              android:layout_height="match_parent"
+                              android:layout_gravity="center_horizontal"
+                              android:gravity="center"
+                              android:text="Best time to contact:"
+                              android:textColor="@color/black"
+                              android:textSize="@dimen/sub_header_text" />
+
+                            <EditText
+                              android:id="@+id/et_remark"
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/_60sdp"
+                              android:gravity="top|left"
+                              android:padding="@dimen/_10sdp"
+                              android:background="@drawable/remark_background"
+                              android:layout_marginStart="@dimen/_10sdp"
+                              android:layout_marginEnd="@dimen/_10sdp"
+                              android:maxLength="250" />
+
                         </LinearLayout>
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -299,7 +328,7 @@
                             android:drawableEnd="@drawable/ic_arrow_white"
                             android:textSize="@dimen/btn_text"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
                             android:visibility="visible"
                             android:layout_marginBottom="@dimen/_10sdp"
                             android:textColor="@color/white"

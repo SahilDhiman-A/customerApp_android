@@ -7,7 +7,9 @@
     <color name="white">#FFFFFF</color>
     <color name="login_txt">#3D3D3D</color>
     <color name="txt_mobile_number">#663D3D3D</color>
+    <color name="white1">#66FFFFFF</color>
     <color name="txt_forgot">#3D3D3D</color>
+    <color name="transparent_black">#72000000</color>
     <color name="resend_txt_color">#F36F69</color>
     <color name="shadow_color">#7F7F7F</color>
     <color name="tab_color">#6D7278</color>
@@ -17,9 +19,11 @@
     <color name="cancel_background_color">#F68D6E</color>
     <color name="color_text_gary">#787878</color>
     <color name="color_view_gary">#3D3D3D</color>
+    <color name="notbg1">#000029</color>
+    <color name="notbg2">#F36F69</color>
 
     <color name="black">#000000</color>
-    <color name="black_transparent">#80000000</color>
+    <color name="black_transparent">#CC000000</color>
     <color name="color_text_grey">#3D3D3D</color>
     <color name="speedometer_red">#EC2324</color>
     <color name="speedometer_yellow">#FCB040</color>
@@ -29,4 +33,13 @@
     <color name="black_overlay">#66000000</color>
 
     <color name="band_color">#0084DD</color>
+
+    <color name="color_band_grey">#803D3D3D</color>
+    <color name="notGray">#A9A9A9</color>
+
+    <color name="com_current_plan">#59F36F69</color>
+    <color name="bitter_sweet">#F36F69</color>
+    <color name="blue">#3F51B5</color>
+    <color name="sparator">#dbdbdb</color>
+    <color name="search_text_color">#020202</color>
 </resources>

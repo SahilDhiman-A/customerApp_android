@@ -49,16 +49,18 @@ android:orientation="vertical">
     </LinearLayout>
 
 
-
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivMore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="@dimen/_10sdp"
-        android:backgroundTint="@color/white"
-        android:src="@drawable/ic_more"
-        android:tint="@color/white" />
+      android:id="@+id/ivMore"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_marginStart="@dimen/_10sdp"
+      android:layout_marginTop="@dimen/_10sdp"
+      android:layout_marginEnd="@dimen/_10sdp"
+      android:layout_marginBottom="@dimen/_10sdp"
+      android:backgroundTint="@color/white"
+      android:src="@drawable/ic_more"
+      android:tint="@color/white" />
 </RelativeLayout>
 
 <View

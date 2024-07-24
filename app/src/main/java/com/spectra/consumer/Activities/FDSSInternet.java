@@ -1,5 +1,14 @@
 package com.spectra.consumer.Activities;
 
+import static com.spectra.consumer.Utils.Constant.CurrentuserKey;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_SERVICE;
+import static com.spectra.consumer.Utils.Constant.STATUS_SUCCESS;
+import static com.spectra.consumer.service.repository.ApiConstant.CHECK_SR;
+import static com.spectra.consumer.service.repository.ApiConstant.CREATE_SR;
+import static com.spectra.consumer.service.repository.ApiConstant.GET_SR_STATUS;
+import static com.spectra.consumer.service.repository.ApiConstant.NO_FDSS_INTERNET;
+import static com.spectra.consumer.service.repository.ApiConstant.NO_INTERNET;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,16 +16,20 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.github.anastr.speedviewlib.SpeedView;
 import com.github.anastr.speedviewlib.components.Section;
 import com.spectra.consumer.BuildConfig;
@@ -33,6 +46,7 @@ import com.spectra.consumer.service.model.Request.PostFDSSFluctuatingLightReques
 import com.spectra.consumer.service.model.Request.PostFUPFlagRequest;
 import com.spectra.consumer.service.model.Request.PostInternetWorkingFDSS;
 import com.spectra.consumer.service.model.Request.PostMRTGRequest;
+import com.spectra.consumer.service.model.Response.CreateSrResponse;
 import com.spectra.consumer.service.model.Response.GetSrStatusResponse;
 import com.spectra.consumer.service.model.Response.InternetNotWorkModelDTO;
 import com.spectra.consumer.service.model.Response.InvoiceDTO;
@@ -40,22 +54,19 @@ import com.spectra.consumer.service.model.Response.ResponseDTO;
 import com.spectra.consumer.service.model.Response.SrReponse;
 import com.spectra.consumer.viewModel.FDSSViewModel;
 import com.spectra.consumer.viewModel.SpectraViewModel;
+
+import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import static com.spectra.consumer.Utils.Constant.CurrentuserKey;
-import static com.spectra.consumer.Utils.Constant.STATUS_SUCCESS;
-import static com.spectra.consumer.service.repository.ApiConstant.CHECK_SR;
-import static com.spectra.consumer.service.repository.ApiConstant.CREATE_SR;
-import static com.spectra.consumer.service.repository.ApiConstant.GET_SR_STATUS;
-import static com.spectra.consumer.service.repository.ApiConstant.NO_FDSS_INTERNET;
-import static com.spectra.consumer.service.repository.ApiConstant.NO_INTERNET;
 
 public class FDSSInternet extends AppCompatActivity {
+    public static final String TAG="FDSSInternet";
 
     @BindView(R.id.img_back)
     AppCompatImageView img_back;
@@ -256,7 +267,7 @@ public class FDSSInternet extends AppCompatActivity {
 
         findViewById(R.id.img_back).setVisibility(View.GONE);
         userData = DroidPrefs.get(this, CurrentuserKey, CurrentUserData.class);
-        canId = userData.CANId;//"167238";//"";
+        canId = userData.CANId;
 //        CAN ID	Type
 //        9056012	OpenSR Done
 //        188705	FUPActive Done
@@ -345,6 +356,7 @@ public class FDSSInternet extends AppCompatActivity {
 
     public void getIssue() {
         if (Constant.isInternetConnected(this)) {
+            Log.d(TAG, "getIssue: "+url);
             fdssViewModel.getFDSSNoInternet(url, NO_FDSS_INTERNET).observe(FDSSInternet.this, FDSSInternet.this::consumeResponse2);
         }
     }
@@ -415,10 +427,24 @@ public class FDSSInternet extends AppCompatActivity {
                     break;
 
                 case CREATE_SR:
+                    try {
+                        CreateSrResponse createSrResponse = (CreateSrResponse) response;
+                        if (createSrResponse.getStatus().equalsIgnoreCase(STATUS_SUCCESS)) {
+                            String sr_no = createSrResponse.getResponse();
+                            SpectraApplication.getInstance().addKey("sr_number", createSrResponse.getResponse());
+                            SpectraApplication.getInstance().addKey("request_type", "");
+                            SpectraApplication.getInstance().addKey("descreption", "");
+                            SpectraApplication.getInstance().postEvent(CATEGORY_SERVICE, "raise_new_service_request_Submit", "raise_new_service_request_Submit", canId);
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
                     goToHome();
                     break;
 
                 case NO_FDSS_INTERNET:
+                    Log.d(TAG, "renderSuccessResponse: ");
                     InternetNotWorkModelDTO responseDTO = (InternetNotWorkModelDTO) response;
                     if (responseDTO.getStatus().equalsIgnoreCase(STATUS_SUCCESS)) {
                         pStatus = 100;
@@ -431,6 +457,7 @@ public class FDSSInternet extends AppCompatActivity {
 //                        response1.setProblemType("IssueNotResolved");
 //                        response1.setSrNo("SR20092529688");
 //                        response1.setEtr("01/01/1970 05:30 AM");
+
                         int problumCode = Integer.parseInt(response1.getMessageCode());
                         if (problumCode > 299) {
                             backToHome(response1.getMessageDescription());
@@ -634,7 +661,7 @@ public class FDSSInternet extends AppCompatActivity {
                                             apiIsInternetWorking("No");
                                     });
                                     fdss_layout.setVisibility(View.VISIBLE);
-                                    text = "ONT not plugged in properly. Replug the white ONT box and reboot Wifi Router/Switch and wait for a minute.";
+                                    text = "ONT not plugged in properly. Replug the white ONT box and reboot Wifi Router/Switch and wait for 2 minutes.";
                                     tvSelectOptTitle.setText(Html.fromHtml(text));
                                     timerWork(text, problumCode);
                                     break;
@@ -743,8 +770,8 @@ public class FDSSInternet extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void timerWork(final String text2, int code) {
-        long time = 60000;
-        //long time = 60;
+        long time = 60000 * 2;
+        //long time = 120;
         tvYes.setVisibility(View.GONE);
         tvNo.setVisibility(View.GONE);
         tvYes.setText("YES");
@@ -803,7 +830,8 @@ public class FDSSInternet extends AppCompatActivity {
         new CountDownTimer(time, 1000) {
             public void onTick(long millisUntilFinished) {
                 long seconds = millisUntilFinished / 1000;
-                String text = text2 + "<br><h1><font color='#F67A71'>" + secondCounter(seconds) + "</font></h1>";
+                @SuppressLint("DefaultLocale") String text1 = MessageFormat.format("{0}:{1}", String.format("%02d", seconds / 60), String.format("%02d", seconds % 60));
+                String text = text2 + "<br><h1><font color='#F67A71'>" + text1 + "</font></h1>";
                 if(code==247) {
                     tvSelectOptTitle.setText(Html.fromHtml(text));
                 }else if(code ==251){
@@ -931,9 +959,6 @@ public class FDSSInternet extends AppCompatActivity {
             txtDescription.setText(srReponse.getMessageTemplate());
         }
     }
-
-
-
 
     public void createSr() {
         llSr.setVisibility(View.VISIBLE);
@@ -1081,6 +1106,7 @@ public class FDSSInternet extends AppCompatActivity {
 
 
     public void fuPNoAPI(String value) {
+        Log.d(TAG, "fuPNoAPI: ");
         if (Constant.isInternetConnected(this)) {
             PostFUPFlagRequest postFUPFlagRequest = new PostFUPFlagRequest();
             postFUPFlagRequest.setGetTopup(value);
@@ -1089,6 +1115,7 @@ public class FDSSInternet extends AppCompatActivity {
     }
 
     public void apiHitForMRTG(String value) {
+        Log.d(TAG, "apiHitForMRTG: ");
         if (Constant.isInternetConnected(this)) {
             PostMRTGRequest postMRTGRequest = new PostMRTGRequest();
             postMRTGRequest.setIsUpgradeBandwidth(value);
@@ -1097,6 +1124,7 @@ public class FDSSInternet extends AppCompatActivity {
     }
 
     public void apiIsInternetWorking(String value) {
+        Log.d(TAG, "apiIsInternetWorking: ");
         if (Constant.isInternetConnected(this)) {
             PostInternetWorkingFDSS postInternetWorkingFDSS = new PostInternetWorkingFDSS();
             postInternetWorkingFDSS.setIsInternetWorking(value);
@@ -1105,6 +1133,7 @@ public class FDSSInternet extends AppCompatActivity {
     }
 
     public void apiFluctuatingLight(String value) {
+        Log.d(TAG, "apiFluctuatingLight: ");
         if (Constant.isInternetConnected(this)) {
             PostFDSSFluctuatingLightRequest postInternetWorkingFDSS = new PostFDSSFluctuatingLightRequest();
             postInternetWorkingFDSS.setFluctuatingLight(value);
@@ -1113,6 +1142,7 @@ public class FDSSInternet extends AppCompatActivity {
     }
 
     public void apiFacingIssue(String value) {
+        Log.d(TAG, "apiFacingIssue: ");
         if (Constant.isInternetConnected(this)) {
             PostFDSSFacingIssueRequest postFDSSFacingIssueRequest = new PostFDSSFacingIssueRequest();
             postFDSSFacingIssueRequest.setFacingIssue(value);

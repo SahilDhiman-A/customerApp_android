@@ -60,8 +60,6 @@ public class SelectCanIdActivity extends AppCompatActivity {
                 Intent intent=new Intent(SelectCanIdActivity.this,HomeActivity.class);
                 startActivity(intent);
                 finish();
-
-
             }
         });
         view_can_ids.setAdapter(adapter);

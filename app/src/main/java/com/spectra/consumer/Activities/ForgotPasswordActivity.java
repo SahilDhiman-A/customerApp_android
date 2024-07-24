@@ -27,6 +27,8 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_LOGIN;
 import static com.spectra.consumer.Utils.Constant.STATUS_SUCCESS;
 import static com.spectra.consumer.service.repository.ApiConstant.FORGOT_PASSWORD;
 
@@ -64,7 +66,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         can_selected();
         spectraViewModel = ViewModelProviders.of(this).get(SpectraViewModel.class);
-
     }
     public void can_selected(){
         txt_can.setTextColor(getResources().getColor(R.color.back_color));
@@ -103,7 +104,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             else{
                 Constant.MakeToastMessage(ForgotPasswordActivity.this,forgotPasswordResponse.getMessage());
             }
-
         }
     }
     private void showLoadingView(boolean visible) {
@@ -114,7 +114,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         }
     }
     public void submit_details(){
-
         if(!checkValidation()){
             return;
         }

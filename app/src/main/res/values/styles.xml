@@ -9,19 +9,28 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowContentTransitions" tools:targetApi="lollipop">true</item>
-        <item name="android:windowEnterTransition" tools:targetApi="lollipop">@transition/explode</item>
-        <item name="android:windowExitTransition" tools:targetApi="lollipop">@transition/explode</item>
-        <item name="android:datePickerDialogTheme" tools:targetApi="lollipop">@style/MyDatePickerDialogTheme</item>
+        <item name="android:windowEnterTransition" tools:targetApi="lollipop">@transition/explode
+        </item>
+        <item name="android:windowExitTransition" tools:targetApi="lollipop">@transition/explode
+        </item>
+        <item name="android:datePickerDialogTheme" tools:targetApi="lollipop">
+            @style/MyDatePickerDialogTheme
+        </item>
     </style>
+
     <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog" tools:targetApi="lollipop">
         <item name="android:headerBackground">@color/back_color</item>
         <item name="colorAccent">@color/back_color</item>
     </style>
+
     <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker" tools:targetApi="lollipop">
         <item name="android:headerBackground">@color/back_color</item>
         <item name="colorAccent">@color/back_color</item>
     </style>
+
     <style name="errorAppearance" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/error_color</item>
     </style>
+
+
 </resources>

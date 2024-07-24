@@ -1,6 +1,19 @@
 package com.spectra.consumer.Activities;
 
 
+import static com.spectra.consumer.Utils.Constant.BASE_CAN;
+import static com.spectra.consumer.Utils.Constant.CurrentuserKey;
+import static com.spectra.consumer.Utils.Constant.EMAIL;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_ACCOUNT;
+import static com.spectra.consumer.Utils.Constant.GSTN;
+import static com.spectra.consumer.Utils.Constant.MOBILE;
+import static com.spectra.consumer.Utils.Constant.SEGMENT_HOME;
+import static com.spectra.consumer.Utils.Constant.STATUS_SUCCESS;
+import static com.spectra.consumer.Utils.Constant.TAN;
+import static com.spectra.consumer.Utils.Constant.USER_NAME;
+import static com.spectra.consumer.service.repository.ApiConstant.GET_PROFILE;
+import static com.spectra.consumer.service.repository.ApiConstant.RESET_PASSWORD;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -33,11 +46,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.spectra.consumer.Adapters.SelectCanLinkedAdapter;
 import com.spectra.consumer.BuildConfig;
 import com.spectra.consumer.Models.CurrentUserData;
 import com.spectra.consumer.Models.UserData;
@@ -47,25 +58,17 @@ import com.spectra.consumer.Utils.Constant;
 import com.spectra.consumer.Utils.DroidPrefs;
 import com.spectra.consumer.service.model.ApiResponse;
 import com.spectra.consumer.service.model.CAN_ID;
-import com.spectra.consumer.service.model.Request.AddContactRequest;
-import com.spectra.consumer.service.model.Request.GetLinkAccountRequest;
 import com.spectra.consumer.service.model.Request.GetProfileRequest;
 import com.spectra.consumer.service.model.Request.RestPasswordRequest;
+import com.spectra.consumer.service.model.Response.AccountManagerResponse;
 import com.spectra.consumer.service.model.Response.BaseResponse;
 import com.spectra.consumer.service.model.Response.BillToResponse;
-import com.spectra.consumer.service.model.Response.CanResponse;
-import com.spectra.consumer.service.model.Response.Contact;
-import com.spectra.consumer.service.model.Response.GetLinkAccountResponse;
 import com.spectra.consumer.service.model.Response.GetprofileResponse;
-import com.spectra.consumer.service.model.Response.LoginMobileResponse;
 import com.spectra.consumer.service.model.Response.ProfileResponse;
 import com.spectra.consumer.service.model.Response.ShipToResponse;
 import com.spectra.consumer.viewModel.SpectraViewModel;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
@@ -74,22 +77,6 @@ import java.util.regex.Pattern;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.hdodenhof.circleimageview.CircleImageView;
-
-import static com.spectra.consumer.Utils.Constant.BASE_CAN;
-import static com.spectra.consumer.Utils.Constant.CurrentuserKey;
-import static com.spectra.consumer.Utils.Constant.EMAIL;
-import static com.spectra.consumer.Utils.Constant.GSTN;
-import static com.spectra.consumer.Utils.Constant.MOBILE;
-import static com.spectra.consumer.Utils.Constant.SEGMENT_HOME;
-import static com.spectra.consumer.Utils.Constant.STATUS_SUCCESS;
-import static com.spectra.consumer.Utils.Constant.TAN;
-import static com.spectra.consumer.Utils.Constant.USER_IMAGE;
-import static com.spectra.consumer.Utils.Constant.USER_NAME;
-import static com.spectra.consumer.Utils.Constant.hasPermissions;
-import static com.spectra.consumer.service.repository.ApiConstant.GET_LINK_ACCOUNT;
-import static com.spectra.consumer.service.repository.ApiConstant.GET_PROFILE;
-import static com.spectra.consumer.service.repository.ApiConstant.RESET_PASSWORD;
 
 public class MyAccountActivity extends AppCompatActivity {
     private static final int PIC_CROP = 3;
@@ -98,25 +85,22 @@ public class MyAccountActivity extends AppCompatActivity {
     TextView txt_user_name;
     @BindView(R.id.layoutCv2)
     CardView layoutCv2;
-
     @BindView(R.id.view_can_select)
     AppCompatTextView view_can_select;
     @BindView(R.id.txt_mobile_number)
     TextView txt_mobile_number;
     @BindView(R.id.tvAddNew)
     TextView tvAddNew;
-    @BindView(R.id.tvManegeContact)
-    TextView tvManegeContact;
+//    @BindView(R.id.tvManegeContact)
+//    TextView tvManegeContact;
     @BindView(R.id.tvResetPassword)
     TextView tvResetPassword;
     @BindView(R.id.tvDeleteAccount)
     TextView tvDeleteAccount;
-
     @BindView(R.id.txt_edit_profile)
     TextView txt_edit_profile;
-    @BindView(R.id.tvChangeProfilePic)
-    TextView tvChangeProfilePic;
-
+//    @BindView(R.id.tvChangeProfilePic)
+//    TextView tvChangeProfilePic;
     @BindView(R.id.txt_email_id)
     TextView txt_email_id;
     @BindView(R.id.txt_installation_add)
@@ -139,8 +123,8 @@ public class MyAccountActivity extends AppCompatActivity {
     TextView txt_can;
     boolean gallery_denied = false;
     Bitmap mImageBitmap;
-    @BindView(R.id.user_image)
-    CircleImageView user_image;
+//    @BindView(R.id.user_image)
+//    CircleImageView user_image;
     Uri file_upload;
     @BindView(R.id.txt_email)
     TextView txt_email;
@@ -154,14 +138,16 @@ public class MyAccountActivity extends AppCompatActivity {
     TextView txt_technical_contact;
     @BindView(R.id.txt_head)
     TextView txt_head;
-
-
+    @BindView(R.id.account_manager_name)
+    TextView account_manager_name;
+    @BindView(R.id.account_manager_email)
+    TextView account_manager_email;
+    @BindView(R.id.account_manager_phone)
+    TextView account_manager_phone;
     @BindView(R.id.tvGST)
     TextView tvGST;
-
     @BindView(R.id.tvLinkedCanID)
     TextView tvLinkedCanID;
-
     @BindView(R.id.tvTAN)
     TextView tvTAN;
     @BindView(R.id.rlTAN)
@@ -184,14 +170,28 @@ public class MyAccountActivity extends AppCompatActivity {
         PERMISSIONS = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         txt_head.setText(getString(R.string.my_account));
         can_id = DroidPrefs.get(this, BASE_CAN, CAN_ID.class);
-
-
         spectraViewModel = ViewModelProviders.of(this).get(SpectraViewModel.class);
         userData = DroidPrefs.get(this, CurrentuserKey, CurrentUserData.class);
         context = MyAccountActivity.this;
         get_Profile();
+        navigateAccordingSearch(getIntent());
+    }
 
-
+    private void navigateAccordingSearch(Intent intent) {
+        if (intent != null && intent.hasExtra(Constant.KEY)) {
+            String Key = intent.getStringExtra(Constant.KEY);
+            switch (Key != null ? Key : null) {
+                case Constant.CHANGE_PASSWORD:
+                    tvResetPassword.performClick();
+                    break;
+//                case Constant.UPDATE_ACCOUNT:
+//                    tvManegeContact.performClick();
+//                    break;
+                case Constant.LINK_MULTIPLE_ACCOUNT:
+                    tvAddNew.performClick();
+                    break;
+            }
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -203,26 +203,25 @@ public class MyAccountActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void get_Profile() {
-        userDataDB = DroidPrefs.get(this, USER_IMAGE, UserImage.class);
+//        userDataDB = DroidPrefs.get(this, USER_IMAGE, UserImage.class);
         tvAddNew.setText("Add new");
         if (TextUtils.isEmpty(can_id.Linked)) {
             tvLinkedCanID.setVisibility(View.GONE);
-            can_id.Linked=can_id.baseCanID;
+            can_id.Linked = can_id.baseCanID;
             DroidPrefs.apply(MyAccountActivity.this, BASE_CAN, can_id);
             can_id = DroidPrefs.get(this, BASE_CAN, CAN_ID.class);
         }
         view_can_select.setText(MessageFormat.format("{0} {1}", getString(R.string.can_), can_id.Linked));
         if (Constant.isInternetConnected(this)) {
-            String image = userDataDB.getResponseHashMap().get((userData.CANId));
-            if (image == null || image.isEmpty()) {
-                findViewById(R.id.imageHolder).setVisibility(View.VISIBLE);
-                tvChangeProfilePic.setText(R.string.uploadProfilePicture);
-            } else {
-                user_image.setImageBitmap(Constant.convert(image));
-                tvChangeProfilePic.setText(R.string.changeProfilePicture);
-                findViewById(R.id.imageHolder).setVisibility(View.GONE);
-            }
-
+//            String image = userDataDB.getResponseHashMap().get((userData.CANId));
+//            if (image == null || image.isEmpty()) {
+//                findViewById(R.id.imageHolder).setVisibility(View.VISIBLE);
+//                tvChangeProfilePic.setText(R.string.uploadProfilePicture);
+//            } else {
+//                user_image.setImageBitmap(Constant.convert(image));
+//                tvChangeProfilePic.setText(R.string.changeProfilePicture);
+//                findViewById(R.id.imageHolder).setVisibility(View.GONE);
+//            }
 
             GetProfileRequest getProfileRequest = new GetProfileRequest();
             getProfileRequest.setAuthkey(BuildConfig.AUTH_KEY);
@@ -256,14 +255,13 @@ public class MyAccountActivity extends AppCompatActivity {
 
     private void renderSuccessResponse(Object response, String code) {
         if (response != null) {
-
             switch (code) {
-
                 case RESET_PASSWORD:
                     BaseResponse baseResponse = (BaseResponse) response;
                     if (baseResponse.getStatus().equals(STATUS_SUCCESS)) {
                         rlResetPassword.setVisibility(View.GONE);
                         llLogin.setVisibility(View.VISIBLE);
+                        SpectraApplication.getInstance().postEvent(CATEGORY_ACCOUNT, "reset_password_success", "reset_password_success",can_id.baseCanID);
                     } else {
                         Constant.MakeToastMessage(MyAccountActivity.this, baseResponse.getMessage());
                     }
@@ -271,6 +269,7 @@ public class MyAccountActivity extends AppCompatActivity {
 
                 case GET_PROFILE:
                     GetprofileResponse getprofileResponse = (GetprofileResponse) response;
+                    Log.d("Nik Response", getprofileResponse.getResponse().toString());
                     if (getprofileResponse.getStatus().equalsIgnoreCase(STATUS_SUCCESS)) {
                         ProfileResponse profileResponse = getprofileResponse.getResponse();
                         ShipToResponse shipToResponse = profileResponse.getShipTo();
@@ -284,12 +283,27 @@ public class MyAccountActivity extends AppCompatActivity {
                             layout_b2B.setVisibility(View.GONE);
                             rlTAN.setVisibility(View.GONE);
                             layoutCv2.setVisibility(View.VISIBLE);
-                            tvManegeContact.setVisibility(View.VISIBLE);
+//                            tvManegeContact.setVisibility(View.VISIBLE);
                             tvResetPassword.setVisibility(View.VISIBLE);
                             tvDeleteAccount.setVisibility(View.GONE);
                             txt_edit_profile.setVisibility(View.VISIBLE);
-                            tvChangeProfilePic.setVisibility(View.VISIBLE);
+//                            tvChangeProfilePic.setVisibility(View.VISIBLE);
 
+                            //Niks- Modified
+                            BillToResponse billToResponse = profileResponse.getBillTo();
+                            if (billToResponse != null) {
+                                txt_company_name.setText(billToResponse.getName());
+                                txt_email.setText(email);
+                                txt_billing_address.setText(billToResponse.getAddress());
+                                txt_billing_contact.setText(billToResponse.getMobile());
+                            }
+                            //Nikhil -> Set Account Manager Info
+                            AccountManagerResponse accountManagerResponse = profileResponse.getAccountManagerResponse();
+                            if (accountManagerResponse != null){
+                                account_manager_name.setText(accountManagerResponse.getName());
+                                account_manager_email.setText(accountManagerResponse.getEmail());
+                                account_manager_phone.setText(accountManagerResponse.getMobile());
+                            }
 
                  /*   tvAddNew.setVisibility(View.GONE);
                     View positiveButton = findViewById(R.id.view_can_select);
@@ -306,20 +320,29 @@ public class MyAccountActivity extends AppCompatActivity {
                             tvGST.setText(profileResponse.getGSTN().toString());
                             tvTAN.setText(profileResponse.getTAN());
                             BillToResponse billToResponse = profileResponse.getBillTo();
+                            Log.d("Nik Response Bill", billToResponse.toString());
                             if (billToResponse != null) {
                                 txt_company_name.setText(billToResponse.getName());
                                 txt_email.setText(email);
                                 txt_billing_address.setText(billToResponse.getAddress());
                                 txt_billing_contact.setText(billToResponse.getMobile());
                             }
+                            //Nikhil -> Set Account Manager Info
+                            AccountManagerResponse accountManagerResponse = profileResponse.getAccountManagerResponse();
+                            Log.d("Nik Response AMR", accountManagerResponse.toString());
+                            if (accountManagerResponse != null){
+                                account_manager_name.setText(accountManagerResponse.getName());
+                                account_manager_email.setText(accountManagerResponse.getEmail());
+                                account_manager_phone.setText(accountManagerResponse.getMobile());
+                            }
                             rlTAN.setVisibility(View.VISIBLE);
                             account_b_2_c.setVisibility(View.GONE);
                             layout_b2B.setVisibility(View.VISIBLE);
                             //tvAddNew.setVisibility(View.GONE);
-                            tvManegeContact.setVisibility(View.VISIBLE);
+//                            tvManegeContact.setVisibility(View.VISIBLE);
                             tvResetPassword.setVisibility(View.VISIBLE);
                             tvDeleteAccount.setVisibility(View.GONE);
-                            tvChangeProfilePic.setVisibility(View.VISIBLE);
+//                            tvChangeProfilePic.setVisibility(View.VISIBLE);
                             txt_edit_profile.setVisibility(View.VISIBLE);
                             View positiveButton = findViewById(R.id.view_can_select);
                    /* RelativeLayout.LayoutParams layoutParams =
@@ -353,28 +376,35 @@ public class MyAccountActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick({R.id.img_back, R.id.view_can_select, R.id.user_image, R.id.txt_edit_profile, R.id.tvManegeContact, R.id.tvAddNew, R.id.tvDeleteAccount, R.id.tvResetPassword})
+    @OnClick({R.id.img_back,
+            R.id.view_can_select,
+//            R.id.user_image,
+            R.id.txt_edit_profile,
+//            R.id.tvManegeContact,
+            R.id.tvAddNew, R.id.tvDeleteAccount, R.id.tvResetPassword})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
                 onBackPressed();
                 break;
             case R.id.view_can_select:
+                SpectraApplication.getInstance().postEvent(CATEGORY_ACCOUNT, "change_account", "change_account",can_id.baseCanID);
                 Intent intent = new Intent(MyAccountActivity.this, LinkedCanLdListActivity.class);
                 startActivity(intent);
                 break;
             // TODO update user image
-            case R.id.user_image:
-                if (!hasPermissions(MyAccountActivity.this, PERMISSIONS)) {
-                    int PERMISSION_ALL = 1;
-                    ActivityCompat.requestPermissions(MyAccountActivity.this, PERMISSIONS, PERMISSION_ALL);
-                } else {
-                    Intent intent_gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(intent_gallery, 2);
-                }
-                break;
+//            case R.id.user_image:
+//                if (!hasPermissions(MyAccountActivity.this, PERMISSIONS)) {
+//                    int PERMISSION_ALL = 1;
+//                    ActivityCompat.requestPermissions(MyAccountActivity.this, PERMISSIONS, PERMISSION_ALL);
+//                } else {
+//                    Intent intent_gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                    startActivityForResult(intent_gallery, 2);
+//                }
+//                break;
             // TODO edit mobile and email functionality
             case R.id.txt_edit_profile:
+                SpectraApplication.getInstance().postEvent(CATEGORY_ACCOUNT, "edit_profile", "edit_profile_click",can_id.baseCanID);
                 Intent edit = new Intent(MyAccountActivity.this, EditProfileActivity.class);
                 if (userData.Segment.equalsIgnoreCase(SEGMENT_HOME)) {
                     edit.putExtra(USER_NAME, userData.AccountName);
@@ -399,10 +429,11 @@ public class MyAccountActivity extends AppCompatActivity {
             case R.id.tvResetPassword:
                 showRestPasswordDialogDialog();
                 break;
-            case R.id.tvManegeContact:
-                Intent intent1 = new Intent(MyAccountActivity.this, ContactListActivity.class);
-                startActivity(intent1);
-                break;
+//            case R.id.tvManegeContact:
+//                SpectraApplication.getInstance().postEvent(CATEGORY_ACCOUNT, "manage_contact", "manage_contact",can_id.baseCanID);
+//                Intent intent1 = new Intent(MyAccountActivity.this, ContactListActivity.class);
+//                startActivity(intent1);
+//                break;
 
 
         }
@@ -423,6 +454,7 @@ public class MyAccountActivity extends AppCompatActivity {
             Intent intent = new Intent(MyAccountActivity.this, CropforProfile.class);
             intent.putExtra("uri", Objects.requireNonNull(picUri).toString());
             intent.putExtra("type", "profile");
+            SpectraApplication.getInstance().postEvent(CATEGORY_ACCOUNT, "upload_profile_picture", "upload_profile_picture",can_id.baseCanID);
             startActivityForResult(intent, PIC_CROP);
         } else if (requestCode == PIC_CROP && resultCode == Activity.RESULT_OK) {
             if (data != null) {
@@ -442,9 +474,9 @@ public class MyAccountActivity extends AppCompatActivity {
                         userDataDB.getResponseHashMap().remove(userData.CANId);
                     }
                     userDataDB.getResponseHashMap().put(userData.CANId, Constant.getimage(mImageBitmap));
-                    DroidPrefs.apply(this, USER_IMAGE, userDataDB);
-                    user_image.setImageBitmap(mImageBitmap);
-                    findViewById(R.id.imageHolder).setVisibility(View.GONE);
+//                    DroidPrefs.apply(this, USER_IMAGE, userDataDB);
+//                    user_image.setImageBitmap(mImageBitmap);
+//                    findViewById(R.id.imageHolder).setVisibility(View.GONE);
                 }
             }
         }
@@ -490,6 +522,7 @@ public class MyAccountActivity extends AppCompatActivity {
 
 
     public void showRestPasswordDialogDialog() {
+        SpectraApplication.getInstance().postEvent(CATEGORY_ACCOUNT, "my_account_reset_password", "my_account_reset_password",can_id.baseCanID);
         AtomicBoolean checkValidation = new AtomicBoolean(false);
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         @SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.reset_password, null);
@@ -598,6 +631,8 @@ public class MyAccountActivity extends AppCompatActivity {
             logOut();
         });
         tvCancel.setOnClickListener(view -> {
+            SpectraApplication.getInstance().postEvent(CATEGORY_ACCOUNT, "reset_password_cancel", "reset_password_cancel",can_id.baseCanID);
+
             dial.dismiss();
             dial = null;
         });
@@ -661,11 +696,11 @@ public class MyAccountActivity extends AppCompatActivity {
 
 
     public void logOut() {
-        UserImage userImage = DroidPrefs.get(context, USER_IMAGE, UserImage.class);
+//        UserImage userImage = DroidPrefs.get(context, USER_IMAGE, UserImage.class);
         DroidPrefs droidPrefs = DroidPrefs.getDefaultInstance(context);
         droidPrefs.clear();
         UserData.DeleteUsersInfo();
-        DroidPrefs.apply(context, USER_IMAGE, userImage);
+//        DroidPrefs.apply(context, USER_IMAGE, userImage);
         Intent intent = new Intent(context, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 

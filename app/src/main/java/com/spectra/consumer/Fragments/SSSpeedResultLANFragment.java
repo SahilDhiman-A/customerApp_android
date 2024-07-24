@@ -12,10 +12,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-
 import com.spectra.consumer.Activities.SlowSpeedTroubleShootActivity;
 import com.spectra.consumer.R;
 import com.spectra.consumer.databinding.FragmentSsLanSpeedAndResultBinding;
+import com.spectra.consumer.viewModel.FDSSViewModel;
+import com.spectra.consumer.viewModel.SpectraViewModel;
+
+import java.text.MessageFormat;
 
 public class SSSpeedResultLANFragment extends Fragment {
 
@@ -26,6 +29,7 @@ public class SSSpeedResultLANFragment extends Fragment {
     private boolean imageInfo = false;
     private boolean enableOnContinue = false;
     private CountDownTimer countDownTimer;
+    FDSSViewModel fdssViewModel;
 
     public SSSpeedResultLANFragment() {
     }
@@ -88,11 +92,13 @@ public class SSSpeedResultLANFragment extends Fragment {
             }
         });
 
+        ////Nikhil -> send remark also
         binding.tvContinue.setOnClickListener(v -> {
             if(!imageInfo){
                 if(enableOnContinue){
                     if(getActivity()!=null && getActivity() instanceof SlowSpeedTroubleShootActivity){
-                        ((SlowSpeedTroubleShootActivity)getActivity()).apiTrobleShootForLAN(binding.edMbps.getText().toString());
+                        ((SlowSpeedTroubleShootActivity)getActivity()).apiTrobleShootForLAN(binding.edMbps.getText().toString(),
+                                binding.etRemark.getText().toString());
                     }
                 }
             }
@@ -100,12 +106,12 @@ public class SSSpeedResultLANFragment extends Fragment {
         return view;
     }
 
-
     @SuppressLint("SetTextI18n")
     private void timerWork() {
-        long time = 60000;
+        long time = 120000;
         //long time = 60;
-        String text = "01:00";
+        //Nikhil -> Changed time to 2Mins
+        String text = "02:00";
         binding.tvTimer.setText(text);
 
         if(countDownTimer!=null){
@@ -115,8 +121,8 @@ public class SSSpeedResultLANFragment extends Fragment {
         countDownTimer =  new CountDownTimer(time, 1000) {
             public void onTick(long millisUntilFinished) {
                 long seconds = millisUntilFinished / 1000;
-                String text =  secondCounter(seconds);
-                binding.tvTimer.setText(text);
+                @SuppressLint("DefaultLocale") String sec = MessageFormat.format("{0}:{1}", String.format("%02d", seconds / 60), String.format("%02d", seconds % 60));
+                binding.tvTimer.setText(sec);
             }
             public void onFinish() {
                 String text ="00:00";

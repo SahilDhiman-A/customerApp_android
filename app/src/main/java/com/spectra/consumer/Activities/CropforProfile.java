@@ -70,7 +70,8 @@ public class CropforProfile extends AppCompatActivity {
         Random random=new Random();
         int rand_name=random.nextInt();
         try {
-            String file_path = Environment.getExternalStorageDirectory().getAbsolutePath() +
+
+            String file_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) +
                     "/Spectra";
             File dir = new File(file_path);
             if (!dir.exists())

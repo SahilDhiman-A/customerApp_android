@@ -20,11 +20,11 @@
 
 
     <include
-        layout="@layout/my_inernet_not"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
-        android:visibility="visible" />
+      layout="@layout/my_inernet_not"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@+id/toolbar"
+      android:visibility="visible" />
 
     <include
         layout="@layout/back_to_home"

@@ -340,7 +340,7 @@ public class UserData extends Model implements Serializable {
         return CancellationFlag;
     }
 
-    public void setCancellationFlag(String cancellationFlag) {
+    public void setCancellationFlag(String cancellationFlag){
         CancellationFlag = cancellationFlag;
     }
 

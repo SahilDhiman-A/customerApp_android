@@ -1,85 +1,267 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
+
     <include layout="@layout/no_internet"/>
-    <include layout="@layout/toolbar_head"/>
+    <include layout="@layout/toolbar_head"
+        android:visibility="gone"
+        />
+
+    <androidx.appcompat.widget.Toolbar
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@color/colorPrimaryDark"
+        android:visibility="visible"
+        android:id="@+id/toolbar_head">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_back_btn"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:layout_marginTop="@dimen/_2sdp"
+                app:srcCompat="@drawable/ic_expand_button"/>
+
+            <TextView
+                android:id="@+id/txt_service"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/topup"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:fontFamily="@font/spectra_regular"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:textSize="24sp"
+                android:textColor="@color/white"/>
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
     <RelativeLayout
         android:id="@+id/view_top_ups"
-
         android:layout_below="@+id/toolbar_head"
         android:layout_width="match_parent"
-
-
         android:layout_height="match_parent">
-        <LinearLayout
+
+        <RelativeLayout
             android:id="@+id/layout_head_tabs"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:orientation="horizontal">
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            >
+
             <LinearLayout
                 android:id="@+id/layout_oneTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_alignParentLeft="true"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/_5sdp"
+                android:paddingRight="@dimen/_5sdp"
+                >
                 <TextView
                     android:id="@+id/txt_oneTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="One Time Top-up"
+                    android:layout_weight="1"
+                    android:text="Flexi Top-up"
                     android:fontFamily="@font/helvetica_neu_bold"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/sub_header_text"
                     android:textColor="@color/not_selected_color"/>
 
                 <View
                     android:id="@+id/view_oneTime"
-                    android:layout_width="match_parent"
-                    android:layout_margin="@dimen/_5sdp"
+                    android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_1sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_4sdp"
                     android:background="@color/colorPrimaryDark"/>
-
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/layout_recurring"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginStart="@dimen/_20sdp">
+                android:layout_alignParentRight="true"
+                android:paddingLeft="@dimen/_5sdp"
+                android:paddingRight="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_50sdp">
+
                 <TextView
                     android:id="@+id/txt_recurring"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Recurring Top-up"
-
                     android:fontFamily="@font/helvetica_neu_bold"
-                    android:textSize="18sp"
-                    android:textColor="@color/not_selected_color"/>
+                    android:text="Auto Top-up"
+                    android:textColor="@color/not_selected_color"
+                    android:textSize="@dimen/sub_header_text" />
+
                 <View
                     android:id="@+id/view_recurring"
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/_50sdp"
                     android:layout_margin="@dimen/_5sdp"
                     android:layout_height="@dimen/_1sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_4sdp"
                     android:background="@color/colorPrimaryDark"/>
-
             </LinearLayout>
+        </RelativeLayout>
 
-        </LinearLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/view_topups"
-            android:layout_centerHorizontal="true"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/tab_tracker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginTop="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_14sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:layout_above="@+id/layout_buyTopup"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
             android:layout_below="@+id/layout_head_tabs"
-            android:layout_marginStart="@dimen/_15sdp"
+            >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_step_one"
+                android:layout_width="@dimen/step_tv_dim"
+                android:layout_alignParentLeft="true"
+                app:fontFamily="@font/helvetica_neu_bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_height="@dimen/step_tv_dim"
+                android:fontFamily="@font/helvetica_neu_bold"
+                android:gravity="center"
+                android:layout_gravity="left"
+                android:background="@drawable/login_background_white"
+                android:textColor="@color/timer_color"
+                android:textSize="12sp"
+                android:text="1"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_one"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="2"
+                android:fontFamily="@font/helvetica_neu_bold"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Choose Top-up"
+                android:textColor="@color/timer_color"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_step_one" />
+
+            <View
+                android:id="@+id/view_first"
+                android:layout_width="@dimen/step_line_dim"
+                android:layout_height="@dimen/_2sdp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_step_one"
+                app:layout_constraintLeft_toRightOf="@+id/tv_step_one"
+                app:layout_constraintStart_toEndOf="@+id/tv_step_one"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_step_two"
+                android:layout_width="@dimen/step_tv_dim"
+                android:layout_height="@dimen/step_tv_dim"
+                android:layout_toRightOf="@+id/view_first"
+                app:fontFamily="@font/helvetica_neu_bold"
+                app:layout_constraintLeft_toRightOf="@+id/view_first"
+                app:layout_constraintTop_toTopOf="parent"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/login_background_white"
+                android:textColor="@color/timer_color"
+                android:textSize="12sp"
+                android:text="2"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_two"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="2"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/helvetica_neu_bold"
+                android:layout_marginLeft="@dimen/_37sdp"
+                android:text="Make Payment"
+                android:textColor="@color/timer_color"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/tv_one"
+                app:layout_constraintTop_toBottomOf="@+id/tv_step_two" />
+
+
+            <View
+                android:id="@+id/view_sec"
+                android:layout_width="@dimen/step_line_dim"
+                android:layout_height="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/tv_step_two"
+                android:layout_toRightOf="@+id/tv_step_two"
+                android:layout_gravity="center_vertical"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_step_three"
+                android:layout_width="@dimen/step_tv_dim"
+                android:layout_height="@dimen/step_tv_dim"
+                android:layout_toRightOf="@+id/view_sec"
+                app:fontFamily="@font/helvetica_neu_bold"
+                android:layout_marginRight="@dimen/_25sdp"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/view_sec"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/login_background_white"
+                android:textColor="@color/timer_color"
+                android:textSize="12sp"
+                android:text="3"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_three"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:maxLines="2"
+                android:layout_marginLeft="@dimen/_35sdp"
+                android:fontFamily="@font/helvetica_neu_bold"
+                android:text="Activation Done"
+                android:textColor="@color/timer_color"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/tv_two"
+                app:layout_constraintTop_toBottomOf="@+id/tv_step_three" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:id="@+id/lay_frame"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:paddingBottom="@dimen/_2sdp"
+            android:layout_above="@+id/layout_buyTopup"
+            android:layout_below="@+id/tab_tracker"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            />
+
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
@@ -87,18 +269,19 @@
             android:visibility="gone"
             android:indeterminateTint="@color/back_color"
             android:layout_centerInParent="true"/>
+
         <LinearLayout
             android:id="@+id/layout_buyTopup"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentBottom="true"
-            android:background="#191919"
+            android:background="#3D3D3D"
             android:visibility="visible"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:padding="@dimen/_15sdp">
+            android:padding="@dimen/_10sdp">
 
             <ImageView
                 android:id="@+id/img_logout"
@@ -111,11 +294,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
+                android:background="#3D3D3D"
                 android:text="Buy Topup"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="@dimen/normal_text" />
         </LinearLayout>
+
+
     </RelativeLayout>
 
 

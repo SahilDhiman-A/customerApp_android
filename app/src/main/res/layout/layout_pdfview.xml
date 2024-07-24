@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+    <RelativeLayout
+        android:id="@+id/rlMian"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="wrap_content"
+        android:padding="@dimen/_10sdp"
+        android:layout_height="wrap_content"
+        >
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_back"
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:padding="@dimen/_7sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:srcCompat="@drawable/ic_expand_button"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_below="@id/rlMian"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:indeterminateTint="@color/back_color"
+        android:layout_centerInParent="true"/>
+</RelativeLayout>

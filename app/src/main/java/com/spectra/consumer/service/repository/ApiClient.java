@@ -14,9 +14,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 class ApiClient {
     private static Retrofit retrofit = null;
     private static Retrofit retrofitAutoPAy = null;
+    private static Retrofit faqretrofit = null;
     private static Retrofit internetNotWorkingClient = null;
     private static Retrofit fdssClient = null;
     private static Retrofit srClient = null;
+    private static Retrofit planAndTopup = null;
+    private static Retrofit affleRetrofit = null;
+
     static Retrofit getClient() {
         if (retrofit == null) {
             synchronized (Retrofit.class) {
@@ -152,4 +156,86 @@ class ApiClient {
         return srClient;
     }
 
+
+    static Retrofit getPlanAndTopup() {
+        if (planAndTopup == null) {
+            synchronized (Retrofit.class) {
+                if (planAndTopup == null) {
+                    Gson gson = new GsonBuilder().create();
+                    RxJava2CallAdapterFactory rxAdapter = RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io());
+                    HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+                    httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+                    int REQUEST_TIMEOUT = 60;
+                    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                            .addNetworkInterceptor(httpLoggingInterceptor)
+                            .connectTimeout(1, TimeUnit.MINUTES)
+                            .readTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
+                            .writeTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS).build();
+                    planAndTopup = new Retrofit.Builder()
+                            .baseUrl(BuildConfig.BASE_URL_2)
+                            .client(okHttpClient)
+                            .addCallAdapterFactory(rxAdapter)
+                            .addConverterFactory(GsonConverterFactory.create(gson))
+                            .build();
+
+                }
+            }
+        }
+        return planAndTopup;
+    }
+
+    static Retrofit getAffleClient() {
+        if (affleRetrofit == null) {
+            synchronized (Retrofit.class) {
+                if (affleRetrofit == null) {
+                    Gson gson = new GsonBuilder().create();
+                    RxJava2CallAdapterFactory rxAdapter = RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io());
+                    HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+                    httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+                    int REQUEST_TIMEOUT = 2*60;
+                    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                            .addNetworkInterceptor(httpLoggingInterceptor)
+                            .connectTimeout(2, TimeUnit.MINUTES)
+                            .readTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
+                            .writeTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS).build();
+                    affleRetrofit = new Retrofit.Builder()
+                            .baseUrl("https://appadmin.spectra.co/v0/notification/")
+                            .client(okHttpClient)
+                            .addCallAdapterFactory(rxAdapter)
+                            .addConverterFactory(GsonConverterFactory.create(gson))
+                            .build();
+
+                }
+            }
+        }
+        return affleRetrofit;
+    }
+
+
+    static Retrofit getFaqClient(){
+        if (faqretrofit == null) {
+            synchronized (Retrofit.class){
+                if (faqretrofit == null) {
+                    Gson gson = new GsonBuilder().create();
+                    RxJava2CallAdapterFactory rxAdapter = RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io());
+                    HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+                    httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+                    int REQUEST_TIMEOUT = 2*60;
+                    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                            .addNetworkInterceptor(httpLoggingInterceptor)
+                            .connectTimeout(2, TimeUnit.MINUTES)
+                            .readTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
+                            .writeTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS).build();
+                    faqretrofit = new Retrofit.Builder()
+                            .baseUrl(BuildConfig.BASE_URL_FAQ)
+                            .client(okHttpClient)
+                            .addCallAdapterFactory(rxAdapter)
+                            .addConverterFactory(GsonConverterFactory.create(gson))
+                            .build();
+
+                }
+            }
+        }
+        return faqretrofit;
+    }
 }

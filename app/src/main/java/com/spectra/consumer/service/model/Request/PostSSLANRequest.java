@@ -12,7 +12,16 @@ public class PostSSLANRequest implements Serializable {
     public String getSpeedOnLan() {
         return speedOnLan;
     }
-    public void setSpeedOnLan(String speedOnLan) {
+
+    @SerializedName("comment")
+    @Expose
+    private String comment;
+    public String getComment() {
+        return comment;
+    }
+
+    public void setSpeedOnLan(String speedOnLan, String comment) {
         this.speedOnLan = speedOnLan;
+        this.comment = comment;
     }
 }

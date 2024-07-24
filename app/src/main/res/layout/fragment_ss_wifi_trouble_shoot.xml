@@ -249,8 +249,7 @@
                             android:orientation="horizontal"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:layout_centerHorizontal="true"
-                            >
+                            android:layout_centerHorizontal="true">
 
                             <EditText
                                 android:id="@+id/ed_mbps"

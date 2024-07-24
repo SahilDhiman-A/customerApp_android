@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="view_all_topics">View All topics</string>
+    <string name="raise_new_sr">RAISE NEW REQUEST</string>
+    <string name="enter_your_quary">Enter your remarks</string>
+    <string name="what_were_you_looking_for">What were you looking for?</string>
+    <string name="help_us_improve">Help Us Improve</string>
+    <string name="thank_you">Thank You!</string>
+    <string name="thanks_for_sharing_your_feedback_we_will_further_improve_on_the_same">Thanks for sharing your feedback. We will further improve on the same</string>
+    <string name="was_this_faq_useful_or_not">Was this FAQ useful or not?</string>
+    <string name="recent_searches">Recent Searches</string>
+    <string name="best_top_ups">Best Top ups</string>
+    <string name="go_to_my_plans">Go to My Plans</string>
+    <string name="results_in_faqs">Results in FAQs</string>
+    <string name="please_enter_the_remarks">Please enter the remarks.</string>
+  <string name="contact_us">Contact Us</string>
+</resources>

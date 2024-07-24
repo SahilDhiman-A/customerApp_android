@@ -40,6 +40,10 @@ public class ProfileResponse implements Serializable
     @SerializedName("shipTo")
     @Expose
     private ShipToResponse shipTo;
+    @SerializedName("accountManager")
+    @Expose
+    private AccountManagerResponse accountManagerResponse;
+
     @SerializedName("BillingTo")
     @Expose
     private Object billingTo;
@@ -56,6 +60,14 @@ public class ProfileResponse implements Serializable
 
     public void setBillTo(BillToResponse billTo) {
         this.billTo = billTo;
+    }
+
+    public AccountManagerResponse getAccountManagerResponse() {
+        return accountManagerResponse;
+    }
+
+    public void setAccountManagerResponse(AccountManagerResponse accountManagerResponse) {
+        this.accountManagerResponse = accountManagerResponse;
     }
 
     public ShipToResponse getShipTo() {

@@ -1,35 +1,50 @@
 {
   "project_info": {
-    "project_number": "949456884341",
-    "firebase_url": "https://spectra-consumer.firebaseio.com",
-    "project_id": "spectra-consumer",
-    "storage_bucket": "spectra-consumer.appspot.com"
+    "project_number": "957206701947",
+    "firebase_url": "https://spectranet-5b332.firebaseio.com",
+    "project_id": "spectranet-5b332",
+    "storage_bucket": "spectranet-5b332.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:949456884341:android:22bc753807b758c6905e3c",
+        "mobilesdk_app_id": "1:957206701947:android:0717d2580a3422d329bfde",
         "android_client_info": {
           "package_name": "com.spectra.consumer"
         }
       },
       "oauth_client": [
         {
-          "client_id": "949456884341-f5b0o30ds5sgo0luqbnvlq6bgpgdgs6i.apps.googleusercontent.com",
+          "client_id": "957206701947-if1it5688ju5kcfqaue8s3duir8ebq06.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spectra.consumer",
+            "certificate_hash": "55736dacbfb530779993266f0743d5c363b1aca4"
+          }
+        },
+        {
+          "client_id": "957206701947-p41qnm2cjjhd53honrcafecajpo7emou.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyACuAN5jFm5eHzO78_HsKcYXBGKaWXClI8"
+          "current_key": "AIzaSyBuN15Q0GkWubGKzyj09xfLp-2BLD0VLtc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "949456884341-f5b0o30ds5sgo0luqbnvlq6bgpgdgs6i.apps.googleusercontent.com",
+              "client_id": "957206701947-p41qnm2cjjhd53honrcafecajpo7emou.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "957206701947-fibr9g0bi8mhigt4lu93nqatvjctsm3u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Spectra.MySpectra"
+              }
             }
           ]
         }

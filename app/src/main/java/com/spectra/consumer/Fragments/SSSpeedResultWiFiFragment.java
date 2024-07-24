@@ -94,9 +94,12 @@ public class SSSpeedResultWiFiFragment extends Fragment {
             if (enableOnContinue) {
                 if (getActivity() != null && getActivity() instanceof SlowSpeedTroubleShootActivity) {
                     if (fiveGHzFrequecyRunning) {
-                        ((SlowSpeedTroubleShootActivity) getActivity()).apiTrobleShootForWIFI5GHz(binding.edMbps.getText().toString());
+                        //Nikhil -> 2.5 and 5 ghz have comments
+                        ((SlowSpeedTroubleShootActivity) getActivity()).apiTrobleShootForWIFI5GHz(binding.edMbps.getText().toString(),
+                                binding.etRemark.getText().toString());
                     } else if (twoGHzFrequecyRunning) {
-                        ((SlowSpeedTroubleShootActivity) getActivity()).apiTrobleShootForWIFI2_4GHz(binding.edMbps.getText().toString());
+                        ((SlowSpeedTroubleShootActivity) getActivity()).apiTrobleShootForWIFI2_4GHz(binding.edMbps.getText().toString(),
+                                binding.etRemark.getText().toString());
                     }
                 }
             }

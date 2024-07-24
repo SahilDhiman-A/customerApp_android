@@ -14,7 +14,16 @@ public class PostSS5GHzRequest implements Serializable {
     public String getSpeedOn5Ghz() {
         return speedOn5Ghz;
     }
-    public void setSpeedOn5Ghz(String facingIssue) {
+
+    @SerializedName("comment")
+    @Expose
+    private String comment;
+    public String getComment() {
+        return comment;
+    }
+
+    public void setSpeedOn5Ghz(String facingIssue, String comment) {
         this.speedOn5Ghz = facingIssue;
+        this.comment = comment;
     }
 }

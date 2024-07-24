@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/cancel_background_color"/>
+    <solid android:color="@color/timer_color"/>
     <corners android:radius="@dimen/_25sdp"/>
-    <stroke android:color="#F07855" android:width="2dp"/>
+    <stroke android:color="#F67A71" android:width="2dp"/>
 
 
 </shape>

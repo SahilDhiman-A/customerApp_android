@@ -1,17 +1,15 @@
 package activeandroid;
 
-import android.widget.Toast;
-
 import com.spectra.consumer.BuildConfig;
-import org.apache.http.util.EncodingUtils;
 
-import activeandroid.util.Log;
+import org.apache.http.util.EncodingUtils;
 
 public class PaymentUtils {
 
     public static final String URL = "https://epay.spectra.co/onlinepayment/getcustomerpaymentAPI.php";
 
     public static byte[] getPaymentParam(String payable_amount, String tds_value_amount, String canID, String mobile, String email) {
+
         String buildType = BuildConfig.BUILD_SEGMENT;
         String postData = "";
         try {
@@ -27,9 +25,6 @@ public class PaymentUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.d("postUrl",postData);
-        Log.e("postUrl",postData);
-        Log.i("postUrl",postData);
         return EncodingUtils.getBytes(postData, "base64");
     }
 }

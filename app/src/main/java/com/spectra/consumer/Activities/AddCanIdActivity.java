@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,12 +43,16 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import activeandroid.util.Log;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.spectra.consumer.Utils.Constant.BASE_CAN;
 import static com.spectra.consumer.Utils.Constant.CurrentuserKey;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_ACCOUNT;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_ALL_MENU;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_DASHBOARD;
 import static com.spectra.consumer.Utils.Constant.LINKED_ACCOUNT;
 import static com.spectra.consumer.Utils.Constant.STATUS_SUCCESS;
 import static com.spectra.consumer.Utils.Constant.USER_DB;
@@ -71,6 +76,7 @@ public class AddCanIdActivity extends AppCompatActivity {
     private String canID;
     private ArrayList<CanResponse> canResponseArrayList = new ArrayList<>();
     private ArrayList<String> canResponseArrayListMain = new ArrayList<>();
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,8 +87,10 @@ public class AddCanIdActivity extends AppCompatActivity {
         txtUpdateHeading.setText(R.string.pleaseAddyourCanID);
         imgBack.setVisibility(View.VISIBLE);
         spectraViewModel = ViewModelProviders.of(this).get(SpectraViewModel.class);
-        imgBack.setOnClickListener(view -> {onBackPressed();});
-        UserDataDB userDataDB = DroidPrefs.get(this,USER_DB, UserDataDB.class);
+        imgBack.setOnClickListener(view -> {
+            onBackPressed();
+        });
+        UserDataDB userDataDB = DroidPrefs.get(this, USER_DB, UserDataDB.class);
         setLIst(userDataDB.getResponseHashMap());
         getContactList();
     }
@@ -126,8 +134,8 @@ public class AddCanIdActivity extends AppCompatActivity {
                     GetLinkAccountResponse getLinkAccountResponse = (GetLinkAccountResponse) response;
                     if (getLinkAccountResponse.getStatus().equalsIgnoreCase(STATUS_SUCCESS)) {
                         canResponseArrayList = getLinkAccountResponse.getResponse();
-                        if(canResponseArrayList!=null&&canResponseArrayList.size()>0){
-                            for(CanResponse canResponse:canResponseArrayList) {
+                        if (canResponseArrayList != null && canResponseArrayList.size() > 0) {
+                            for (CanResponse canResponse : canResponseArrayList) {
                                 canResponseArrayListMain.add(canResponse.getLink_canid());
                             }
                         }
@@ -149,7 +157,7 @@ public class AddCanIdActivity extends AppCompatActivity {
                         }
                         intent.putExtra("type", LINKED_ACCOUNT);
                         startActivity(intent);
-                    }else {
+                    } else {
                         Constant.MakeToastMessage(AddCanIdActivity.this, updateMobileResponse.getMessage());
                     }
                     break;
@@ -169,7 +177,7 @@ public class AddCanIdActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_update)
     public void onClick() {
-        canID= Objects.requireNonNull(inputUpdateField.getText()).toString();
+        canID = Objects.requireNonNull(inputUpdateField.getText()).toString();
         if (TextUtils.isEmpty(canID)) {
             Constant.MakeToastMessage(AddCanIdActivity.this, "CanID can't be blank");
             return;
@@ -184,6 +192,7 @@ public class AddCanIdActivity extends AppCompatActivity {
         }
         sendOtp();
     }
+
     public void setLIst(LinkedHashMap<String, LoginMobileResponse> mp) {
         for (Map.Entry<String, LoginMobileResponse> stringLoginMobileResponseEntry : mp.entrySet()) {
             LoginMobileResponse loginMobileResponse = (LoginMobileResponse) ((Map.Entry) stringLoginMobileResponseEntry).getValue();
@@ -191,16 +200,15 @@ public class AddCanIdActivity extends AppCompatActivity {
         }
     }
 
-
     private void getContactList() {
         CAN_ID can_id = DroidPrefs.get(this, BASE_CAN, CAN_ID.class);
         if (Constant.isInternetConnected(this)) {
             GetLinkAccountRequest linkAccountRequest = new GetLinkAccountRequest();
             linkAccountRequest.setAuthkey(BuildConfig.AUTH_KEY);
             linkAccountRequest.setAction(GET_LINK_ACCOUNT);
-            if(can_id.isMobile) {
+            if (can_id.isMobile) {
                 linkAccountRequest.setMobileNo(can_id.mobile);
-            }else {
+            } else {
                 linkAccountRequest.setCanID(can_id.baseCanID);
             }
             spectraViewModel.getLinkAccount(linkAccountRequest).observe(AddCanIdActivity.this, AddCanIdActivity.this::consumeResponse);

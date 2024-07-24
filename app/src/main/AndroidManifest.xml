@@ -1,172 +1,255 @@
 <?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  package="com.spectra.consumer">
 
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.spectra.consumer">
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    tools:ignore="ScopedStorage" />
+  <uses-permission android:name="android.permission.READ_MEDIA_*"/>
+  <uses-permission android:name="android.permission.CALL_PHONE" />
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+  <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+  <application
+    android:name=".Activities.SpectraApplication"
+    android:allowBackup="false"
+    android:installLocation="preferExternal"
+    android:hardwareAccelerated="true"
+    android:icon="@mipmap/app_icon"
+    android:label="@string/appName"
+    android:requestLegacyExternalStorage="true"
+    android:preserveLegacyExternalStorage="true"
+    android:roundIcon="@mipmap/app_icon"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme"
+    android:usesCleartextTraffic="false">
 
-    <application
-        android:name=".Activities.SpectraApplication"
-        android:allowBackup="false"
-        android:icon="@mipmap/app_icon"
-        android:label="@string/appName"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:roundIcon="@mipmap/app_icon"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        tools:ignore="GoogleAppIndexingWarning,InnerclassSeparator,UnusedAttribute">
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
-        <provider
-            android:name="activeandroid.content.ContentProvider"
-            android:authorities="com.spectra.consumer"
-            android:enabled="true"
-            android:exported="false" />
+    <provider
+      android:name="androidx.core.content.FileProvider"
+      android:authorities="${applicationId}.provider"
+      android:exported="false"
+      android:grantUriPermissions="true">
+      <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/provider_paths" />
+    </provider>
+    <activity android:name=".Activities.KnowYourBillActivity" />
+    <activity android:name=".Activities.RecentSearchActivity" />
+    <activity
+      android:name=".Activities.GeneralSeachActivity"
+      android:windowSoftInputMode="adjustResize" />
+    <activity
+      android:name=".Activities.DailogHelpUsActivity"
+      android:launchMode="singleInstance" />
+    <activity android:name=".Activities.SearchActivity" />
 
+    <uses-library
+      android:name="org.apache.http.legacy"
+      android:required="false" />
+
+    <provider
+      android:name="activeandroid.content.ContentProvider"
+      android:authorities="com.spectra.consumer"
+      android:exported="false" />
+
+    <meta-data
+      android:name="AA_DB_NAME"
+      android:value="spectra.db" />
+    <meta-data
+      android:name="AA_DB_VERSION"
+      android:value="14" />
+    <meta-data
+      android:name="firebase_analytics_collection_enabled"
+      android:value="true" />
+    <meta-data
+      android:name="AA_MODELS"
+      android:value="com.spectra.consumer.Models.UserData,com.spectra.consumer.Models.UserImageData" />
+    <!--
+ Set custom default icon. This is used when no icon is set for incoming notification messages.
+             See README(https://goo.gl/l4GJaQ) for more.
+        -->
+    <!--
+  <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_live_ILgsfZCZoFIKMb"
+            />
         <meta-data
-            android:name="AA_DB_NAME"
-            android:value="spectra.db" />
-        <meta-data
-            android:name="AA_DB_VERSION"
-            android:value="14" />
-        <meta-data
-            android:name="AA_MODELS"
-            android:value="com.spectra.consumer.Models.UserData,com.spectra.consumer.Models.UserImageData" />
+        -->
+    <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
+    <meta-data
+      android:name="com.google.firebase.messaging.default_notification_channel_id"
+      android:value="98765" />
+    <meta-data
+      android:name="com.google.firebase.messaging.default_notification_color"
+      android:resource="@color/colorAccent" />
+    <meta-data
+      android:name="preloaded_fonts"
+      android:resource="@array/preloaded_fonts" />
 
-        <activity
-            android:name=".Activities.SplashActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+    <activity
+      android:name=".Activities.SplashActivity"
+      android:screenOrientation="portrait"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="Notification" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
 
-        </activity>
+    <activity
+      android:name="com.razorpay.CheckoutActivity"
+      android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+      android:theme="@style/CheckoutTheme"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
 
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:grantUriPermissions="true"
-            android:exported="false"
-            android:authorities="${applicationId}"
-            tools:replace="android:authorities">
+        <data
+          android:host="rzp.io"
+          android:scheme="io.rzp" />
+      </intent-filter>
+    </activity>
 
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"
-                tools:node="replace"/>
+    <receiver android:name="com.razorpay.RzpTokenReceiver"
+      android:exported="true"
+      android:permission="android.permission.INTERNET">
+      <intent-filter>
+        <action android:name="rzp.device_token.share" />
+      </intent-filter>
+    </receiver>
 
-        </provider>
+    <service
+      android:name=".service.MyFirebaseMessagingService"
+      android:exported="false">
+      <intent-filter>
+        <action android:name="com.google.firebase.MESSAGING_EVENT" />
+      </intent-filter>
+    </service>
 
-        <activity
-            android:name=".Activities.LoginActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity
-            android:name=".Activities.OtpActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.ForgotPasswordActivity"
-            android:screenOrientation="portrait" />
-        <activity
+    <activity
+      android:name=".Activities.LoginActivity"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="adjustResize|stateHidden" />
+    <activity
+      android:name=".Activities.OtpActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.ForgotPasswordActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.HomeActivity"
+      android:screenOrientation="portrait"/>
+    <!--
+       <activity
             android:name=".Activities.HomeActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.MyPlanActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.MyAccountActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.SelectCanIdActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.PayNowActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.CreateSrActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.DataUsageActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.InvoiceDetailsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.SelectcaseTypeActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.FAQActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.ContactUs"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.PolicyDisclaimerActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.SelectPackageActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.EditProfileActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.CropforProfile"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.StandingInstructionsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.TopUpListActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.ContactListActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.TrackActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.PayOtherActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.LinkedCanLdListActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".Activities.AddCanIdActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Activities.TopUpActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".Activities.NoInternet"
-            android:screenOrientation="portrait"
-            />
-
-        <activity android:name=".Activities.FDSSInternet"
-            android:screenOrientation="portrait"
-            />
-
-        <activity android:name=".Activities.SlowSpeedTroubleShootActivity"
-            android:screenOrientation="portrait"
-            />
-
-        <activity android:name=".Activities.ComparePackageActivity"
-            android:screenOrientation="portrait"
-            >
-        </activity>
-
-        <!--<activity android:name=".Activities.Update" />
--->
-    </application>
+        -->
+    <activity
+      android:name=".Activities.MyPlanActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.MyAccountActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.SelectCanIdActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.PayNowActivity"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name=".Activities.NotificationArchivedActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.NotificationSearchActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.CreateSrActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.DataUsageActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.InvoiceDetailsActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.InvoiceDetailsActivityOne"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.SelectcaseTypeActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.NotificationLActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.FAQActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.ContactUs"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.PolicyDisclaimerActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.SelectPackageActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.EditProfileActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.CropforProfile"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.StandingInstructionsActivity"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name=".Activities.TopUpListActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.TrackActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.PayOtherActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.LinkedCanLdListActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.AddCanIdActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.TopUpActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.NoInternet"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.FDSSInternet"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.SlowSpeedTroubleShootActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.ComparePackageActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.PlanComparisionActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".Activities.CangePlanSelectionActivity"
+      android:screenOrientation="portrait" />
+    <activity android:name=".Activities.NotPDFActivity" />
+  </application>
 
 </manifest>

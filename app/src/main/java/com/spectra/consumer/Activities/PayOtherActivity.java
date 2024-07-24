@@ -52,8 +52,6 @@ import static com.spectra.consumer.Utils.Constant.hideKeyboard;
 import static com.spectra.consumer.service.repository.ApiConstant.GET_ACCOUNT_DATA;
 
 public class PayOtherActivity extends AppCompatActivity {
-
-
     @BindView(R.id.img_back)
     AppCompatImageView imgBack;
     @BindView(R.id.txt_head)
@@ -231,7 +229,7 @@ public class PayOtherActivity extends AppCompatActivity {
                 onBackPressed();
                 break;
             case R.id.tvPay:
-                amount= Objects.requireNonNull(etPayAmount.getText()).toString().replace("₹ ","");
+                amount= (etPayAmount.getText()).toString().replace("₹ ","");
                 if (!TextUtils.isEmpty(amount)) {
                     double amountValue = Double.parseDouble(amount);
                     if (amountValue > 0) {
@@ -242,17 +240,16 @@ public class PayOtherActivity extends AppCompatActivity {
                         intent_pay.putExtra("type", "unpaid");
                         intent_pay.putExtra("subType", "normal");
                         intent_pay.putExtra("canID", canID);
-                        intent_pay.putExtra("ComeFrom", "PayNowActivity");
+                        //Nikhil- Commented For payment activity was not opening
+//                        intent_pay.putExtra("ComeFrom", "home");
                         startActivity(intent_pay);
                     } else {
                        Constant.MakeToastMessage(context, "Payable amount can't be 0");
                     }
-
                 }
                 else {
                     Constant.MakeToastMessage(context, "Payable amount can't be 0");
                 }
-
                 break;
             case R.id.btn_update:
                 if (TextUtils.isEmpty(inputUpdateField.getText())) {
@@ -265,8 +262,6 @@ public class PayOtherActivity extends AppCompatActivity {
                 }
                 getAccountDetails(inputUpdateField.getText().toString());
                 break;
-
-
         }
     }
 }

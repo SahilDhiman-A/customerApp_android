@@ -19,14 +19,12 @@ package activeandroid;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import activeandroid.content.ContentProvider;
 import activeandroid.query.Delete;
 import activeandroid.query.Select;
 import activeandroid.serializer.TypeSerializer;
 import activeandroid.util.Log;
 import activeandroid.util.ReflectionUtils;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;

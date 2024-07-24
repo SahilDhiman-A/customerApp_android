@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lay_com"
+    android:layout_width="@dimen/_135sdp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/com_tv_header"
+        android:layout_height="@dimen/_50sdp"
+        android:maxLines="2"
+        android:layout_width="match_parent"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
+        android:textSize="@dimen/normal_text"
+        android:fontFamily="@font/helvetica_neu_bold"
+        android:gravity="left|center_vertical"
+        android:textColor="@color/timer_color"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/com_tv_speed"
+        android:layout_height="@dimen/_50sdp"
+        android:maxLines="2"
+        android:layout_width="match_parent"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
+        android:textSize="@dimen/normal_text"
+        android:gravity="left|center_vertical"
+        android:textColor="@color/color_text_grey"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/com_tv_data"
+        android:layout_height="@dimen/_50sdp"
+        android:maxLines="2"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/normal_text"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
+        android:gravity="left|center_vertical"
+        android:textColor="@color/color_text_grey"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/com_tv_charges"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/normal_text"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
+        android:gravity="left|center_vertical"
+        android:textColor="@color/color_text_grey"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/com_tv_frequency"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/normal_text"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
+        android:gravity="left|center_vertical"
+        android:textColor="@color/color_text_grey"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/com_tv_benefits"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_width="match_parent"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
+        android:textSize="@dimen/normal_text"
+        android:gravity="left|center_vertical"
+        android:textColor="@color/color_text_grey"
+        />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvSelectPlan"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"
+        android:text="Select plan"
+        android:textAlignment="center"
+        android:background="@drawable/login_background"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
+        android:drawableEnd="@drawable/ic_arrow_white"
+        android:textAllCaps="true"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:fontFamily="@font/helvetica_neu_bold"
+        android:textSize="@dimen/normal_text"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:gravity="left|center_vertical"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        tools:ignore="RtlCompat" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_know_more"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:text="@string/know_more"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
+        android:textAllCaps="true"
+        android:textAlignment="center"
+        android:fontFamily="@font/helvetica_neu_bold"
+        android:textSize="@dimen/normal_text"
+        android:gravity="left|center_vertical"
+        android:textColor="@color/timer_color"
+        android:layout_gravity="center_horizontal"
+        tools:ignore="RtlCompat" />
+</LinearLayout>

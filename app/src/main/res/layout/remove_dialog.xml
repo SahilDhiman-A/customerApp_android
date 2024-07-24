@@ -41,17 +41,17 @@
                     android:layout_gravity="center"
                     android:padding="@dimen/_7sdp"
                     android:background="@drawable/login_background">
+
                     <TextView
                         android:id="@+id/txt_view"
-                        android:layout_width="wrap_content"
+                        android:layout_width="42dp"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_5sdp"
                         android:text="Cancel"
                         android:textAllCaps="true"
-                        android:textSize="14sp"
                         android:textColor="@color/white"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_centerVertical="true"
-                        />
+                        android:textSize="14sp" />
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="16sp"

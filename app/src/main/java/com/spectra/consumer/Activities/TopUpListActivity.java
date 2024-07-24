@@ -22,6 +22,7 @@ import com.spectra.consumer.service.model.ApiResponse;
 import com.spectra.consumer.service.model.Request.ConsumedTopupRequest;
 import com.spectra.consumer.service.model.Response.TopUpListResponse;
 import com.spectra.consumer.service.model.Response.TopUpResponse;
+import com.spectra.consumer.viewModel.PlanAndTopupViewModel;
 import com.spectra.consumer.viewModel.SpectraViewModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,7 @@ public class TopUpListActivity extends AppCompatActivity {
     LinearLayoutManager linearLayoutManager;
     TopUpAdapter topUpListAdapter;
     SpectraViewModel spectraViewModel;
+    PlanAndTopupViewModel planAndTopupViewModel;
     List<TopUpResponse> topUpResponseList=new ArrayList<>();
 
     @Override
@@ -66,6 +68,7 @@ public class TopUpListActivity extends AppCompatActivity {
         txt_head.setText(getString(R.string.topup));
         linearLayoutManager=new LinearLayoutManager(this);
         spectraViewModel = ViewModelProviders.of(this).get(SpectraViewModel.class);
+        planAndTopupViewModel = ViewModelProviders.of(this).get(PlanAndTopupViewModel.class);
         view_topups.setLayoutManager(linearLayoutManager);
         layout_head_tabs.setVisibility(View.GONE);
         layout_buyTopup.setVisibility(View.VISIBLE);
@@ -74,17 +77,16 @@ public class TopUpListActivity extends AppCompatActivity {
         findViewById(R.id.try_again).setVisibility(View.GONE);
         txt_payment.setTextColor(getResources().getColor(R.color.back_color));
         getTopUpList();
-
     }
+
     private void getTopUpList(){
         CurrentUserData userData= DroidPrefs.get(this,CurrentuserKey,CurrentUserData.class);
         if(Constant.isInternetConnected(this)){
             ConsumedTopupRequest consumedTopupRequest=new ConsumedTopupRequest();
             consumedTopupRequest.setAuthkey(BuildConfig.AUTH_KEY);
             consumedTopupRequest.setCanID(userData.CANId);
-
             consumedTopupRequest.setAction(CONSUMED_TOPUP);
-            spectraViewModel.consumedTopup(consumedTopupRequest).observe(TopUpListActivity.this, TopUpListActivity.this::consumeResponse);
+            planAndTopupViewModel.consumedTopup(consumedTopupRequest).observe(TopUpListActivity.this, TopUpListActivity.this::consumeResponse);
         }
     }
     private void consumeResponse(ApiResponse apiResponse) {

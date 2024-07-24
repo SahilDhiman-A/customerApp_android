@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -60,17 +62,7 @@ public class SlowSpeedTroubleShootActivity extends FragmentActivity {
         activityBinding = DataBindingUtil.setContentView(this, R.layout.activity_slowspeed_trobleshoot);
         networkStateViewModel = ViewModelProviders.of(this).get(NetworkStateViewModel.class);
         fdssViewModel = ViewModelProviders.of(this).get(FDSSViewModel.class);
-//        showLoadingView(true);
-//        networkStateViewModel.isOnlineStatus(getApplication()).observe(this, s -> {
-//            if(fragment==null) {
-//                showLoadingView(false);
-//                if (s != null && s.equalsIgnoreCase("TRANSPORT_WIFI")) {
-//                    pushFragments("SSRouterSelect", true, false);
-//                } else {
-//                    pushFragments("SSWifiNotDetect", true, false);
-//                }
-//            }
-//        });
+        //Nikhil -> Based on testing lan 67 -69 are exchanged
         if(SiUtils.isInternetViaWifiConnected(SlowSpeedTroubleShootActivity.this)){
             pushFragments("SSRouterSelect", true, false);
         }else{
@@ -78,7 +70,7 @@ public class SlowSpeedTroubleShootActivity extends FragmentActivity {
         }
         networkStateViewModel.getSingleNetworkState();
         userData = DroidPrefs.get(this, CurrentuserKey, CurrentUserData.class);
-        canId = userData.CANId;//"167238";
+        canId = userData.CANId;
         url = "getfdss/canId/"+canId+"/voc/"+vocNumber;
     }
 
@@ -202,6 +194,10 @@ public class SlowSpeedTroubleShootActivity extends FragmentActivity {
                         handler.postDelayed(() -> {
                             String text ;
                             switch (problumCode) {
+                                case 247:
+                                    text = "ONT not plugged in properly. Replug the white ONT box and reboot Wifi Router\\/Switch and wait for 2 minutes.";
+                                    backToHome(text);
+                                    break;
                                 case 249:
                                     if(response1.getSubType()!=null && response1.getType()!=null)
                                         subtype = response1.getType()+"-"+response1.getSubType();
@@ -238,7 +234,6 @@ public class SlowSpeedTroubleShootActivity extends FragmentActivity {
                                     text="You are getting proper speed as per your plan. <br><br>Thank you.";
                                     activityBinding.tvSpeedTitle.setText(Html.fromHtml(text));
                                     break;
-
                             }
                         }, 1500);
                     }
@@ -270,26 +265,27 @@ public class SlowSpeedTroubleShootActivity extends FragmentActivity {
         pushFragments("SSWifiRestart", true, false);
     }
 
-    public void apiTrobleShootForLAN(String value) {
+    //Nikhil -> this fn now have remark also
+    public void apiTrobleShootForLAN(String value, String remark) {
         if (Constant.isInternetConnected(this)) {
             PostSSLANRequest postSSLANRequest = new PostSSLANRequest();
-            postSSLANRequest.setSpeedOnLan(value);
+            postSSLANRequest.setSpeedOnLan(value, remark);
             fdssViewModel.fupYesORNO(url, postSSLANRequest, NO_FDSS_INTERNET).observe(SlowSpeedTroubleShootActivity.this, SlowSpeedTroubleShootActivity.this::consumeResponse);
         }
     }
 
-    public void apiTrobleShootForWIFI2_4GHz(String value) {
+    public void apiTrobleShootForWIFI2_4GHz(String value, String remark) {
         if (Constant.isInternetConnected(this)) {
             PostSS2_4GHzRequest postSS24GHzRequest = new PostSS2_4GHzRequest();
-            postSS24GHzRequest.setSpeedOn2_4Ghz(value);
+            postSS24GHzRequest.setSpeedOn2_4Ghz(value, remark);
             fdssViewModel.fupYesORNO(url, postSS24GHzRequest, NO_FDSS_INTERNET).observe(SlowSpeedTroubleShootActivity.this, SlowSpeedTroubleShootActivity.this::consumeResponse);
         }
     }
 
-    public void apiTrobleShootForWIFI5GHz(String value) {
+    public void apiTrobleShootForWIFI5GHz(String value, String remark) {
         if (Constant.isInternetConnected(this)) {
             PostSS5GHzRequest postSS5GHzRequest = new PostSS5GHzRequest();
-            postSS5GHzRequest.setSpeedOn5Ghz(value);
+            postSS5GHzRequest.setSpeedOn5Ghz(value, remark);
             fdssViewModel.fupYesORNO(url, postSS5GHzRequest, NO_FDSS_INTERNET).observe(SlowSpeedTroubleShootActivity.this, SlowSpeedTroubleShootActivity.this::consumeResponse);
         }
     }

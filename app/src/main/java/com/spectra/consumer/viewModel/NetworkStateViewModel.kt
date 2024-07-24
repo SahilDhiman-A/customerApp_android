@@ -6,6 +6,7 @@ import com.spectra.consumer.service.model.NetworkStateModel
 import com.spectra.consumer.service.repository.NetworkRepository
 
 open class NetworkStateViewModel(application: Application): AndroidViewModel(application) {
+
     companion object {
         private val networkRepository: NetworkRepository = NetworkRepository()
     }
@@ -18,7 +19,6 @@ open class NetworkStateViewModel(application: Application): AndroidViewModel(app
     fun getSingleNetworkState():MutableLiveData<NetworkStateModel>{
         return networkRepository.getSingleNetworkLiveData(this.getApplication())
     }
-
 
     fun getSingleNetwork(){
         networkRepository.getSingleNetworkState(this.getApplication())

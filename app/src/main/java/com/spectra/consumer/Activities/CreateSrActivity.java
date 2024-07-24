@@ -17,20 +17,28 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.spectra.consumer.BuildConfig;
 import com.spectra.consumer.Models.CurrentUserData;
 import com.spectra.consumer.R;
 import com.spectra.consumer.Utils.Constant;
 import com.spectra.consumer.Utils.DroidPrefs;
 import com.spectra.consumer.service.model.ApiResponse;
+import com.spectra.consumer.service.model.CAN_ID;
 import com.spectra.consumer.service.model.Request.CreateSrRequest;
 import com.spectra.consumer.service.model.Response.CreateSrResponse;
 import com.spectra.consumer.viewModel.SpectraViewModel;
+
+import java.lang.reflect.AnnotatedElement;
 import java.util.Objects;
+
+import activeandroid.util.Log;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.spectra.consumer.Utils.Constant.BASE_CAN;
+import static com.spectra.consumer.Utils.Constant.EVENT.CATEGORY_SERVICE;
 import static com.spectra.consumer.Utils.Constant.STATUS_SUCCESS;
 import static com.spectra.consumer.service.repository.ApiConstant.CREATE_SR;
 
@@ -57,6 +65,7 @@ public class CreateSrActivity extends AppCompatActivity {
     Intent intent;
     private String type, id;
     SpectraViewModel spectraViewModel;
+    String canIdAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +77,10 @@ public class CreateSrActivity extends AppCompatActivity {
         userData = DroidPrefs.get(CreateSrActivity.this, Constant.CurrentuserKey, CurrentUserData.class);
         spectraViewModel = ViewModelProviders.of(this).get(SpectraViewModel.class);
         intent = getIntent();
+        CAN_ID canIdNik = DroidPrefs.get(this, BASE_CAN, CAN_ID.class);
+        Log.d("Nik Can", canIdNik.baseCanID);
+        canIdAnalytics = canIdNik.baseCanID;
+        android.util.Log.d("====checking Can ID", canIdAnalytics);
         if (intent != null) {
             id = intent.getStringExtra("id");
             type = intent.getStringExtra("type");
@@ -76,11 +89,16 @@ public class CreateSrActivity extends AppCompatActivity {
             txt_issue_type.setText(type);
             txt_issue_type.setTextColor(getResources().getColor(R.color.white));
             txt_isu_type.setVisibility(View.VISIBLE);
+            if (type.equalsIgnoreCase("My Internet is not working") || type.equalsIgnoreCase("I am getting slow speed")
+                    || type.equalsIgnoreCase("I am getting frequent disconnection")) {
+                findViewById(R.id.TextInput_description).setVisibility(View.GONE);
+            } else {
+                findViewById(R.id.TextInput_description).setVisibility(View.VISIBLE);
+            }
         } else {
             txt_isu_type.setVisibility(View.GONE);
         }
         input_description.requestFocus();
-
     }
 
     public void create_Sr() {
@@ -103,7 +121,6 @@ public class CreateSrActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void show_back_to_sr(String sr, String type) {
-
         try {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             @SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.back_to_sr_dialog, null);
@@ -112,7 +129,6 @@ public class CreateSrActivity extends AppCompatActivity {
             if (userData.CancellationFlag != null && userData.CancellationFlag.equalsIgnoreCase("true")) {
                 back_to_sr.setText(R.string.txt_logout);
                 txt_heading.setText(sr);
-
             } else {
                 if (type.equalsIgnoreCase("fail")) {
                     back_to_sr.setText(R.string.back_to_sr);
@@ -121,7 +137,6 @@ public class CreateSrActivity extends AppCompatActivity {
                     back_to_sr.setText(R.string.back_to_sr);
                     txt_heading.setText(getString(R.string.sr_requested) + " " + sr);
                 }
-
             }
             dialog.setView(v);
             dialog.setCancelable(true);
@@ -139,11 +154,9 @@ public class CreateSrActivity extends AppCompatActivity {
                     dial.dismiss();
                     finish();
                 }
-
             });
             if (!isFinishing())
                 dial.show();
-
             Objects.requireNonNull(dial.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         } catch (Exception e) {
             e.printStackTrace();
@@ -157,27 +170,24 @@ public class CreateSrActivity extends AppCompatActivity {
                 if (txt_issue_type.getText().toString().equalsIgnoreCase("Issue Type")) {
                     Constant.MakeToastMessage(CreateSrActivity.this, getString(R.string.select_issue_type));
                 } else {
-                    //TODO Include the Other cases here and generate SR
+                    SpectraApplication.getInstance().postEvent(CATEGORY_SERVICE, "raise_new_service_request", "raise_new_service_request", canIdAnalytics);
                     if (type != null && type.equalsIgnoreCase("My Internet is not working")) {
                         Intent intent = new Intent(CreateSrActivity.this, NoInternet.class);
                         startActivity(intent);
                         finish();
-                    }
-                   else if (type != null && type.equalsIgnoreCase("I am getting slow speed")) {
-                       //TODO
-                        Intent intent = new Intent(CreateSrActivity.this, FDSSInternet.class);
-                        intent.putExtra("VOC",3);
-                        startActivity(intent);
-                        finish();
-                    }
-                    else if (type != null && type.equalsIgnoreCase("I am getting frequent disconnection")) {
+                    } else if (type != null && type.equalsIgnoreCase("I am getting slow speed")) {
                         //TODO
                         Intent intent = new Intent(CreateSrActivity.this, FDSSInternet.class);
-                        intent.putExtra("VOC",2);
+                        intent.putExtra("VOC", 3);
                         startActivity(intent);
                         finish();
-                    }
-                    else {
+                    } else if (type != null && type.equalsIgnoreCase("I am getting frequent disconnection")) {
+                        //TODO
+                        Intent intent = new Intent(CreateSrActivity.this, FDSSInternet.class);
+                        intent.putExtra("VOC", 2);
+                        startActivity(intent);
+                        finish();
+                    } else {
                         create_Sr();
                     }
                 }
@@ -191,7 +201,6 @@ public class CreateSrActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 break;
-
         }
     }
 
@@ -218,6 +227,12 @@ public class CreateSrActivity extends AppCompatActivity {
             if (createSrResponse.getStatus().equalsIgnoreCase(STATUS_SUCCESS)) {
                 String sr_no = createSrResponse.getResponse();
                 try {
+                    SpectraApplication.getInstance().addKey("sr_number", createSrResponse.getResponse());
+                    SpectraApplication.getInstance().addKey("request_type", "type");
+                    SpectraApplication.getInstance().addKey("descreption", "");
+                    SpectraApplication.getInstance().postEvent(CATEGORY_SERVICE,
+                            "raise_new_service_request_Submit",
+                            "raise_new_service_request_Submit",canIdAnalytics);
                     show_back_to_sr(sr_no, STATUS_SUCCESS);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -225,7 +240,6 @@ public class CreateSrActivity extends AppCompatActivity {
             } else {
                 show_back_to_sr(createSrResponse.getMessage(), "fail");
             }
-
         }
     }
 

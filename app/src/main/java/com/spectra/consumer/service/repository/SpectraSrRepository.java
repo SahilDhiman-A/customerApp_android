@@ -27,6 +27,7 @@ import com.spectra.consumer.service.model.Request.GetTransactionListRequest;
 import com.spectra.consumer.service.model.Request.InvoiceDetailRequest;
 import com.spectra.consumer.service.model.Request.LoginViaMobileRequest;
 import com.spectra.consumer.service.model.Request.LoginViapasswordRequest;
+import com.spectra.consumer.service.model.Request.PostKnowMoreRequest;
 import com.spectra.consumer.service.model.Request.RemoveLinkAccountRequest;
 import com.spectra.consumer.service.model.Request.ResendOtpRequest;
 import com.spectra.consumer.service.model.Request.RestPasswordRequest;
@@ -62,6 +63,20 @@ public class SpectraSrRepository {
 
     public MutableLiveData<ApiResponse> getSrStatus(GetSrRequest getSrRequest) {
         final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
+        disposables.add(apiService.getSrStatus(getSrRequest)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe((d) -> data.setValue(ApiResponse.loading()))
+                .subscribe(
+                        result -> data.setValue(ApiResponse.success(result, getSrRequest.getAction())),
+                        throwable -> data.setValue(ApiResponse.error(throwable))
+                ));
+        return data;
+    }
+
+    public MutableLiveData<ApiResponse> updateToken(GetSrRequest getSrRequest) {
+        final MutableLiveData<ApiResponse> data = new MutableLiveData<>();
+
         disposables.add(apiService.getSrStatus(getSrRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

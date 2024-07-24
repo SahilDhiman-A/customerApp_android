@@ -15,7 +15,15 @@ public class PostSS2_4GHzRequest implements Serializable {
         return speedOn2_4Ghz;
     }
 
-    public void setSpeedOn2_4Ghz(String speedOn2_4Ghz) {
+    @SerializedName("comment")
+    @Expose
+    private String comment;
+    public String getComment() {
+        return comment;
+    }
+
+    public void setSpeedOn2_4Ghz(String speedOn2_4Ghz, String comment) {
         this.speedOn2_4Ghz = speedOn2_4Ghz;
+        this.comment = comment;
     }
 }

@@ -34,7 +34,8 @@ public class PolicyDisclaimerActivity extends AppCompatActivity  {
         type=intent.getStringExtra("type");
         if (type != null) {
             if(type.equalsIgnoreCase("policy")){
-                URL="https://www.spectra.co/privacy-policy";
+//                URL="https://www.spectra.co/privacy-policy";
+                URL="https://home.spectra.co/privacy-policy";
             }else {
                 if(type.equalsIgnoreCase("speed")){
                     URL="http://fiber.spectra.co/";

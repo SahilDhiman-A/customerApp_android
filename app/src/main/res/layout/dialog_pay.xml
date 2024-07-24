@@ -39,11 +39,11 @@
                 android:visibility="visible">
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/btn_update"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/back_color"
-                    app:srcCompat="@drawable/ic_arrow_white" />
+                  android:id="@+id/btn_update"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:backgroundTint="@color/back_color"
+                  app:srcCompat="@drawable/ic_arrow_white" />
             </RelativeLayout>
 
             <com.google.android.material.textfield.TextInputLayout

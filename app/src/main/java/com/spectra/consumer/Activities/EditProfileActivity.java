@@ -73,38 +73,24 @@ public class EditProfileActivity extends AppCompatActivity {
     @BindView(R.id.txt_head)
     TextView txt_head;
     CurrentUserData userData;
-
     @BindView(R.id.etUserName)
     TextInputEditText etUserName;
-
-
     @BindView(R.id.etCompanyName)
     TextInputEditText etCompanyName;
-
-
     @BindView(R.id.inlUserName)
     TextInputLayout inlUserName;
-
     @BindView(R.id.inlCompanyName)
     TextInputLayout inlCompanyName;
-
-
     @BindView(R.id.etEmailId)
     TextInputEditText etEmailId;
-
     @BindView(R.id.etGSTN)
     TextInputEditText etGSTN;
-
     @BindView(R.id.etTAN)
     TextInputEditText etTAN;
     @BindView(R.id.etMobileNumber)
     TextInputEditText etMobileNumber;
-
-
     @BindView(R.id.progress_bar)
     ProgressBar progress_bar;
-
-
     SpectraViewModel spectraViewModel;
     Intent intent;
     AlertDialog dial;
@@ -121,8 +107,6 @@ public class EditProfileActivity extends AppCompatActivity {
         userData = DroidPrefs.get(this, CurrentuserKey, CurrentUserData.class);
         spectraViewModel = ViewModelProviders.of(this).get(SpectraViewModel.class);
         getDetails();
-
-
     }
 
     @OnClick({R.id.img_back, R.id.tvEditMobileNumber, R.id.tvEditEmailId, R.id.tvEditGSTN, R.id.tvEditTAN})
@@ -185,6 +169,7 @@ public class EditProfileActivity extends AppCompatActivity {
                             int otp = jsonObject.getInt("OTP");
                             intent.putExtra("phone", phone);
                             intent.putExtra("otp", "" + otp);
+                            etMobileNumber.setText(phone);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -192,8 +177,6 @@ public class EditProfileActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                     Constant.MakeToastMessage(EditProfileActivity.this, updateMobileResponse.getMessage());
-
-
                     break;
                 case UPDATE_EMAIL:
                     dial.dismiss();
@@ -206,7 +189,6 @@ public class EditProfileActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                     Constant.MakeToastMessage(EditProfileActivity.this, updateEmailResponse.getMessage());
-
                     break;
                 case UPDATE_GSTN:
                     dial.dismiss();
@@ -222,8 +204,6 @@ public class EditProfileActivity extends AppCompatActivity {
                         }
                         onBackPressed();
                     }
-
-
                     break;
                 case UPDATE_TAN:
                     dial.dismiss();
@@ -239,13 +219,8 @@ public class EditProfileActivity extends AppCompatActivity {
                         }
                         onBackPressed();
                     }
-
-
-
                     break;
             }
-
-
         }
     }
 
@@ -314,12 +289,10 @@ public class EditProfileActivity extends AppCompatActivity {
                 input_update_field.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
                     }
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
                     }
 
                     @Override
@@ -432,15 +405,12 @@ public class EditProfileActivity extends AppCompatActivity {
                 });
                 break;
         }
-
-
         dialog.setView(v);
         dialog.setCancelable(true);
         dial = dialog.create();
         dial.show();
         cancel.setOnClickListener(view -> dial.dismiss());
         btn_updateLayout.setOnClickListener(view -> {
-
            if(!apicall2) {
                UpdateGSTNRequest updateGSTNRequest;
                progress_bar.setVisibility(View.VISIBLE);
